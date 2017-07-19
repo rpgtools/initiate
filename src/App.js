@@ -7,7 +7,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Creature />
+        <Creature counters={[{id: 1, count: 42, label: "hp"}]}/>
       </div>
     );
   }
