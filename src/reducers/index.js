@@ -4,4 +4,5 @@ import { creatures } from './creatures';
 
 export default combineReducers({
     counters,
+    creatures,
 });

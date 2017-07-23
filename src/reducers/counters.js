@@ -10,6 +10,7 @@ export const counters = (state = [], action) => {
           id: nextId,
           count: 0,
           label: action.counter.label,
+          creature: action.counter.creature,
         })
       );
     case 'COUNTER_UPDATE':

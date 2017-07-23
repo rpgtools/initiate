@@ -13,7 +13,6 @@ export class Counter extends React.Component {
 	}
 
 	onClickIncrement() {
-		console.log(this)
 		this.props.onClickIncrement({id: this.props.id, count: this.props.count})
 	}
 

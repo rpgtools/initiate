@@ -15,29 +15,32 @@ class Creature extends React.Component {
   }
 
   onCounterSubmit = label => {
-    this.props.handleCounterCreate({label, count: 0})
+    this.props.handleCounterCreate({label, creature: {id: this.props.creature.id}})
   }
 
   render() {
     var counters = []
     if(this.props.counters.length > 0) {
       this.props.counters.forEach((counter) => {
-        counters.push(
-          <Counter key={counter.id}
-            id={counter.id}
-            count={counter.count}
-            label={counter.label}
-            onClickIncrement={this.handleCounterIncrement}
-            onClickDecrement={this.handleCounterDecrement}
-            incrementLabel="+"
-            decrementLabel="-"
-          />
-        );
+        if(counter.creature.id === this.props.creature.id) {
+          counters.push(
+            <Counter key={counter.id}
+              id={counter.id}
+              count={counter.count}
+              label={counter.label}
+              onClickIncrement={this.handleCounterIncrement}
+              onClickDecrement={this.handleCounterDecrement}
+              incrementLabel="+"
+              decrementLabel="-"
+            />
+          );
+        }
       });
     }
 
     return(
       <div>
+        <h2 className="creature_name">{this.props.creature.name}</h2>
         {counters}
         <CreateButton onSubmit={this.onCounterSubmit} buttonLabel="New Counter" />
       </div>
