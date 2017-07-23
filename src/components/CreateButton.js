@@ -11,7 +11,7 @@ export class CreateButton extends React.Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleToggle = this.handleToggle.bind(this);
+    this.toggleForm = this.toggleForm.bind(this);
   }
 
   handleChange(event) {
@@ -20,11 +20,11 @@ export class CreateButton extends React.Component {
 
   handleSubmit(event) {
     this.props.onSubmit(this.state.value);
-    this.handleToggle();
+    this.toggleForm();
     event.preventDefault();
   }
 
-  handleToggle() {
+  toggleForm() {
     this.setState({showForm: !this.state.showForm});
   }
 
@@ -32,15 +32,15 @@ export class CreateButton extends React.Component {
     if(this.state.showForm) {
       return(
         <form onSubmit={this.handleSubmit}>
-          <input type="text" value={this.state.value} onChange={this.handleChange} />
+          <input autoFocus type="text" value={this.state.value} onChange={this.handleChange} />
           <input type="submit" value={this.state.buttonLabel} />
         </form>
       );
     }
     return(
       <button
-        className="counter-create"
-        onClick={this.handleToggle}
+        className="button button__create"
+        onClick={this.toggleForm}
       >{this.state.buttonLabel}</button>
     );
   }

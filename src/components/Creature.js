@@ -14,6 +14,10 @@ class Creature extends React.Component {
     this.props.handleCounterUpdate({...current, count: current.count + 1})
   }
 
+  handleSetCount = counter => {
+    this.props.handleCounterUpdate(counter)
+  }
+
   onCounterSubmit = label => {
     this.props.handleCounterCreate({label, creature: {id: this.props.creature.id}})
   }
@@ -28,8 +32,9 @@ class Creature extends React.Component {
               id={counter.id}
               count={counter.count}
               label={counter.label}
-              onClickIncrement={this.handleCounterIncrement}
-              onClickDecrement={this.handleCounterDecrement}
+              handleClickIncrement={this.handleCounterIncrement}
+              handleClickDecrement={this.handleCounterDecrement}
+              handleSetCount={this.handleSetCount}
               incrementLabel="+"
               decrementLabel="-"
             />
