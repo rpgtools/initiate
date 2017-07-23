@@ -1,29 +1,45 @@
 import React from 'react';
 import {Counter} from './Counter'
+import {CreateButton} from './CreateButton'
 import { connect } from 'react-redux';
-import { counterCreate } from '../actions/counters';
+import { counterCreate, counterUpdate } from '../actions/counters';
 import PropTypes from 'prop-types';
 
 class Creature extends React.Component {
+  handleCounterDecrement = current => {
+    this.props.handleCounterUpdate({...current, count: current.count - 1})
+  }
+
+  handleCounterIncrement = current => {
+    this.props.handleCounterUpdate({...current, count: current.count + 1})
+  }
+
+  onCounterSubmit = label => {
+    this.props.handleCounterCreate({label, count: 0})
+  }
+
   render() {
     var counters = []
     if(this.props.counters.length > 0) {
       this.props.counters.forEach((counter) => {
         counters.push(
           <Counter key={counter.id}
+            id={counter.id}
             count={counter.count}
             label={counter.label}
+            onClickIncrement={this.handleCounterIncrement}
+            onClickDecrement={this.handleCounterDecrement}
+            incrementLabel="+"
+            decrementLabel="-"
           />
         );
       });
     }
+
     return(
       <div>
         {counters}
-        <button
-          className="counter-create"
-          onClick={this.props.onClickCounterCreate}
-        >New Creature</button>
+        <CreateButton onSubmit={this.onCounterSubmit} buttonLabel="New Counter" />
       </div>
     );
 	}
@@ -31,7 +47,7 @@ class Creature extends React.Component {
 
 Creature.propTypes = {
   counters: PropTypes.array,
-  onClickCounterCreate: PropTypes.func.isRequired
+  handleCounterCreate: PropTypes.func.isRequired,
 }
 
 Creature.defaultProps = {
@@ -46,7 +62,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onClickCounterCreate: (counter) => dispatch(counterCreate(counter))
+    handleCounterCreate: (counter) => dispatch(counterCreate(counter)),
+    handleCounterUpdate: (counter) => dispatch(counterUpdate(counter)),
   };
 };
 
