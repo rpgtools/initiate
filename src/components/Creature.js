@@ -59,7 +59,8 @@ Creature.propTypes = {
 }
 
 Creature.defaultProps = {
-  counters: []
+  counters: [],
+  currentInitiative: false,
 }
 
 const mapStateToProps = (state) => {
