@@ -28,15 +28,12 @@ class Creature extends React.Component {
       this.props.counters.forEach((counter) => {
         if(counter.creature.id === this.props.creature.id) {
           counters.push(
-            <Counter key={counter.id}
+            <Counter
+              key={counter.id}
               id={counter.id}
               count={counter.count}
               label={counter.label}
-              handleClickIncrement={this.handleCounterIncrement}
-              handleClickDecrement={this.handleCounterDecrement}
               handleSetCount={this.handleSetCount}
-              incrementLabel="+"
-              decrementLabel="-"
             />
           );
         }
@@ -44,7 +41,7 @@ class Creature extends React.Component {
     }
 
     return(
-      <div>
+      <div className="creature">
         <h2 className="creature_name">{this.props.creature.name}</h2>
         {counters}
         <CreateButton onSubmit={this.onCounterSubmit} buttonLabel="New Counter" />

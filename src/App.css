@@ -1,24 +1,68 @@
-.App {
+body {
+  font-family: monospace;
+}
+
+.creature {
+  background-color:#ccffff;
+  margin:0 0 5px;
+  border-radius: 5px;
+  text-align: left;
+  padding: 5px;
+  cursor: grab;
+}
+
+.creature .counter_widget {
+  display: inline-block;
+  margin: 0 12px 0 0;
+}
+
+
+.creature_name {
+  display: inline-block;
+  margin: 0;
+  margin-right: 24px;
+  padding:0;
+  line-height: 1;
+}
+
+.creature .button__create {
+  float:right;
+}
+
+.counter_widget {
+  cursor: initial;
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+.counter_widget .button {
+  border: 0;
+  background: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  border-radius: 3px;
+  background-color:#ddeeee;
+  display:block;
+  margin: 0 auto;
+  padding:0 5px;
+  font-size:12px;
+  line-height: 14px;
+  height:14px;
+  width: 28px;
+  font-weight: bold;
+  color:#fff;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+.counter_widget .counter_count {
+  line-height: 20px;
+  font-size:20px;
+  font-weight: bold;
+  display: block;
 }
 
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.counter_widget .counter_label {
+  opacity: 0.7;
+  font-size: 12px;
+  text-transform: uppercase;
+  line-height: 12px;
+  display: block;
 }

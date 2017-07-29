@@ -5,27 +5,29 @@ export class Counter extends React.Component {
 		super(props);
 		this.state = {
 			showForm: false,
-			value: props.count.toString(),
 		}
 		this.onClickDecrement = this.onClickDecrement.bind(this);
 		this.onClickIncrement = this.onClickIncrement.bind(this);
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.toggleForm = this.toggleForm.bind(this);
-
 	}
 
 	componentWillReceiveProps(nextProps) {
 		this.setState({value: nextProps.count.toString()})
 	}
 
-	onClickDecrement(event) {
-		this.props.handleClickDecremenent({id: this.props.id, count: this.props.count}, event)
-	}
-
-	onClickIncrement(event) {
-		this.props.handleClickIncrement({id: this.props.id, count: this.props.count}, event)
-	}
+	getAmountFromModifiers(event) {
+    if(event.metaKey && event.altKey)
+      return 1000
+    if(event.metaKey)
+      return 10
+    if(event.altKey)
+      return 100
+		if(event.shiftKey)
+			return 5
+    return 1
+  }
 
 	handleChange(event) {
     this.setState({value: event.target.value});
@@ -38,7 +40,19 @@ export class Counter extends React.Component {
 	}
 
 	handleFocus(event) {
-	  event.target.select();
+		event.target.select();
+	}
+
+	onClickDecrement(event) {
+		this.updateValue(this.getAmountFromModifiers(event) * -1);
+	}
+
+	onClickIncrement(event) {
+		this.updateValue(this.getAmountFromModifiers(event));
+	}
+
+	updateValue(amount) {
+		this.props.handleSetCount({id: this.props.id, count: this.props.count + amount});
 	}
 
 	toggleForm() {
@@ -58,10 +72,10 @@ export class Counter extends React.Component {
 		}
 		return(
       <div className="counter_widget">
-				<button className="button button__increment" onClick={(event) => this.onClickIncrement(event)}>{this.props.incrementLabel}</button>
+				<button className="button button__increment" onClick={(event) => this.onClickIncrement(event)}>+</button>
 				<a className="counter_count" onClick={this.toggleForm}>{this.props.count}</a>
         <span className="counter_label">{this.props.label}</span>
-				<button className="button button__decrement" onClick={(event) => this.onClickDecrement(event)}>{this.props.decrementLabel}</button>
+				<button className="button button__decrement" onClick={(event) => this.onClickDecrement(event)}>-</button>
       </div>
     );
 	}

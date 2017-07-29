@@ -21,7 +21,7 @@ export class CreateButton extends React.Component {
   handleFocus(event) {
     event.target.select();
   }
-  
+
   handleSubmit(event) {
     this.props.onSubmit(this.state.value);
     this.toggleForm();
@@ -36,7 +36,14 @@ export class CreateButton extends React.Component {
     if(this.state.showForm) {
       return(
         <form onSubmit={this.handleSubmit}>
-          <input autoFocus type="text" value={this.state.value} onFocus={this.handleFocus} onChange={this.handleChange} />
+          <input
+            placeholder="label"
+            autoFocus
+            type="text"
+            value={this.state.value}
+            onFocus={this.handleFocus}
+            onChange={this.handleChange}
+          />
           <input type="submit" value={this.state.buttonLabel} />
         </form>
       );

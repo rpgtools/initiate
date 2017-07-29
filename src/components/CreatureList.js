@@ -36,13 +36,7 @@ class CreatureList extends React.Component {
 
   onAdvanceInitiative = () => {
     var creatures = this.state.creatures;
-    if(creatures.length < 1) { return; }
-    var current = creatures.findIndex((item) => {return item.currentInitiative === true});
-    if(current >= 0) {
-      creatures.splice(current, 1, {...creatures[current], currentInitiative: false})
-    }
-    if(current === creatures.length-1) { current = -1 }
-    creatures.splice(current+1, 1, {...creatures[current+1], currentInitiative: true});
+    creatures.push(creatures.shift());
     this.setState({creatures})
   }
 
@@ -60,25 +54,18 @@ class CreatureList extends React.Component {
     var creatures = []
     if(this.state.creatures.length > 0) {
       this.state.creatures.forEach((creature) => {
-        var currentInitiative = '';
-        if(creature.currentInitiative) {
-          currentInitiative = <span className="initiative_marker">GO</span>
-        }
         creatures.push(
-          <div>
-            {currentInitiative}
-            <Creature
-              key={creature.id}
-              creature={creature}
-              counters={creature.counters}
-            />
-          </div>
+          <Creature
+            key={creature.id}
+            creature={creature}
+            counters={creature.counters}
+          />
         );
       });
     }
 
     return(
-      <div>
+      <div className="creature-list">
         <SortableList items={creatures} onSortEnd={this.onSortEnd} distance={10} />
         <div><button className="button button_advance_initiative" onClick={this.onAdvanceInitiative}>Advance Initiative</button></div>
         <div><CreateButton onSubmit={this.onCreatureSubmit} buttonLabel="New Creature" /></div>
