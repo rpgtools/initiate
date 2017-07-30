@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {stateLoad} from './../actions';
+import {URL} from './../services';
 
 const encoding = 'UTF-8';
 
@@ -8,29 +9,30 @@ class StateManagement extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: props.state,
-      download: null
+      data: props.state
     };
     this.save = this.save.bind(this);
     this.load = this.load.bind(this);
-    this.reset = this.reset.bind(this);
+    this.fileInput = {click: () => null};
   }
 
   render() {
-    const {download} = this.state;
     return <div>
-      {download
-        ? <a href={download} onClick={this.reset} download="initiate.json">Download</a>
-        : <button onClick={this.save}>Save</button>}
-      <input type="file" onChange={this.load}/>
+      <input ref={input => this.fileInput = input} type="file" onChange={this.load} hidden="hidden"/>
+      <button onClick={this.save}>Save</button>
+      <button onClick={() => this.fileInput.click()}>Load</button>
     </div>
   }
 
   save() {
     const json = JSON.stringify(this.state.data);
     const blob = new Blob([json], {encoding, type: `text/json;charset=${encoding}`});
-    const url = window.URL.createObjectURL(blob);
-    this.setState({download: url})
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'initiate.json';
+    a.click();
+    URL.revokeObjectURL(url);
   }
 
   load({target}) {
@@ -42,11 +44,6 @@ class StateManagement extends React.Component {
       target.value = null;
     };
     reader.onerror = evt => alert('Error reading file.');
-  }
-
-  reset() {
-    window.URL.revokeObjectURL(this.state.download);
-    this.setState({download: null});
   }
 }
 
