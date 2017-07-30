@@ -1,7 +1,7 @@
-import {action} from './util';
+import {action, keysToVals} from './util';
 
-export const ACTIONS = {
-  LOAD_STATE: 'LOAD_STATE',
-};
+export const ACTIONS = keysToVals({
+  LOAD_STATE: null
+});
 
 export const stateLoad = state => action(ACTIONS.LOAD_STATE, {state});
