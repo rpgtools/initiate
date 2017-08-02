@@ -47,7 +47,7 @@ class Creature extends React.Component {
         <CreateButton onSubmit={this.onCounterSubmit} buttonLabel="New Counter" />
       </div>
     );
-	}
+  }
 }
 
 Creature.propTypes = {
@@ -60,13 +60,13 @@ Creature.defaultProps = {
   currentInitiative: false,
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     counters: state.counters,
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
     handleCounterCreate: (counter) => dispatch(counterCreate(counter)),
     handleCounterUpdate: (counter) => dispatch(counterUpdate(counter)),

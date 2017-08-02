@@ -8,28 +8,28 @@ export class CreateButton extends React.Component {
       buttonLabel: props.buttonLabel,
       value: '',
     }
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.toggleForm = this.toggleForm.bind(this);
   }
 
-  handleChange(event) {
-    this.setState({value: event.target.value});
+  handleChange = event => {
+    this.setState({
+      value: event.target.value
+    });
   }
 
-  handleFocus(event) {
+  handleFocus = event => {
     event.target.select();
   }
 
-  handleSubmit(event) {
+  handleSubmit = event => {
     this.props.onSubmit(this.state.value);
     this.toggleForm();
     event.preventDefault();
   }
 
-  toggleForm() {
-    this.setState({showForm: !this.state.showForm});
+  toggleForm = () => {
+    this.setState({
+      showForm: !this.state.showForm
+    });
   }
 
   render() {

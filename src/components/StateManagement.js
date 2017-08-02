@@ -16,15 +16,7 @@ class StateManagement extends React.Component {
     this.fileInput = {click: () => null};
   }
 
-  render() {
-    return <div>
-      <input ref={input => this.fileInput = input} type="file" onChange={this.load} hidden="hidden"/>
-      <button onClick={this.save}>Save</button>
-      <button onClick={() => this.fileInput.click()}>Load</button>
-    </div>
-  }
-
-  save() {
+  save = () => {
     const json = JSON.stringify(this.state.data);
     const blob = new Blob([json], {encoding, type: `text/json;charset=${encoding}`});
     const url = URL.createObjectURL(blob);
@@ -44,6 +36,15 @@ class StateManagement extends React.Component {
       target.value = null;
     };
     reader.onerror = evt => alert('Error reading file.');
+  }
+
+  render() {
+    return (
+      <div>
+        <input ref={input => this.fileInput = input} type="file" onChange={this.load} hidden="hidden"/>
+        <button onClick={this.save}>Save</button>
+        <button onClick={() => this.fileInput.click()}>Load</button>
+      </div>)
   }
 }
 
