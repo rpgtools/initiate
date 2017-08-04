@@ -3,8 +3,11 @@ import Creature from './Creature'
 import {SortableContainer, SortableElement, arrayMove} from 'react-sortable-hoc';
 import {CreateButton} from './CreateButton'
 import {connect} from 'react-redux';
-import {creatureCreate, creatureUpdate} from '../actions/creatures';
 import PropTypes from 'prop-types';
+import { bindActionCreators } from 'redux';
+
+// actions
+import * as creatureActions from '../actions/creatures';
 
 const SortableItem = SortableElement(({value}) =>
   <div>{value}</div>
@@ -41,7 +44,7 @@ class CreatureList extends React.Component {
   }
 
   onCreatureSubmit = name => {
-    this.props.handleCreatureCreate({name})
+    this.props._creature.creatureCreate({name})
   }
 
   onSortEnd = ({oldIndex, newIndex}) => {
@@ -66,17 +69,28 @@ class CreatureList extends React.Component {
 
     return(
       <div className="creature-list">
-        <SortableList items={creatures} onSortEnd={this.onSortEnd} distance={10} />
-        <div><button className="button button_advance_initiative" onClick={this.onAdvanceInitiative}>Advance Initiative</button></div>
-        <div><CreateButton onSubmit={this.onCreatureSubmit} buttonLabel="New Creature" /></div>
+        <SortableList
+          items={creatures}
+          onSortEnd={this.onSortEnd}
+          distance={10} />
+        <div>
+          <button
+            className="button button_advance_initiative"
+            onClick={this.onAdvanceInitiative}>Advance Initiative
+          </button>
+        </div>
+        <div>
+          <CreateButton
+            onSubmit={this.onCreatureSubmit}
+            buttonLabel="New Creature" />
+        </div>
       </div>
     );
   }
 }
 
 CreatureList.propTypes = {
-  creatures: PropTypes.array,
-  handleCreatureCreate: PropTypes.func.isRequired,
+  creatures: PropTypes.array
 }
 
 CreatureList.defaultProps = {
@@ -91,8 +105,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    handleCreatureCreate: (creature) => dispatch(creatureCreate(creature)),
-    handleCreatureUpdate: (creature) => dispatch(creatureUpdate(creature)),
+    _creature: bindActionCreators(creatureActions, dispatch)
   };
 };
 
