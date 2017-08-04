@@ -2,24 +2,27 @@ import React from 'react';
 import {Counter} from './Counter'
 import {CreateButton} from './CreateButton'
 import { connect } from 'react-redux';
-import { counterCreate, counterUpdate } from '../actions/counters';
 import PropTypes from 'prop-types';
+import { bindActionCreators } from 'redux';
+
+// actions
+import * as counterActions from '../actions/counters';
 
 class Creature extends React.Component {
   handleCounterDecrement = current => {
-    this.props.handleCounterUpdate({...current, count: current.count - 1})
+    this.props._counter.counterUpdate({...current, count: current.count - 1})
   }
 
   handleCounterIncrement = current => {
-    this.props.handleCounterUpdate({...current, count: current.count + 1})
+    this.props._counter.counterUpdate({...current, count: current.count + 1})
   }
 
   handleSetCount = counter => {
-    this.props.handleCounterUpdate(counter)
+    this.props._counter.counterUpdate(counter)
   }
 
   onCounterSubmit = label => {
-    this.props.handleCounterCreate({label, creature: {id: this.props.creature.id}})
+    this.props._counter.counterCreate({label, creature: {id: this.props.creature.id}})
   }
 
   render() {
@@ -52,7 +55,6 @@ class Creature extends React.Component {
 
 Creature.propTypes = {
   counters: PropTypes.array,
-  handleCounterCreate: PropTypes.func.isRequired,
 }
 
 Creature.defaultProps = {
@@ -68,8 +70,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    handleCounterCreate: (counter) => dispatch(counterCreate(counter)),
-    handleCounterUpdate: (counter) => dispatch(counterUpdate(counter)),
+    _counter: bindActionCreators(counterActions, dispatch)
   };
 };
 
