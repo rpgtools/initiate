@@ -9,13 +9,6 @@ import { bindActionCreators } from 'redux';
 import * as counterActions from '../actions/counters';
 
 class Creature extends React.Component {
-  handleCounterDecrement = current => {
-    this.props._counter.counterUpdate({...current, count: current.count - 1})
-  }
-
-  handleCounterIncrement = current => {
-    this.props._counter.counterUpdate({...current, count: current.count + 1})
-  }
 
   handleSetCount = counter => {
     this.props._counter.counterUpdate(counter)

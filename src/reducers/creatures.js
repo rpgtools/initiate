@@ -1,16 +1,7 @@
-import {getNextId} from '../services/identifiers.js'
-
 export const creatures = (state = [], action) => {
   switch(action.type) {
     case 'CREATURE_CREATE':
-      var nextId = getNextId(state);
-      return(
-        state.concat(
-        {
-          id: nextId,
-          name: action.creature.name,
-        })
-      );
+      return state.concat(action.creature);
     case 'CREATURE_UPDATE':
       var newState = state.map((creature) => {
         if(creature.id !== action.creature.id) { return(creature) }
