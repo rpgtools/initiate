@@ -1,16 +1,11 @@
-import {getNextId} from '../services/identifiers.js'
-
 export const counters = (state = [], action) => {
   switch(action.type) {
     case 'COUNTER_CREATE':
-      var nextId = getNextId(state);
       return(
         state.concat(
         {
-          id: nextId,
           count: 0,
-          label: action.counter.label,
-          creature: action.counter.creature,
+          ...action.counter
         })
       );
     case 'COUNTER_UPDATE':
