@@ -55,8 +55,9 @@ class CreatureList extends React.Component {
 
   render() {
     var creatures = []
-    if(this.state.creatures.length > 0) {
-      this.state.creatures.forEach((creature) => {
+    if(this.state.creatures.allIds.length > 0) {
+      this.state.creatures.allIds.forEach((creature_id) => {
+        var creature = this.state.creatures.byId[creature_id]
         creatures.push(
           <Creature
             key={creature.id}

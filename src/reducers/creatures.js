@@ -1,14 +1,30 @@
-export const creatures = (state = [], action) => {
+import {combineReducers} from 'redux';
+
+const byId = (state = {}, action) => {
   switch(action.type) {
+    // case 'COUNTER_CREATE':
+    //   return
     case 'CREATURE_CREATE':
-      return state.concat(action.creature);
-    case 'CREATURE_UPDATE':
-      var newState = state.map((creature) => {
-        if(creature.id !== action.creature.id) { return(creature) }
-        return(Object.assign(creature, action.creature));
-      })
-      return newState
+      const { creature } = action;
+      return {
+        ...state,
+        [creature.id]: creature
+      }
     default:
-      return state
+      return state;
   }
 }
+
+const allIds = (state = [], action) => {
+  switch(action.type) {
+    case 'CREATURE_CREATE':
+      return state.concat(action.creature.id);
+    default:
+      return state;
+  }
+}
+
+export const creatures = combineReducers({
+  byId,
+  allIds
+});
