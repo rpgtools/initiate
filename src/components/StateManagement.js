@@ -1,7 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {stateLoad} from './../actions';
 import {URL} from './../services';
+import { bindActionCreators } from 'redux';
+// actions
+import * as stateManagementActions from './../actions/stateManagement';
 
 const encoding = 'UTF-8';
 
@@ -32,7 +34,7 @@ class StateManagement extends React.Component {
     const reader = new FileReader();
     reader.readAsText(file, encoding);
     reader.onload = evt => {
-      this.props.handleLoadState(JSON.parse(evt.target.result));
+      this.props._stateManagement.stateLoad(JSON.parse(evt.target.result));
       target.value = null;
     };
     reader.onerror = evt => alert('Error reading file.');
@@ -41,7 +43,11 @@ class StateManagement extends React.Component {
   render() {
     return (
       <div>
-        <input ref={input => this.fileInput = input} type="file" onChange={this.load} hidden="hidden"/>
+        <input
+          ref={input => this.fileInput = input}
+          type="file"
+          onChange={this.load}
+          hidden="hidden"/>
         <button onClick={this.save}>Save</button>
         <button onClick={() => this.fileInput.click()}>Load</button>
       </div>)
@@ -54,7 +60,7 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    handleLoadState: state => dispatch(stateLoad(state)),
+    _stateManagement: bindActionCreators(stateManagementActions, dispatch)
   };
 };
 
