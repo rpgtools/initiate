@@ -9,7 +9,6 @@ import { bindActionCreators } from 'redux';
 import * as counterActions from '../actions/counters';
 
 class Creature extends React.Component {
-
   handleSetCount = counter => {
     this.props._counter.counterUpdate(counter)
   }
@@ -19,20 +18,17 @@ class Creature extends React.Component {
   }
 
   render() {
+    const {counterIds} = this.props
     var counters = []
-    if(this.props.counters.length > 0) {
-      this.props.counters.forEach((counter) => {
-        if(counter.creature.id === this.props.creature.id) {
-          counters.push(
-            <Counter
-              key={counter.id}
-              id={counter.id}
-              count={counter.count}
-              label={counter.label}
-              handleSetCount={this.handleSetCount}
-            />
-          );
-        }
+    if(counterIds.length > 0) {
+      counterIds.forEach((counterId) => {
+        counters.push(
+          <Counter
+            key={counterId}
+            id={counterId}
+            handleSetCount={this.handleSetCount}
+          />
+        );
       });
     }
 
@@ -47,17 +43,19 @@ class Creature extends React.Component {
 }
 
 Creature.propTypes = {
-  counters: PropTypes.array,
+  creatureId: PropTypes.string.isRequired,
+  creature: PropTypes.object,
+  counterIds: PropTypes.array,
 }
 
 Creature.defaultProps = {
-  counters: [],
-  currentInitiative: false,
+  counterIds: [],
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state, ownProps) => {
   return {
-    counters: state.counters,
+    creature: state.creatures.byId[ownProps.creatureId],
+    counterIds: state.creatures.byId[ownProps.creatureId].counterIds,
   };
 };
 

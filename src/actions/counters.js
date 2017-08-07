@@ -4,8 +4,9 @@ export const counterCreate = counter => {
   return {
     type: 'COUNTER_CREATE',
     counter: {
+      ...counter,
       id: uuid(),
-      ...counter
+      count: 0,
     }
   }
 }

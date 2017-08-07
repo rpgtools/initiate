@@ -2,13 +2,22 @@ import {combineReducers} from 'redux';
 
 const byId = (state = {}, action) => {
   switch(action.type) {
-    // case 'COUNTER_CREATE':
-    //   return
-    case 'CREATURE_CREATE':
-      const { creature } = action;
+    case 'COUNTER_CREATE':
+      const creature = state[action.counter.creatureId]
       return {
         ...state,
-        [creature.id]: creature
+        [action.counter.creatureId]: {
+          ...creature,
+          counters: [
+            ...creature.counters,
+            action.counter.id
+          ]
+        }
+      }
+    case 'CREATURE_CREATE':
+      return {
+        ...state,
+        [action.creature.id]: action.creature
       }
     default:
       return state;
