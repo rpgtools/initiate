@@ -1,21 +1,24 @@
+// Libs
 import React from 'react';
-import Creature from './Creature'
 import {SortableContainer, SortableElement, arrayMove} from 'react-sortable-hoc';
-import {CreateButton} from './CreateButton'
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 
-// actions
+// Child Components
+import Creature from './Creature'
+import {CreateButton} from './CreateButton'
+
+// Actions
 import * as creatureActions from '../actions/creatures';
 
 const SortableItem = SortableElement(({value}) =>
-  <div>{value}</div>
+  <div className="SortableItem">{value}</div>
 );
 
 const SortableList = SortableContainer(({items}) => {
   return (
-    <div>
+    <div className="SortableList">
       {items.map((value, index) => (
         <SortableItem key={`item-${index}`} index={index} value={value} />
       ))}
@@ -27,20 +30,20 @@ class CreatureList extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      creatures: props.creatures,
+      creatureIds: props.creatureIds
     }
   }
 
   componentWillReceiveProps(nextProps) {
     this.setState({
-      creatures: nextProps.creatures
+      creatureIds: nextProps.creatureIds
     })
   }
 
   onAdvanceInitiative = () => {
-    var creatures = this.state.creatures;
-    creatures.push(creatures.shift());
-    this.setState({creatures})
+    const {creatureIds} = this.state;
+    creatureIds.push(creatureIds.shift());
+    this.setState({creatureIds})
   }
 
   onCreatureSubmit = name => {
@@ -49,19 +52,19 @@ class CreatureList extends React.Component {
 
   onSortEnd = ({oldIndex, newIndex}) => {
     this.setState({
-      creatures: arrayMove(this.state.creatures, oldIndex, newIndex),
+      creatureIds: arrayMove(this.state.creatureIds, oldIndex, newIndex),
     });
   };
 
   render() {
+    const {creatureIds} = this.state;
     var creatures = []
-    if(this.state.creatures.length > 0) {
-      this.state.creatures.forEach((creature) => {
+    if(creatureIds.length > 0) {
+      creatureIds.forEach((creatureId) => {
         creatures.push(
           <Creature
-            key={creature.id}
-            creature={creature}
-            counters={creature.counters}
+            key={creatureId}
+            creatureId={creatureId}
           />
         );
       });
@@ -90,16 +93,16 @@ class CreatureList extends React.Component {
 }
 
 CreatureList.propTypes = {
-  creatures: PropTypes.array
+  creaturesIds: PropTypes.array
 }
 
 CreatureList.defaultProps = {
-  creatures: []
+  creatureIds: []
 }
 
 const mapStateToProps = (state) => {
   return {
-    creatures: state.creatures,
+    creatureIds: state.creatures.allIds,
   };
 };
 

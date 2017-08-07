@@ -1,16 +1,24 @@
+// Libs
 import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { bindActionCreators } from 'redux';
 
-export class Counter extends React.Component {
+// Actions
+import * as counterActions from '../actions/counters';
+
+class Counter extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       showForm: false,
+      value: props.counter.count
     }
   }
 
   componentWillReceiveProps = nextProps => {
     this.setState({
-      value: nextProps.count.toString()
+      value: nextProps.counter.count.toString()
     })
   }
 
@@ -32,9 +40,13 @@ export class Counter extends React.Component {
     });
   }
 
+  handleSetCount = counter => {
+    this.props._counter.counterUpdate(counter)
+  }
+
   handleSubmit = event => {
-    this.props.handleSetCount({
-      id: this.props.id,
+    this.handleSetCount({
+      ...this.props.counter,
       count: parseInt(this.state.value,10)
     })
     this.toggleForm()
@@ -54,9 +66,9 @@ export class Counter extends React.Component {
   }
 
   updateValue = amount => {
-    this.props.handleSetCount({
-      id: this.props.id,
-      count: this.props.count + amount
+    this.handleSetCount({
+      id: this.props.counter.id,
+      count: this.props.counter.count + amount
     });
   }
 
@@ -71,7 +83,12 @@ export class Counter extends React.Component {
       return(
         <div className="counter_widget counter_widget_edit">
           <form onSubmit={this.handleSubmit}>
-            <input autoFocus type="text" value={this.state.value} onChange={this.handleChange} onFocus={this.handleFocus} />
+            <input
+              autoFocus
+              type="text"
+              value={this.state.value}
+              onChange={this.handleChange}
+              onFocus={this.handleFocus} />
             <input type="submit" value="Save" />
           </form>
         </div>
@@ -80,10 +97,28 @@ export class Counter extends React.Component {
     return(
       <div className="counter_widget">
         <button className="button button__increment" onClick={this.onClickIncrement}>+</button>
-        <a className="counter_count" onClick={this.toggleForm}>{this.props.count}</a>
-        <span className="counter_label">{this.props.label}</span>
+        <a className="counter_count" onClick={this.toggleForm}>{this.props.counter.count}</a>
+        <span className="counter_label">{this.props.counter.label}</span>
         <button className="button button__decrement" onClick={this.onClickDecrement}>-</button>
       </div>
     );
   }
 }
+
+Counter.propTypes = {
+  counterId: PropTypes.string.isRequired,
+}
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    counter: state.counters.byId[ownProps.counterId],
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    _counter: bindActionCreators(counterActions, dispatch)
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Counter);
