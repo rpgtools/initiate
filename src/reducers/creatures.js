@@ -8,17 +8,17 @@ const byId = (state = {}, action) => {
         ...state,
         [action.counter.creatureId]: {
           ...creature,
-          counters: [
-            ...creature.counters,
+          counterIds: [
+            ...creature.counterIds,
             action.counter.id
           ]
         }
-      }
+      };
     case 'CREATURE_CREATE':
       return {
         ...state,
         [action.creature.id]: action.creature
-      }
+      };
     default:
       return state;
   }
