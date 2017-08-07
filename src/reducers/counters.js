@@ -8,15 +8,13 @@ const byId = (state = {}, action) => {
         [action.counter.id]: action.counter
       };
     case 'COUNTER_UPDATE':
-      var result = {
+      return {
         ...state,
         [action.counter.id]: {
           ...state[action.counter.id],
           ...action.counter
         }
       }
-      console.log(result)
-      return result
     default:
       return state;
   }

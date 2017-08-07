@@ -1,12 +1,15 @@
+// Libs
 import React from 'react';
-import Creature from './Creature'
 import {SortableContainer, SortableElement, arrayMove} from 'react-sortable-hoc';
-import {CreateButton} from './CreateButton'
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 
-// actions
+// Child Components
+import Creature from './Creature'
+import {CreateButton} from './CreateButton'
+
+// Actions
 import * as creatureActions from '../actions/creatures';
 
 const SortableItem = SortableElement(({value}) =>

@@ -83,7 +83,12 @@ class Counter extends React.Component {
       return(
         <div className="counter_widget counter_widget_edit">
           <form onSubmit={this.handleSubmit}>
-            <input autoFocus type="text" value={this.state.value} onChange={this.handleChange} onFocus={this.handleFocus} />
+            <input
+              autoFocus
+              type="text"
+              value={this.state.value}
+              onChange={this.handleChange}
+              onFocus={this.handleFocus} />
             <input type="submit" value="Save" />
           </form>
         </div>

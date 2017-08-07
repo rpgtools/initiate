@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 
-// Subcomponents
+// Child Components
 import Counter from './Counter'
 import {CreateButton} from './CreateButton'
 
