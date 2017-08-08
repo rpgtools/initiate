@@ -60,8 +60,8 @@ class CreatureList extends React.Component {
   };
 
   // From Creature
-  handleCounterSubmit = label => {
-    this.props._counter.counterCreate({label, creatureId: this.props.creature.id})
+  handleCounterSubmit = counter => {
+    this.props._counter.counterCreate(counter)
   };
 
 //  From Counter
@@ -71,10 +71,14 @@ class CreatureList extends React.Component {
     var creatures = []
     if(_.size(this.props.creatures) > 0) {
       _.forEach(this.props.creatures, (creature) => {
+        const counters = _.filter((this.props.counters), (counter) => {
+          _.includes(creature.counterIds, counter.id)
+        })
         creatures.push(
           <Creature
             key={creature.id}
             creature={creature}
+            counters={counters}
             onCounterSubmit={this.handleCounterSubmit}
           />
         );
@@ -114,6 +118,7 @@ CreatureList.defaultProps = {
 const mapStateToProps = (state) => {
   return {
     creatures: state.creatures.byId,
+    counters: state.counters.byId
   };
 };
 
@@ -121,7 +126,6 @@ const mapDispatchToProps = (dispatch) => {
   return {
     _creature: bindActionCreators(creatureActions, dispatch),
     _counter: bindActionCreators(counterActions, dispatch)
-
   };
 };
 

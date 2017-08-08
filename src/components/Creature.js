@@ -1,20 +1,27 @@
 // Libs
 import React from 'react';
 // import PropTypes from 'prop-types';
+import _ from 'lodash';
 
 // Child Components
-import Counter from './Counter'
-import {CreateButton} from './CreateButton'
+import Counter from './Counter';
+import {CreateButton} from './CreateButton';
 
-export const Creature = (props) => {
-    const {creature} = props
+export class Creature extends React.Component {
+
+  handleCounterSubmit = label => {
+    this.props.onCounterSubmit({label, creatureId: this.props.creature.id})
+  };
+
+  render() {
+    const {creature} = this.props
     var counters = []
-    if(creature.counterIds.length > 0) {
-      creature.counterIds.forEach((counterId) => {
+    if(_.size(this.props.counters) > 0) {
+      this.props.counters.forEach((counter) => {
         counters.push(
           <Counter
-            key={counterId}
-            counterId={counterId}
+            key={counter.id}
+            counter={counter}
           />
         );
       });
@@ -24,7 +31,8 @@ export const Creature = (props) => {
       <div className="creature">
         <h2 className="creature_name">{creature.name}</h2>
         {counters}
-        <CreateButton onSubmit={props.onCounterSubmit} buttonLabel="New Counter" />
+        <CreateButton onSubmit={this.handleCounterSubmit} buttonLabel="New Counter" />
       </div>
     );
   }
+}

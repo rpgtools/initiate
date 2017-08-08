@@ -109,10 +109,8 @@ Counter.propTypes = {
   counterId: PropTypes.string.isRequired,
 }
 
-const mapStateToProps = (state, ownProps) => {
-  return {
-    counter: state.counters.byId[ownProps.counterId],
-  };
+const mapStateToProps = (state) => {
+  return {};
 };
 
 const mapDispatchToProps = dispatch => {
