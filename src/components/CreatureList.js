@@ -4,13 +4,16 @@ import {SortableContainer, SortableElement, arrayMove} from 'react-sortable-hoc'
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
+import _ from 'lodash';
 
 // Child Components
-import Creature from './Creature'
+import {Creature} from './Creature'
 import {CreateButton} from './CreateButton'
 
 // Actions
 import * as creatureActions from '../actions/creatures';
+import * as counterActions from '../actions/counters';
+
 
 const SortableItem = SortableElement(({value}) =>
   <div className="SortableItem">{value}</div>
@@ -56,15 +59,23 @@ class CreatureList extends React.Component {
     });
   };
 
+  // From Creature
+  handleCounterSubmit = label => {
+    this.props._counter.counterCreate({label, creatureId: this.props.creature.id})
+  };
+
+//  From Counter
+
+
   render() {
-    const {creatureIds} = this.state;
     var creatures = []
-    if(creatureIds.length > 0) {
-      creatureIds.forEach((creatureId) => {
+    if(_.size(this.props.creatures) > 0) {
+      _.forEach(this.props.creatures, (creature) => {
         creatures.push(
           <Creature
-            key={creatureId}
-            creatureId={creatureId}
+            key={creature.id}
+            creature={creature}
+            onCounterSubmit={this.handleCounterSubmit}
           />
         );
       });
@@ -102,13 +113,15 @@ CreatureList.defaultProps = {
 
 const mapStateToProps = (state) => {
   return {
-    creatureIds: state.creatures.allIds,
+    creatures: state.creatures.byId,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    _creature: bindActionCreators(creatureActions, dispatch)
+    _creature: bindActionCreators(creatureActions, dispatch),
+    _counter: bindActionCreators(counterActions, dispatch)
+
   };
 };
 
