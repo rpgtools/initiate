@@ -17,7 +17,7 @@ export class Creature extends React.Component {
     const {creature} = this.props
     var counters = []
     if(_.size(this.props.counters) > 0) {
-      this.props.counters.forEach((counter) => {
+      _.forEach(this.props.counters, (counter) => {
         counters.push(
           <Counter
             key={counter.id}

@@ -71,9 +71,7 @@ class CreatureList extends React.Component {
     var creatures = []
     if(_.size(this.props.creatures) > 0) {
       _.forEach(this.props.creatures, (creature) => {
-        const counters = _.filter((this.props.counters), (counter) => {
-          _.includes(creature.counterIds, counter.id)
-        })
+        const counters = _.pick(this.props.counters, creature.counterIds)
         creatures.push(
           <Creature
             key={creature.id}
