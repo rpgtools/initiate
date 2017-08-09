@@ -1,30 +1,27 @@
 // Libs
 import React from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { bindActionCreators } from 'redux';
+// import PropTypes from 'prop-types';
+import _ from 'lodash';
 
 // Child Components
-import Counter from './Counter'
-import {CreateButton} from './CreateButton'
+import Counter from './Counter';
+import {CreateButton} from './CreateButton';
 
-// Actions
-import * as counterActions from '../actions/counters';
+export class Creature extends React.Component {
 
-class Creature extends React.Component {
-  onCounterSubmit = label => {
-    this.props._counter.counterCreate({label, creatureId: this.props.creature.id})
-  }
+  handleCounterSubmit = label => {
+    this.props.onCounterSubmit({label, creatureId: this.props.creature.id})
+  };
 
   render() {
-    const {counterIds} = this.props
+    const {creature} = this.props
     var counters = []
-    if(counterIds.length > 0) {
-      counterIds.forEach((counterId) => {
+    if(_.size(this.props.counters) > 0) {
+      _.forEach(this.props.counters, (counter) => {
         counters.push(
           <Counter
-            key={counterId}
-            counterId={counterId}
+            key={counter.id}
+            counter={counter}
           />
         );
       });
@@ -32,35 +29,10 @@ class Creature extends React.Component {
 
     return(
       <div className="creature">
-        <h2 className="creature_name">{this.props.creature.name}</h2>
+        <h2 className="creature_name">{creature.name}</h2>
         {counters}
-        <CreateButton onSubmit={this.onCounterSubmit} buttonLabel="New Counter" />
+        <CreateButton onSubmit={this.handleCounterSubmit} buttonLabel="New Counter" />
       </div>
     );
   }
 }
-
-Creature.propTypes = {
-  creatureId: PropTypes.string.isRequired,
-  creature: PropTypes.object,
-  counterIds: PropTypes.array,
-}
-
-Creature.defaultProps = {
-  counterIds: [],
-}
-
-const mapStateToProps = (state, ownProps) => {
-  return {
-    creature: state.creatures.byId[ownProps.creatureId],
-    counterIds: state.creatures.byId[ownProps.creatureId].counterIds,
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    _counter: bindActionCreators(counterActions, dispatch)
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Creature);

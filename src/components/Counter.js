@@ -1,7 +1,7 @@
 // Libs
 import React from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 
 // Actions
@@ -105,20 +105,10 @@ class Counter extends React.Component {
   }
 }
 
-Counter.propTypes = {
-  counterId: PropTypes.string.isRequired,
-}
-
-const mapStateToProps = (state, ownProps) => {
-  return {
-    counter: state.counters.byId[ownProps.counterId],
-  };
-};
-
 const mapDispatchToProps = dispatch => {
   return {
     _counter: bindActionCreators(counterActions, dispatch)
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Counter);
+export default connect(null, mapDispatchToProps)(Counter);
