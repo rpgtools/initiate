@@ -13,6 +13,10 @@ export class Creature extends React.Component {
     this.props.onCounterSubmit({label, creatureId: this.props.creature.id})
   };
 
+  handleCreatureDelete = () => {
+    this.props.onCreatureDelete(this.props.creature)
+  }
+
   render() {
     const {creature} = this.props
     var counters = []
@@ -32,6 +36,7 @@ export class Creature extends React.Component {
         <h2 className="creature_name">{creature.name}</h2>
         {counters}
         <CreateButton onSubmit={this.handleCounterSubmit} buttonLabel="New Counter" />
+        <button onClick={this.handleCreatureDelete} >Delete Creature</button>
       </div>
     );
   }
