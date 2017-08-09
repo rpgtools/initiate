@@ -65,9 +65,10 @@ class CreatureList extends React.Component {
 
   render() {
     var creatures = []
-    if(_.size(this.props.creatures) > 0) {
-      _.forEach(this.props.creatures, (creature) => {
-        const counters = _.pick(this.props.counters, creature.counterIds)
+    if(_.size(this.state.creatureIds) > 0) {
+      _.forEach(this.state.creatureIds, (creatureId) => {
+        var creature   = this.props.creatures[creatureId];
+        const counters = _.pick(this.props.counters, creature.counterIds);
         creatures.push(
           <Creature
             key={creature.id}
@@ -111,6 +112,7 @@ CreatureList.defaultProps = {
 
 const mapStateToProps = (state) => {
   return {
+    creatureIds: state.creatures.allIds,
     creatures: state.creatures.byId,
     counters: state.counters.byId
   };
