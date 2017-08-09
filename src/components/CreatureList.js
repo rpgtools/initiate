@@ -59,13 +59,9 @@ class CreatureList extends React.Component {
     });
   };
 
-  // From Creature
   handleCounterSubmit = counter => {
     this.props._counter.counterCreate(counter)
   };
-
-//  From Counter
-
 
   render() {
     var creatures = []
