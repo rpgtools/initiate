@@ -28,10 +28,7 @@ const allIds = (state = [], action) => {
     case 'COUNTER_CREATE':
       return state.concat(action.counter.id);
     case 'CREATURE_DELETE':
-      const nextState = _.without(state, action.creature.counterIds)
-      console.log(state)
-      console.log(action.creature.counterIds)
-      return nextState
+      return _.difference(state, action.creature.counterIds);
     default:
       return state;
   }
