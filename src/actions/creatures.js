@@ -17,3 +17,18 @@ export const creatureUpdate = creature => {
     creature
   }
 }
+
+export const creatureDelete = creature => {
+  return {
+    type: 'CREATURE_DELETE',
+    creature
+  }
+}
+
+export const reorderCreatures = (previousIndex, nextIndex) => {
+  return {
+    type: 'CREATURE_REORDER',
+    previousIndex,
+    nextIndex
+  }
+}

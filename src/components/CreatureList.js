@@ -1,6 +1,6 @@
 // Libs
 import React from 'react';
-import {SortableContainer, SortableElement, arrayMove} from 'react-sortable-hoc';
+import {SortableContainer, SortableElement} from 'react-sortable-hoc';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
@@ -30,23 +30,8 @@ const SortableList = SortableContainer(({items}) => {
 });
 
 class CreatureList extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      creatureIds: props.creatureIds
-    }
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      creatureIds: nextProps.creatureIds
-    })
-  }
-
   onAdvanceInitiative = () => {
-    const {creatureIds} = this.state;
-    creatureIds.push(creatureIds.shift());
-    this.setState({creatureIds})
+    this.props._creature.reorderCreatures(0, -1);
   }
 
   onCreatureSubmit = name => {
@@ -54,19 +39,21 @@ class CreatureList extends React.Component {
   }
 
   onSortEnd = ({oldIndex, newIndex}) => {
-    this.setState({
-      creatureIds: arrayMove(this.state.creatureIds, oldIndex, newIndex),
-    });
+    this.props._creature.reorderCreatures(oldIndex, newIndex);
   };
 
   handleCounterSubmit = counter => {
     this.props._counter.counterCreate(counter)
   };
 
+  handleCreatureDelete = (creature) => {
+    this.props._creature.creatureDelete(creature)
+  }
+
   render() {
     var creatures = []
-    if(_.size(this.state.creatureIds) > 0) {
-      _.forEach(this.state.creatureIds, (creatureId) => {
+    if(_.size(this.props.creatureIds) > 0) {
+      _.forEach(this.props.creatureIds, (creatureId) => {
         var creature   = this.props.creatures[creatureId];
         const counters = _.pick(this.props.counters, creature.counterIds);
         creatures.push(
@@ -75,6 +62,7 @@ class CreatureList extends React.Component {
             creature={creature}
             counters={counters}
             onCounterSubmit={this.handleCounterSubmit}
+            onCreatureDelete={this.handleCreatureDelete}
           />
         );
       });
