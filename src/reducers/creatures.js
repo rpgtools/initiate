@@ -6,7 +6,7 @@ const arrayMove = require('array-move');
 const byId = (state = {}, action) => {
   switch(action.type) {
     case 'COUNTER_CREATE':
-      const creature = state[action.counter.creatureId]
+      var creature = state[action.counter.creatureId]
       return {
         ...state,
         [action.counter.creatureId]: {
@@ -17,13 +17,22 @@ const byId = (state = {}, action) => {
           ]
         }
       };
+    case 'COUNTER_DELETE':
+      var creature = state[action.counter.creatureId]
+      return {
+        ...state,
+        [action.counter.creatureId]: {
+          ...creature,
+          counterIds: _.difference(creature.counterIds, action.counter.id)
+        }
+      };
     case 'CREATURE_CREATE':
       return {
         ...state,
         [action.creature.id]: action.creature
       };
     case 'CREATURE_DELETE':
-      return _.omit(state, action.creature.id)
+      return _.omit(state, action.creature.id);
     default:
       return state;
   }

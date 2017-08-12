@@ -17,3 +17,11 @@ export const counterUpdate = counter => {
     counter
   }
 }
+
+export const counterDelete = counter => {
+  console.log(counter);
+  return {
+    type: 'COUNTER_DELETE',
+    counter
+  }
+}
