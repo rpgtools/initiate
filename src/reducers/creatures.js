@@ -4,9 +4,10 @@ import _ from 'lodash';
 const arrayMove = require('array-move');
 
 const byId = (state = {}, action) => {
+  var creature;
   switch(action.type) {
     case 'COUNTER_CREATE':
-      var creature = state[action.counter.creatureId]
+      creature = state[action.counter.creatureId];
       return {
         ...state,
         [action.counter.creatureId]: {
@@ -18,7 +19,7 @@ const byId = (state = {}, action) => {
         }
       };
     case 'COUNTER_DELETE':
-      var creature = state[action.counter.creatureId]
+      creature = state[action.counter.creatureId];
       return {
         ...state,
         [action.counter.creatureId]: {
@@ -27,12 +28,14 @@ const byId = (state = {}, action) => {
         }
       };
     case 'CREATURE_CREATE':
+      creature = action.creature;
       return {
         ...state,
-        [action.creature.id]: action.creature
+        [creature.id]: creature
       };
     case 'CREATURE_DELETE':
-      return _.omit(state, action.creature.id);
+      creature = action.creature;
+      return _.omit(state, creature.id);
     default:
       return state;
   }

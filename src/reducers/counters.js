@@ -32,7 +32,9 @@ const allIds = (state = [], action) => {
     case 'CREATURE_DELETE':
       return _.difference(state, action.creature.counterIds);
     case 'COUNTER_DELETE':
-      return _.difference(state, action.counter.id);
+      return _.remove(state, (counterId) => {
+        return counterId !== action.counter.id
+      })
     default:
       return state;
   }
