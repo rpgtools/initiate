@@ -8,20 +8,19 @@ export const counterCreate = counter => {
       id: uuid(),
       count: 0,
     }
-  }
-}
+  };
+};
 
 export const counterUpdate = counter => {
   return {
     type: 'COUNTER_UPDATE',
     counter
-  }
-}
+  };
+};
 
 export const counterDelete = counter => {
-  console.log(counter);
   return {
     type: 'COUNTER_DELETE',
     counter
-  }
-}
+  };
+};
