@@ -40,6 +40,10 @@ class Counter extends React.Component {
     });
   }
 
+  onClickDelete = event => {
+    this.props._counter.counterDelete(this.props.counter);
+  }
+
   handleSetCount = counter => {
     this.props._counter.counterUpdate(counter)
   }
@@ -96,6 +100,7 @@ class Counter extends React.Component {
     }
     return(
       <div className="counter_widget">
+        <button className="button button__delete" onClick={this.onClickDelete}>x</button>
         <button className="button button__increment" onClick={this.onClickIncrement}>+</button>
         <a className="counter_count" onClick={this.toggleForm}>{this.props.counter.count}</a>
         <span className="counter_label">{this.props.counter.label}</span>

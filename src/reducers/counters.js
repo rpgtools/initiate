@@ -16,8 +16,10 @@ const byId = (state = {}, action) => {
           ...action.counter
         }
       }
+    case 'COUNTER_DELETE':
+      return _.omit(state, action.counter.id);
     case 'CREATURE_DELETE':
-      return _.omit(state, action.creature.counterIds)
+      return _.omit(state, action.creature.counterIds);
     default:
       return state;
   }
@@ -29,6 +31,10 @@ const allIds = (state = [], action) => {
       return state.concat(action.counter.id);
     case 'CREATURE_DELETE':
       return _.difference(state, action.creature.counterIds);
+    case 'COUNTER_DELETE':
+      return _.remove(state, (counterId) => {
+        return counterId !== action.counter.id
+      })
     default:
       return state;
   }

@@ -50,6 +50,10 @@ class CreatureList extends React.Component {
     this.props._creature.creatureDelete(creature)
   }
 
+  handleCounterDelete = (counter) => {
+    this.props._counter.counterDelete(counter);
+  }
+
   render() {
     var creatures = []
     if(_.size(this.props.creatureIds) > 0) {

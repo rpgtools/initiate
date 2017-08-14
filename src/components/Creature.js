@@ -8,6 +8,12 @@ import Counter from './Counter';
 import {CreateButton} from './CreateButton';
 
 export class Creature extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      editing: false
+    }
+  }
 
   handleCounterSubmit = label => {
     this.props.onCounterSubmit({label, creatureId: this.props.creature.id})
@@ -15,6 +21,10 @@ export class Creature extends React.Component {
 
   handleCreatureDelete = () => {
     this.props.onCreatureDelete(this.props.creature)
+  }
+
+  toggleCreatureEdit = () => {
+    this.setState({editing: !this.state.editing});
   }
 
   render() {
@@ -30,13 +40,15 @@ export class Creature extends React.Component {
         );
       });
     }
+    const className = (!this.state.editing) ? "creature" : "creature editing";
 
     return(
-      <div className="creature">
+      <div className={className}>
         <h2 className="creature_name">{creature.name}</h2>
         {counters}
         <CreateButton onSubmit={this.handleCounterSubmit} buttonLabel="New Counter" />
-        <button onClick={this.handleCreatureDelete} >Delete Creature</button>
+        <button className="button__edit" onClick={this.toggleCreatureEdit} >Edit Creature</button>
+        <button className="button__delete" onClick={this.handleCreatureDelete} >Delete Creature</button>
       </div>
     );
   }
