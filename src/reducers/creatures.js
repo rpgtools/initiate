@@ -4,13 +4,13 @@ import _ from 'lodash';
 const arrayMove = require('array-move');
 
 const byId = (state = {}, action) => {
-  var creature;
   switch(action.type) {
-    case 'COUNTER_CREATE':
-      creature = state[action.counter.creatureId];
+    case 'COUNTER_CREATE': {
+      let creature = state[action.counter.creatureId];
+      let creatureId = action.counter.creatureId;
       return {
         ...state,
-        [action.counter.creatureId]: {
+        [creatureId]: {
           ...creature,
           counterIds: [
             ...creature.counterIds,
@@ -18,43 +18,54 @@ const byId = (state = {}, action) => {
           ]
         }
       };
-    case 'COUNTER_DELETE':
-      creature = state[action.counter.creatureId];
+    }
+    case 'COUNTER_DELETE': {
+      let creature = state[action.counter.creatureId];
+      let creatureId = action.counter.creatureId;
       return {
         ...state,
-        [action.counter.creatureId]: {
+        [creatureId]: {
           ...creature,
           counterIds: _.difference(creature.counterIds, action.counter.id)
         }
       };
-    case 'CREATURE_CREATE':
-      creature = action.creature;
+    }
+    case 'CREATURE_CREATE': {
+      let creature = action.creature;
       return {
         ...state,
         [creature.id]: creature
       };
-    case 'CREATURE_DELETE':
-      creature = action.creature;
+    }
+    case 'CREATURE_DELETE': {
+      let creature = action.creature;
       return _.omit(state, creature.id);
-    default:
+    }
+    default: {
       return state;
+    }
   }
-}
+};
 
 const allIds = (state = [], action) => {
   switch(action.type) {
-    case 'CREATURE_CREATE':
+    case 'CREATURE_CREATE': {
       return state.concat(action.creature.id);
-    case 'CREATURE_DELETE':
+    }
+    case 'CREATURE_DELETE': {
       return _.remove(state, (creatureId) => {
-          return creatureId !== action.creature.id
+          return creatureId !== action.creature.id;
         })
-    case 'CREATURE_REORDER':
-      return arrayMove(state, action.previousIndex, action.nextIndex)
-    default:
+    }
+    case 'CREATURE_REORDER': {
+      let { previousIndex, nextIndex } = action;
+      return arrayMove(state, previousIndex, nextIndex);
+    }
+    default: {
       return state;
+    }
   }
-}
+};
 
 export const creatures = combineReducers({
   byId,
