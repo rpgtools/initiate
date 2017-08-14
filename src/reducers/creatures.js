@@ -6,8 +6,8 @@ const arrayMove = require('array-move');
 const byId = (state = {}, action) => {
   switch(action.type) {
     case 'COUNTER_CREATE': {
-      let creature = state[action.counter.creatureId];
-      let creatureId = action.counter.creatureId;
+      const creature = state[action.counter.creatureId];
+      const creatureId = action.counter.creatureId;
       return {
         ...state,
         [creatureId]: {
@@ -20,8 +20,8 @@ const byId = (state = {}, action) => {
       };
     }
     case 'COUNTER_DELETE': {
-      let creature = state[action.counter.creatureId];
-      let creatureId = action.counter.creatureId;
+      const creature = state[action.counter.creatureId];
+      const creatureId = action.counter.creatureId;
       return {
         ...state,
         [creatureId]: {
@@ -31,14 +31,14 @@ const byId = (state = {}, action) => {
       };
     }
     case 'CREATURE_CREATE': {
-      let creature = action.creature;
+      const creature = action.creature;
       return {
         ...state,
         [creature.id]: creature
       };
     }
     case 'CREATURE_DELETE': {
-      let creature = action.creature;
+      const creature = action.creature;
       return _.omit(state, creature.id);
     }
     default: {
@@ -55,10 +55,10 @@ const allIds = (state = [], action) => {
     case 'CREATURE_DELETE': {
       return _.remove(state, (creatureId) => {
           return creatureId !== action.creature.id;
-        })
+        });
     }
     case 'CREATURE_REORDER': {
-      let { previousIndex, nextIndex } = action;
+      const { previousIndex, nextIndex } = action;
       return arrayMove(state, previousIndex, nextIndex);
     }
     default: {

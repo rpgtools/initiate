@@ -32,11 +32,11 @@ const SortableList = SortableContainer(({items}) => {
 class CreatureList extends React.Component {
   onAdvanceInitiative = () => {
     this.props._creature.reorderCreatures(0, -1);
-  }
+  };
 
   onCreatureSubmit = name => {
     this.props._creature.creatureCreate({name})
-  }
+  };
 
   onSortEnd = ({oldIndex, newIndex}) => {
     this.props._creature.reorderCreatures(oldIndex, newIndex);
@@ -48,17 +48,17 @@ class CreatureList extends React.Component {
 
   handleCreatureDelete = (creature) => {
     this.props._creature.creatureDelete(creature)
-  }
+  };
 
   handleCounterDelete = (counter) => {
     this.props._counter.counterDelete(counter);
-  }
+  };
 
   render() {
-    var creatures = []
-    if(_.size(this.props.creatureIds) > 0) {
+    const creatures = [];
+    if(this.props.creatureIds.length > 0) {
       _.forEach(this.props.creatureIds, (creatureId) => {
-        var creature   = this.props.creatures[creatureId];
+        const creature   = this.props.creatures[creatureId];
         const counters = _.pick(this.props.counters, creature.counterIds);
         creatures.push(
           <Creature
@@ -70,7 +70,7 @@ class CreatureList extends React.Component {
           />
         );
       });
-    }
+    };
 
     return(
       <div className="creature-list">
@@ -91,16 +91,23 @@ class CreatureList extends React.Component {
         </div>
       </div>
     );
-  }
-}
+  };
+};
 
 CreatureList.propTypes = {
-  creaturesIds: PropTypes.array
-}
-
-CreatureList.defaultProps = {
-  creatureIds: []
-}
+  creaturesIds: PropTypes.array,
+  creatures: PropTypes.objectOf(PropTypes.shape({
+    name: PropTypes.string,
+    id: PropTypes.string,
+    counterIds: PropTypes.array
+  })),
+  counters: PropTypes.objectOf(PropTypes.shape({
+    label: PropTypes.string,
+    id: PropTypes.string,
+    creatureId: PropTypes.string,
+    count: PropTypes.number
+  }))
+};
 
 const mapStateToProps = (state) => {
   return {

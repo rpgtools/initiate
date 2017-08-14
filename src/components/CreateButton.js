@@ -7,30 +7,30 @@ export class CreateButton extends React.Component {
       showForm: false,
       buttonLabel: props.buttonLabel,
       value: '',
-    }
-  }
+    };
+  };
 
   handleChange = event => {
     this.setState({
       value: event.target.value
     });
-  }
+  };
 
   handleFocus = event => {
     event.target.select();
-  }
+  };
 
   handleSubmit = event => {
     this.props.onSubmit(this.state.value);
     this.toggleForm();
     event.preventDefault();
-  }
+  };
 
   toggleForm = () => {
     this.setState({
       showForm: !this.state.showForm
     });
-  }
+  };
 
   render() {
     if(this.state.showForm) {
@@ -47,12 +47,12 @@ export class CreateButton extends React.Component {
           <input type="submit" value={this.state.buttonLabel} />
         </form>
       );
-    }
+    };
     return(
       <button
         className="button button__create"
         onClick={this.toggleForm}
       >{this.state.buttonLabel}</button>
     );
-  }
-}
+  };
+};
