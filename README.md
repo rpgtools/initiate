@@ -14,6 +14,15 @@ Features:
  - Counters can be incremented by or decremented with button clicks, or set to a new value by clicking on the current value.
  - Counters can be incremented by 5, 10, 100, or 1000 by holding down shift, command, option, or option-command respectively.
 
+# Quickstart
+
+ - Clone this repository with git.
+ - Install [node and npm](https://nodejs.org/en/).
+ - In the repository root folder:
+ - `npm install`
+ - `npm start`
+ - You can now access the site at [http://127.0.0.1:3000](http://127.0.0.1:3000)
+
 # Example
 Here's an example from my latest game session:
 ![Example usage of initiate](screenshot.png?raw=true "Example Usage")
