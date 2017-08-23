@@ -1,5 +1,6 @@
 body {
   font-family: monospace;
+  margin: 0;
 }
 
 .creature {
@@ -81,4 +82,10 @@ body {
   text-transform: uppercase;
   line-height: 12px;
   display: block;
+}
+
+.header {
+  background-color:#ccffff;
+  margin:0 0 5px;
+  border-radius: 5px;
 }
