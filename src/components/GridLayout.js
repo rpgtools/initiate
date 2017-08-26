@@ -26,9 +26,17 @@ class GridLayout extends Component {
         cols={{all: 12}}
         rowHeight={30}
         autoSize={true}
+        draggableCancel=".no-gl-drag"
         onLayoutChange={this.handleLayoutChange}>
-        <div key={'a'}><Header /></div>
-        <div key={'b'}><CreatureList /></div>
+        <div className="gl-frame" key={'a'}><Header /></div>
+        <div  key={'b'}>
+          <div className="gl-frame">
+          <h1>Initiative</h1>
+          <div className="no-gl-drag" style={{clear:"both"}}>
+            <CreatureList />
+          </div>
+          </div>
+        </div>
       </ResponsiveReactGridLayout>
     )
   }
@@ -36,8 +44,8 @@ class GridLayout extends Component {
 
 GridLayout.defaultProps= {
   layouts: [
-    {i: 'a', x: 0, y: 0, w: 12, h: 1, static: true},
-    {i: 'b', x: 0, y: 1, w: 6, h: 6}
+    {i: 'a', x: 0, y: 0, w: 12, h: 2, static: true},
+    {i: 'b', x: 0, y: 2, w: 6, h: 6}
   ]
 }
 

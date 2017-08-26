@@ -85,7 +85,20 @@ body {
 }
 
 .header {
-  background-color:#ccffff;
-  margin:0 0 5px;
+  height: 15px;
+  line-height: 15px;
+  margin: 0;
+  padding: 0;
+}
+
+.gl-frame {
+  background-color: #ffc;
+  border:1px solid #ccd;
   border-radius: 5px;
+  padding: 15px;
+  clear: both;
+  cursor: hand;
+  box-sizing: border-box;
+  overflow-y: scroll;
+  height: 100%;
 }
