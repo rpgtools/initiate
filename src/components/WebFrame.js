@@ -49,13 +49,12 @@ export default class WebFrame extends React.Component {
       );
     };
     return(
-      <div>
+      <div className="web-frame" style={{height:"100%"}}>
         <button
           className="button button__settings"
           onClick={this.toggleForm}
         >Edit</button>
-        <hr/>
-        <iframe style={{width:"100%"}} title={this.state.url} src={this.state.url}></iframe>
+        <iframe style={{width:"100%", height:"100%"}} title={this.state.url} src={this.state.url}></iframe>
       </div>
     );
   };

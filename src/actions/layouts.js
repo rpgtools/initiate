@@ -1,6 +1,5 @@
-export const updateLayouts = layouts => {
+export const toggleLayoutEdit = () => {
   return {
-    type: 'LAYOUTS_UPDATE',
-    layouts
+    type: 'LAYOUTS_EDIT_TOGGLE',
   }
 }

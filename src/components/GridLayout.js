@@ -5,6 +5,7 @@ import {Responsive, WidthProvider} from 'react-grid-layout';
 //to be props in da future
 import Header from './Header';
 import CreatureList from './CreatureList';
+import WebFrame from './WebFrame';
 
 //actions
 import * as layoutsActions from '../actions/layouts'
@@ -27,14 +28,15 @@ class GridLayout extends Component {
         rowHeight={30}
         autoSize={true}
         draggableCancel=".no-gl-drag"
+        isDraggable={this.props.editing_layout}
+        isResizable={this.props.editing_layout}
         onLayoutChange={this.handleLayoutChange}>
-        <div className="gl-frame" key={'a'}><Header /></div>
-        <div  key={'b'}>
+        <div key={'a'}>
           <div className="gl-frame">
-          <h1>Initiative</h1>
-          <div className="no-gl-drag" style={{clear:"both"}}>
-            <CreatureList />
-          </div>
+            <h1>Initiative</h1>
+            <div className="no-gl-drag" style={{clear:"both"}}>
+              <CreatureList />
+            </div>
           </div>
         </div>
       </ResponsiveReactGridLayout>
@@ -44,14 +46,15 @@ class GridLayout extends Component {
 
 GridLayout.defaultProps= {
   layouts: [
-    {i: 'a', x: 0, y: 0, w: 12, h: 2, static: true},
-    {i: 'b', x: 0, y: 2, w: 6, h: 6}
-  ]
+    {i: 'a', x: 0, y: 0, w: 12, h: 16},
+  ],
+  editing_layout: false,
 }
 
 const mapStateToProps = (state) => {
   return {
-    layouts: state.display.layout
+    layouts: state.display.layout,
+    editing_layout: state.display.editing_layout,
   };
 };
 

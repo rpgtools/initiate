@@ -11,4 +11,15 @@ const layouts = (state = [], action) => {
   }
 };
 
-export const display = combineReducers({layouts});
+const editing_layout = (state = false, action) => {
+  switch(action.type) {
+    case 'LAYOUTS_EDIT_TOGGLE': {
+      return !state;
+    }
+    default: {
+      return state;
+    }
+  }
+}
+
+export const display = combineReducers({layouts,editing_layout});

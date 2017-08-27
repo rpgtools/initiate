@@ -101,4 +101,11 @@ body {
   box-sizing: border-box;
   overflow-y: scroll;
   height: 100%;
+  position: relative;
+}
+
+.web-frame .button__settings {
+  position: absolute;
+  top: 5px;
+  right: 5px;
 }
