@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {CreatureList, StateManagement} from './components';
+import {CreatureList, StateManagement, Timer} from './components';
 import './App.css';
 
 class App extends Component {
@@ -8,6 +8,7 @@ class App extends Component {
       <div className="App">
         <StateManagement/>
         <CreatureList/>
+        <Timer name="Lucifer"/>
       </div>
     );
   }
