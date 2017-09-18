@@ -3,7 +3,7 @@ body {
   margin: 0;
 }
 
-.creature {
+.entity {
   background-color:#ccffff;
   margin:0 0 5px;
   border-radius: 5px;
@@ -12,13 +12,13 @@ body {
   cursor: grab;
 }
 
-.creature .counter_widget {
+.entity .counter_widget {
   display: inline-block;
   margin: 0 12px 0 0;
 }
 
 
-.creature_name {
+.entity_name {
   display: inline-block;
   margin: 0;
   margin-right: 24px;
@@ -26,18 +26,18 @@ body {
   line-height: 1;
 }
 
-.creature .button__create,
-.creature .button__edit,
-.creature > .button__delete
+.entity .button__create,
+.entity .button__edit,
+.entity > .button__delete
 {
   float:right;
 }
 
-.creature .button__delete {
+.entity .button__delete {
   display: none !important;
 }
 
-.creature.editing .button__delete {
+.entity.editing .button__delete {
   display: block !important;
 }
 

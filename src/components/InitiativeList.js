@@ -11,8 +11,9 @@ import {Creature} from './Creature'
 import {CreateButton} from './CreateButton'
 
 // Actions
-import * as creatureActions from '../actions/creatures';
+import * as entityActions from '../actions/entities';
 import * as counterActions from '../actions/counters';
+import * as layoutActions from '../actions/layouts';
 
 
 const SortableItem = SortableElement(({value}) =>
@@ -29,25 +30,25 @@ const SortableList = SortableContainer(({items}) => {
   );
 });
 
-class CreatureList extends React.Component {
+class InitiativeList extends React.Component {
   onAdvanceInitiative = () => {
-    this.props._creature.reorderCreatures(0, -1);
+    this.props._layout.reorderTokens(0, -1);
   };
 
   onCreatureSubmit = name => {
-    this.props._creature.creatureCreate({name})
+    this.props._entity.entityCreate({name})
   };
 
   onSortEnd = ({oldIndex, newIndex}) => {
-    this.props._creature.reorderCreatures(oldIndex, newIndex);
+    this.props._layout.reorderTokens(oldIndex, newIndex);
   };
 
   handleCounterSubmit = counter => {
     this.props._counter.counterCreate(counter)
   };
 
-  handleCreatureDelete = (creature) => {
-    this.props._creature.creatureDelete(creature)
+  handleCreatureDelete = (entity) => {
+    this.props._entity.entityDelete(entity)
   };
 
   handleCounterDelete = (counter) => {
@@ -55,15 +56,15 @@ class CreatureList extends React.Component {
   };
 
   render() {
-    const creatures = [];
-    if(this.props.creatureIds.length > 0) {
-      _.forEach(this.props.creatureIds, (creatureId) => {
-        const creature   = this.props.creatures[creatureId];
-        const counters = _.pick(this.props.counters, creature.counterIds);
-        creatures.push(
-          <Creature
-            key={creature.id}
-            creature={creature}
+    const entities = [];
+    if(this.props.entityIds.length > 0) {
+      _.forEach(this.props.entityIds, (entityId) => {
+        const entity   = this.props.entities[entityId];
+        const counters = _.pick(this.props.counters, entity.counterIds);
+        entities.push(
+          <Token
+            key={entity.id}
+            entity={entity}
             counters={counters}
             onCounterSubmit={this.handleCounterSubmit}
             onCreatureDelete={this.handleCreatureDelete}
@@ -73,9 +74,9 @@ class CreatureList extends React.Component {
     };
 
     return(
-      <div className="creature-list">
+      <div className="entity-list">
         <SortableList
-          items={creatures}
+          items={entities}
           onSortEnd={this.onSortEnd}
           distance={10} />
         <div>
@@ -95,8 +96,8 @@ class CreatureList extends React.Component {
 };
 
 CreatureList.propTypes = {
-  creaturesIds: PropTypes.array,
-  creatures: PropTypes.objectOf(PropTypes.shape({
+  entitiesIds: PropTypes.array,
+  entities: PropTypes.objectOf(PropTypes.shape({
     name: PropTypes.string,
     id: PropTypes.string,
     counterIds: PropTypes.array
@@ -104,23 +105,24 @@ CreatureList.propTypes = {
   counters: PropTypes.objectOf(PropTypes.shape({
     label: PropTypes.string,
     id: PropTypes.string,
-    creatureId: PropTypes.string,
+    entityId: PropTypes.string,
     count: PropTypes.number
   }))
 };
 
 const mapStateToProps = (state) => {
   return {
-    creatureIds: state.creatures.allIds,
-    creatures: state.creatures.byId,
-    counters: state.counters.byId
+    entityIds: state.display.initiative,
+    entities: state.entities.byId,
+    counters: state.counters.byId,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    _creature: bindActionCreators(creatureActions, dispatch),
-    _counter: bindActionCreators(counterActions, dispatch)
+    _entity: bindActionCreators(entityActions, dispatch),
+    _counter: bindActionCreators(counterActions, dispatch),
+    _layout: bindActionCreators(layoutActions, dispatch),
   };
 };
 

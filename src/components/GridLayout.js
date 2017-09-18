@@ -3,8 +3,8 @@ import React, {Component} from 'react';
 import { bindActionCreators } from 'redux';
 import {Responsive, WidthProvider} from 'react-grid-layout';
 //to be props in da future
-import Header from './Header';
 import CreatureList from './CreatureList';
+import EntitiesList from './EntitiesList';
 import WebFrame from './WebFrame';
 
 //actions
@@ -39,6 +39,12 @@ class GridLayout extends Component {
             </div>
           </div>
         </div>
+        <div key={'b'}>
+          <div className="gl-frame">
+            <h1>Creatures, Places & Items</h1>
+            <EntitiesList />
+          </div>
+        </div>
       </ResponsiveReactGridLayout>
     )
   }
@@ -46,7 +52,8 @@ class GridLayout extends Component {
 
 GridLayout.defaultProps= {
   layouts: [
-    {i: 'a', x: 0, y: 0, w: 12, h: 16},
+    {i: 'a', x: 0, y: 0, w: 6, h: 16},
+    {i: 'b', x: 6, y: 0, w: 6, h: 16},
   ],
   editing_layout: false,
 }

@@ -15,11 +15,11 @@ export class Creature extends React.Component {
   };
 
   handleCounterSubmit = label => {
-    this.props.onCounterSubmit({label, creatureId: this.props.creature.id});
+    this.props.onCounterSubmit({label, entityId: this.props.entity.id});
   };
 
   handleCreatureDelete = () => {
-    this.props.onCreatureDelete(this.props.creature);
+    this.props.onCreatureDelete(this.props.entity);
   };
 
   toggleCreatureEdit = () => {
@@ -27,7 +27,7 @@ export class Creature extends React.Component {
   };
 
   render() {
-    const {creature} = this.props;
+    const {entity} = this.props;
     const counters = [];
     if(_.size(this.props.counters) > 0) {
       _.forEach(this.props.counters, (counter) => {
@@ -39,10 +39,10 @@ export class Creature extends React.Component {
         );
       });
     };
-    const className = (!this.state.editing) ? "creature" : "creature editing";
+    const className = (!this.state.editing) ? "entity" : "entity editing";
     return(
       <div className={className}>
-        <h2 className="creature_name">{creature.name}</h2>
+        <h2 className="entity_name">{entity.name}</h2>
         {counters}
         <CreateButton onSubmit={this.handleCounterSubmit} buttonLabel="New Counter" />
         <button className="button__edit" onClick={this.toggleCreatureEdit} >Edit Creature</button>

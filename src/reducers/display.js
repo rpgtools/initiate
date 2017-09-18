@@ -22,4 +22,15 @@ const editing_layout = (state = false, action) => {
   }
 }
 
+const initiative = (state = [], action) => {
+  switch(action.type) {
+    case 'REORDER_TOKENS': {
+
+    }
+    default: {
+      return state;
+    }
+  }
+}
+
 export const display = combineReducers({layouts,editing_layout});

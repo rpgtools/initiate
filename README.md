@@ -8,7 +8,7 @@ Features:
 
  - Drag-and-drop reordering of initiative tokens
  - Single click to advance initiative
- - Define as many counters as you wish per initiative token. Use counters to track multiple creatures' hp on one token, or keep track of other constantly changing stats like Spell Slots, gold, etc.
+ - Define as many counters as you wish per initiative token. Use counters to track multiple entities' hp on one token, or keep track of other constantly changing stats like Spell Slots, gold, etc.
  - All data is saved in your browser's local storage — close it and come back to it later.
  - You can export your data as a json file and then import it on another device or browser.
  - Counters can be incremented by or decremented with button clicks, or set to a new value by clicking on the current value.
