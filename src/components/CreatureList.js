@@ -13,6 +13,7 @@ import {CreateButton} from './CreateButton'
 // Actions
 import * as creatureActions from '../actions/creatures';
 import * as counterActions from '../actions/counters';
+import * as timerActions from '../actions/timers';
 
 
 const SortableItem = SortableElement(({value}) =>
@@ -30,8 +31,19 @@ const SortableList = SortableContainer(({items}) => {
 });
 
 class CreatureList extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      turn: 1
+    }
+  };
+  
   onAdvanceInitiative = () => {
     this.props._creature.reorderCreatures(0, -1);
+    this.setState({turn: this.state.turn + 1})
+    if (this.state.turn % this.props.creatureIds.length == 0){
+      this.props._timer.addSeconds(6)
+    }
   };
 
   onCreatureSubmit = name => {
@@ -120,7 +132,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     _creature: bindActionCreators(creatureActions, dispatch),
-    _counter: bindActionCreators(counterActions, dispatch)
+    _counter: bindActionCreators(counterActions, dispatch),
+    _timer: bindActionCreators(timerActions, dispatch)
   };
 };
 

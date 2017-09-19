@@ -4,3 +4,10 @@ export const updateTime = time => {
     time
   };
 };
+
+export const addSeconds = seconds => {
+  return {
+    type: 'TIME_ADD_SECONDS',
+    seconds
+  };
+};

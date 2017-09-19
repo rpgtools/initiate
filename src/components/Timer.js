@@ -19,7 +19,7 @@ class Timer extends React.Component {
   
   handleIncrementClick = (z = 6) => {
     var moment = require('moment');
-    this.props._time.updateTime(moment(this.props.time).add(z, 'seconds'));
+    this.props._time.addSeconds(z);
   }
   
   render() {
