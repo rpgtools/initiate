@@ -1,6 +1,6 @@
 # Initiate
 
-__Pronounced in-i-shi-yut, as in a person who has been initiated into an organization or activity, typically recently.__
+__Pronounced ih-_nish_-ee-it, as in a person who has been initiated into an organization or activity, typically recently.__
 
 A simple initiative tracker for Table Top Role Playing Games. Initiate is designed so that you can start using it as quickly as possible for your in-person games with minimal fuss.
 
