@@ -8,7 +8,7 @@ class App extends Component {
       <div className="App">
         <StateManagement/>
         <CreatureList/>
-        <Timer name="Lucifer"/>
+        <Timer/>
       </div>
     );
   }
