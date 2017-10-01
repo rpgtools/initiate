@@ -37,7 +37,7 @@ class CreatureList extends React.Component {
       turn: 1
     }
   };
-  
+
   onAdvanceInitiative = () => {
     this.props._creature.reorderCreatures(0, -1);
     this.setState({turn: this.state.turn + 1})
@@ -70,8 +70,8 @@ class CreatureList extends React.Component {
     const creatures = [];
     if(this.props.creatureIds.length > 0) {
       _.forEach(this.props.creatureIds, (creatureId) => {
-        const creature   = this.props.creatures[creatureId];
-        const counters = _.pick(this.props.counters, creature.counterIds);
+        const creature = this.props.creatures[creatureId];
+        const counters = creature.counters;
         creatures.push(
           <Creature
             key={creature.id}
@@ -106,26 +106,25 @@ class CreatureList extends React.Component {
   };
 };
 
-CreatureList.propTypes = {
-  creaturesIds: PropTypes.array,
-  creatures: PropTypes.objectOf(PropTypes.shape({
-    name: PropTypes.string,
-    id: PropTypes.string,
-    counterIds: PropTypes.array
-  })),
-  counters: PropTypes.objectOf(PropTypes.shape({
-    label: PropTypes.string,
-    id: PropTypes.string,
-    creatureId: PropTypes.string,
-    count: PropTypes.number
-  }))
-};
+// CreatureList.propTypes = {
+//   creaturesIds: PropTypes.array,
+//   creatures: PropTypes.objectOf(PropTypes.shape({
+//     name: PropTypes.string,
+//     id: PropTypes.string,
+//     counters: PropTypes.array
+//   })),
+//   counters: PropTypes.objectOf(PropTypes.shape({
+//     label: PropTypes.string,
+//     id: PropTypes.string,
+//     creatureId: PropTypes.string,
+//     value: PropTypes.number
+//   }))
+// };
 
 const mapStateToProps = (state) => {
   return {
     creatureIds: state.creatures.allIds,
-    creatures: state.creatures.byId,
-    counters: state.counters.byId
+    creatures: state.creatures.byId
   };
 };
 

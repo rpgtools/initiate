@@ -1,12 +1,14 @@
-const uuid = require('uuid/v4');
-
 export const counterCreate = counter => {
   return {
     type: 'COUNTER_CREATE',
-    counter: {
-      ...counter,
-      id: uuid(),
-      count: 0,
+    payload: {
+      counter: {
+        id: counter.label,
+        label: counter.label,
+        type: 'number',
+        value: 0,
+        creatureId: counter.creatureId
+      }
     }
   };
 };
@@ -14,7 +16,9 @@ export const counterCreate = counter => {
 export const counterUpdate = counter => {
   return {
     type: 'COUNTER_UPDATE',
-    counter
+    payload: {
+      counter
+    }
   };
 };
 

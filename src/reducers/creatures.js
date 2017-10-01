@@ -6,29 +6,43 @@ const arrayMove = require('array-move');
 const byId = (state = {}, action) => {
   switch(action.type) {
     case 'COUNTER_CREATE': {
-      const creature = state[action.counter.creatureId];
-      const creatureId = action.counter.creatureId;
+      const creature = state[action.payload.counter.creatureId];
+      const creatureId = action.payload.counter.creatureId;
       return {
         ...state,
         [creatureId]: {
           ...creature,
-          counterIds: [
-            ...creature.counterIds,
-            action.counter.id
+          counters: [
+            ...creature.counters,
+            {
+              id: action.payload.counter.id,
+              label: action.payload.counter.label,
+              value: action.payload.counter.value,
+            }
           ]
         }
       };
     }
     case 'COUNTER_DELETE': {
-      const creature = state[action.counter.creatureId];
-      const creatureId = action.counter.creatureId;
+      const creature = state[action.payload.counter.creatureId];
+      const creatureId = action.payload.counter.creatureId;
       return {
         ...state,
         [creatureId]: {
           ...creature,
-          counterIds: _.difference(creature.counterIds, action.counter.id)
+          counters: _.differenceBy(creature.counters, action.payload.counter, 'id')
         }
       };
+    }
+    case 'COUNTER_UPDATE': {
+      const counter = action.payload.counter
+      return {
+        ...state,
+        [counter.id]: {
+          ...state[counter.id],
+          ...counter
+        }
+      }
     }
     case 'CREATURE_CREATE': {
       const creature = action.creature;

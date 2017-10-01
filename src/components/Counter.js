@@ -70,9 +70,10 @@ class Counter extends React.Component {
   };
 
   updateValue = amount => {
+    // this can just call the action
     this.handleSetCount({
       id: this.props.counter.id,
-      count: this.props.counter.count + amount
+      value: this.props.counter.value + amount
     });
   };
 
@@ -102,7 +103,7 @@ class Counter extends React.Component {
       <div className="counter_widget">
         <button className="button button__delete" onClick={this.onClickDelete}>x</button>
         <button className="button button__increment" onClick={this.onClickIncrement}>+</button>
-        <a className="counter_count" onClick={this.toggleForm}>{this.props.counter.count}</a>
+        <a className="counter_count" onClick={this.toggleForm}>{this.props.counter.value}</a>
         <span className="counter_label">{this.props.counter.label}</span>
         <button className="button button__decrement" onClick={this.onClickDecrement}>-</button>
       </div>
