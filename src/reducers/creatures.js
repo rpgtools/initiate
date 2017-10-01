@@ -38,6 +38,7 @@ const byId = (state = {}, action) => {
       const counter = action.payload.counter
       return {
         ...state,
+
         [counter.id]: {
           ...state[counter.id],
           ...counter

@@ -66,6 +66,10 @@ class CreatureList extends React.Component {
     this.props._counter.counterDelete(counter);
   };
 
+  handleCounterUpdate = (counter, creatureId) => {
+    this.props._counter.counterUpdate(counter, creatureId);
+  };
+
   render() {
     const creatures = [];
     if(this.props.creatureIds.length > 0) {
@@ -79,6 +83,7 @@ class CreatureList extends React.Component {
             counters={counters}
             onCounterSubmit={this.handleCounterSubmit}
             onCreatureDelete={this.handleCreatureDelete}
+            onCounterUpdate={this.handleCounterUpdate}
           />
         );
       });

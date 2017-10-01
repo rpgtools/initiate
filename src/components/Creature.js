@@ -26,6 +26,10 @@ export class Creature extends React.Component {
     this.setState({editing: !this.state.editing});
   };
 
+  handleCounterUpdate = counter => {
+    this.props.onCounterUpdate(counter, this.props.creature.id);
+  };
+
   render() {
     const {creature} = this.props;
     const counters = [];
@@ -35,6 +39,7 @@ export class Creature extends React.Component {
           <Counter
             key={counter.id}
             counter={counter}
+            onCounterUpdate={this.handleCounterUpdate}
           />
         );
       });

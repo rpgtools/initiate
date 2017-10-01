@@ -1,11 +1,6 @@
 // Libs
 import React from 'react';
-import { connect } from 'react-redux';
 // import PropTypes from 'prop-types';
-import { bindActionCreators } from 'redux';
-
-// Actions
-import * as counterActions from '../actions/counters';
 
 class Counter extends React.Component {
   constructor(props) {
@@ -44,10 +39,6 @@ class Counter extends React.Component {
     this.props._counter.counterDelete(this.props.counter);
   };
 
-  handleSetCount = counter => {
-    this.props._counter.counterUpdate(counter);
-  };
-
   handleSubmit = event => {
     this.handleSetCount({
       ...this.props.counter,
@@ -70,8 +61,7 @@ class Counter extends React.Component {
   };
 
   updateValue = amount => {
-    // this can just call the action
-    this.handleSetCount({
+    this.props.onCounterUpdate({
       id: this.props.counter.id,
       value: this.props.counter.value + amount
     });
@@ -110,11 +100,3 @@ class Counter extends React.Component {
     );
   };
 };
-
-const mapDispatchToProps = dispatch => {
-  return {
-    _counter: bindActionCreators(counterActions, dispatch)
-  };
-};
-
-export default connect(null, mapDispatchToProps)(Counter);
