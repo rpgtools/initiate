@@ -16,11 +16,7 @@ export const counterCreate = counter => {
 export const counterUpdate = counter => {
   return {
     type: 'COUNTER_UPDATE',
-    payload: {
-      counter: counter,
-
-
-    }
+    payload: {counter}
   };
 };
 

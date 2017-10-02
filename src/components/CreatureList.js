@@ -66,8 +66,8 @@ class CreatureList extends React.Component {
     this.props._counter.counterDelete(counter);
   };
 
-  handleCounterUpdate = (counter, creatureId) => {
-    this.props._counter.counterUpdate(counter, creatureId);
+  handleCounterUpdate = (counter) => {
+    this.props._counter.counterUpdate(counter);
   };
 
   render() {
@@ -80,7 +80,6 @@ class CreatureList extends React.Component {
           <Creature
             key={creature.id}
             creature={creature}
-            counters={counters}
             onCounterSubmit={this.handleCounterSubmit}
             onCreatureDelete={this.handleCreatureDelete}
             onCounterUpdate={this.handleCounterUpdate}
@@ -111,20 +110,6 @@ class CreatureList extends React.Component {
   };
 };
 
-// CreatureList.propTypes = {
-//   creaturesIds: PropTypes.array,
-//   creatures: PropTypes.objectOf(PropTypes.shape({
-//     name: PropTypes.string,
-//     id: PropTypes.string,
-//     counters: PropTypes.array
-//   })),
-//   counters: PropTypes.objectOf(PropTypes.shape({
-//     label: PropTypes.string,
-//     id: PropTypes.string,
-//     creatureId: PropTypes.string,
-//     value: PropTypes.number
-//   }))
-// };
 
 const mapStateToProps = (state) => {
   return {

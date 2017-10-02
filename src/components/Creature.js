@@ -27,19 +27,20 @@ export class Creature extends React.Component {
   };
 
   handleCounterUpdate = counter => {
-    this.props.onCounterUpdate(counter, this.props.creature.id);
+    this.props.onCounterUpdate({...counter, creatureId: this.props.creature.id});
   };
 
   render() {
     const {creature} = this.props;
     const counters = [];
-    if(_.size(this.props.counters) > 0) {
-      _.forEach(this.props.counters, (counter) => {
+    if(_.size(this.props.creature.counters) > 0) {
+      _.forOwn(this.props.creature.counters, (value, id) => {
         counters.push(
           <Counter
-            key={counter.id}
-            counter={counter}
-            onCounterUpdate={this.handleCounterUpdate}
+            key={id}
+            label={id}
+            value={value}
+            onUpdateValue={this.handleCounterUpdate}
           />
         );
       });

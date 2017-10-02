@@ -2,18 +2,18 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
 
-class Counter extends React.Component {
+export default class Counter extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       showForm: false,
-      value: props.counter.count
+      value: this.props.value.toString()
     };
   };
 
   componentWillReceiveProps = nextProps => {
     this.setState({
-      value: nextProps.counter.count.toString()
+      value: nextProps.value.toString()
     });
   };
 
@@ -36,16 +36,7 @@ class Counter extends React.Component {
   };
 
   onClickDelete = event => {
-    this.props._counter.counterDelete(this.props.counter);
-  };
-
-  handleSubmit = event => {
-    this.handleSetCount({
-      ...this.props.counter,
-      count: parseInt(this.state.value,10)
-    });
-    this.toggleForm();
-    event.preventDefault();
+    this.props.onClickDelete();
   };
 
   handleFocus = event => {
@@ -61,10 +52,12 @@ class Counter extends React.Component {
   };
 
   updateValue = amount => {
-    this.props.onCounterUpdate({
-      id: this.props.counter.id,
-      value: this.props.counter.value + amount
+    var new_value = this.props.value + amount;
+    this.props.onUpdateValue({
+      id: this.props.label,
+      value: new_value
     });
+    this.setState({value: new_value.toString()});
   };
 
   toggleForm = () => {
@@ -93,8 +86,8 @@ class Counter extends React.Component {
       <div className="counter_widget">
         <button className="button button__delete" onClick={this.onClickDelete}>x</button>
         <button className="button button__increment" onClick={this.onClickIncrement}>+</button>
-        <a className="counter_count" onClick={this.toggleForm}>{this.props.counter.value}</a>
-        <span className="counter_label">{this.props.counter.label}</span>
+        <a className="counter_count" onClick={this.toggleForm}>{this.state.value}</a>
+        <span className="counter_label">{this.props.label}</span>
         <button className="button button__decrement" onClick={this.onClickDecrement}>-</button>
       </div>
     );

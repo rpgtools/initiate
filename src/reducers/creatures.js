@@ -6,20 +6,16 @@ const arrayMove = require('array-move');
 const byId = (state = {}, action) => {
   switch(action.type) {
     case 'COUNTER_CREATE': {
-      const creature = state[action.payload.counter.creatureId];
-      const creatureId = action.payload.counter.creatureId;
+      const counter = action.payload.counter;
+      const creature = state[counter.creatureId];
       return {
         ...state,
-        [creatureId]: {
+        [counter.creatureId]: {
           ...creature,
-          counters: [
+          counters: {
             ...creature.counters,
-            {
-              id: action.payload.counter.id,
-              label: action.payload.counter.label,
-              value: action.payload.counter.value,
-            }
-          ]
+            [counter.id]: counter.value
+          }
         }
       };
     }
@@ -36,12 +32,15 @@ const byId = (state = {}, action) => {
     }
     case 'COUNTER_UPDATE': {
       const counter = action.payload.counter
+      const creature = state[counter.creatureId];
       return {
         ...state,
-
-        [counter.id]: {
-          ...state[counter.id],
-          ...counter
+        [counter.creatureId]: {
+          ...creature,
+          counters: {
+            ...creature.counters,
+            [counter.id]: counter.value
+          }
         }
       }
     }
