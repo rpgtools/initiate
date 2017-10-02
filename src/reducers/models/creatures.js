@@ -68,8 +68,8 @@ const allIds = (state = [], action) => {
     }
     case 'CREATURE_DELETE': {
       return _.remove(state, (creatureId) => {
-          return creatureId !== action.creature.id;
-        });
+        return creatureId !== action.creature.id;
+      });
     }
     case 'CREATURE_REORDER': {
       const { previousIndex, nextIndex } = action;
