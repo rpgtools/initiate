@@ -1,6 +1,5 @@
 // Libs
 import React from 'react';
-import {SortableContainer, SortableElement} from 'react-sortable-hoc';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
