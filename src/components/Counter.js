@@ -1,7 +1,6 @@
 // Libs
 import React from 'react';
 // import PropTypes from 'prop-types';
-
 export default class Counter extends React.Component {
   constructor(props) {
     super(props);
@@ -36,7 +35,7 @@ export default class Counter extends React.Component {
   };
 
   onClickDelete = event => {
-    this.props.onClickDelete();
+    this.props.onClickDelete(event, this.props.label);
   };
 
   handleFocus = event => {
