@@ -6,7 +6,7 @@ export const creatureCreate = creature => {
     creature: {
       ...creature,
       id: uuid(),
-      counters: [],
+      counters: {},
     }
   };
 };

@@ -1,13 +1,13 @@
 export const counterCreate = counter => {
+  console.log(counter);
   return {
     type: 'COUNTER_CREATE',
     payload: {
       counter: {
-        id: counter.label,
-        label: counter.label,
+        ...counter,
+        id: uuid(),
         type: 'number',
         value: 0,
-        creatureId: counter.creatureId
       }
     }
   };

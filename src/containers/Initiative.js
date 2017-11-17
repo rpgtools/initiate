@@ -23,8 +23,11 @@ class Initiative extends React.Component {
   };
 
   // Handlers
-  handleCounterCreate = (counterId, creatureId) => {
-
+  handleCounterCreate = (label, creatureId) => {
+    this.props._counter.counterCreate({
+      label,
+      creatureId
+    });
   };
   handleCounterUpdate = (counterId, creatureId) => {};
   handleCounterDelete = (counterId, creatureId) => {};
@@ -37,27 +40,39 @@ class Initiative extends React.Component {
   };
 
   // Renderers
-  renderCreatureActions = (creatureId) => {
 
-  }
-
-  renderCreatures = (ids, creatures) => {
+  fetchCreatures = (ids, creatures) => {
     var tokens = [];
     _.forEach(ids, (creatureId) => {
       const creature = creatures[creatureId];
-      const counters = this.renderCounters(creature.counters);
+      const counters = this.fetchCounters(creature.counters);
+      const creatureActions = this.fetchCreatureActions(creature.id);
       tokens.push(
         <InitiativeToken
           key={creature.id}
           title={creature.name}
           children={counters}
+          buttons={creatureActions}
         />
       );
     });
     return tokens;
   };
 
-  renderCounters = (creature) => {
+  fetchCreatureActions = (creatureId) => {
+    const assignCounterLabel = label => {
+      this.handleCounterCreate(label, creatureId);
+    }
+    var creatureActions = (
+      <CreateButton
+        onSubmit={assignCounterLabel}
+        buttonLabel="New Counter"
+        />
+    );
+    return creatureActions;
+  }
+
+  fetchCounters = (creature) => {
     var counters = []
     _.forEach(creature.counters, (counter) => {
       counters.push(
@@ -73,7 +88,7 @@ class Initiative extends React.Component {
   };
 
   render() {
-    const creatures = this.renderCreatures(this.props.creatureIds, this.props.creatures);
+    const creatures = this.fetchCreatures(this.props.creatureIds, this.props.creatures);
     return (
       <div className="initiative">
         <SortableList
