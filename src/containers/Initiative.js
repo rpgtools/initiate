@@ -1,3 +1,12 @@
+/* @TODO:
+
+ TODOS:
+  * Rename to View (see: https://unbug.gitbooks.io/react-native-training/content/45_naming_convention.html)
+  * Put counters as properties on creatures(label:value pairs)
+  * EVENTUALLY: Figure out saving settings for counters
+  */
+
+
 // Libs
 import _ from 'lodash';
 import {bindActionCreators} from 'redux';
@@ -13,7 +22,6 @@ import SortableList from '../components/SortableList';
 
 // Actions
 import * as creatureActions from '../actions/creatures';
-import * as counterActions from '../actions/counters';
 import * as timerActions from '../actions/timers';
 
 class Initiative extends React.Component {
@@ -24,15 +32,22 @@ class Initiative extends React.Component {
 
   // Handlers
   handleCounterCreate = (label, creatureId) => {
-    this.props._counter.counterCreate({
-      label,
-      creatureId
-    });
+    let creature = this.props.creatures[creatureId];
+    creature.counters.push({label, value: 0});
+    this.props.actions.creature.creatureUpdate(creature);
   };
-  handleCounterUpdate = (counterId, creatureId) => {};
-  handleCounterDelete = (counterId, creatureId) => {};
+  handleCounterUpdate = (counter, creatureId) => {
+    let creature = this.props.creatures[creatureId];
+    creature.counters[counter.id].value = counter.value;
+    this.props.actions.creature.creatureUpdate(creature);
+  };
+  handleCounterDelete = (counterId, creatureId) => {
+    let creature = this.props.creatures[creatureId];
+    creature.counters.splice(counterId, 1);
+    this.props.actions.creature.creatureUpdate(creature);
+  };
   handleCreatureCreate = (name) => {
-    this.props._creature.creatureCreate({name});
+    this.props.actions.creature.creatureCreate({name});
   };
   handleNextTurn = () => {};
   handleSortEnd = ({oldIndex, newIndex}) => {
@@ -41,12 +56,17 @@ class Initiative extends React.Component {
 
   // Renderers
 
-  fetchCreatures = (ids, creatures) => {
+  renderCreatures = () => {
     var tokens = [];
-    _.forEach(ids, (creatureId) => {
-      const creature = creatures[creatureId];
-      const counters = this.fetchCounters(creature.counters);
-      const creatureActions = this.fetchCreatureActions(creature.id);
+    _.forEach(this.props.creatureIds, (creatureId) => {
+      const creature = this.props.creatures[creatureId];
+
+      const updateCounterCallback = (counter) => {this.handleCounterUpdate(counter, creature.id)};
+      const deleteCounterCallback = (counterId) => {this.handleCounterDelete(counterId, creature.id)};
+
+      const counters = this.renderCounters(creature.counters, updateCounterCallback, deleteCounterCallback);
+      const creatureActions = this.renderCreatureActions(creature.id);
+
       tokens.push(
         <InitiativeToken
           key={creature.id}
@@ -59,7 +79,7 @@ class Initiative extends React.Component {
     return tokens;
   };
 
-  fetchCreatureActions = (creatureId) => {
+  renderCreatureActions = (creatureId) => {
     const assignCounterLabel = label => {
       this.handleCounterCreate(label, creatureId);
     }
@@ -67,35 +87,38 @@ class Initiative extends React.Component {
       <CreateButton
         onSubmit={assignCounterLabel}
         buttonLabel="New Counter"
-        />
+      />
     );
     return creatureActions;
   }
 
-  fetchCounters = (creature) => {
-    var counters = []
-    _.forEach(creature.counters, (counter) => {
-      counters.push(
+  renderCounters = (counters, handleCounterUpdate, handleCounterDelete) => {
+    var output = [];
+    var id = 0;
+    _.forEach(counters, (counter) => {
+      output.push(
         <Counter
-          key={counter.id}
-          label={counter.id}
+          id={id}
+          key={id++}
+          label={counter.label}
           value={counter.value}
-          onUpdateValue={(counter) => {this.handleCounterUpdate(counter, creature.id)}}
+          onUpdateValue={handleCounterUpdate}
+          onCounterDelete={handleCounterDelete}
         />
-      )
+      );
     });
-    return counters;
+    return output;
   };
 
   render() {
-    const creatures = this.fetchCreatures(this.props.creatureIds, this.props.creatures);
+    const creatures = this.renderCreatures();
     return (
       <div className="initiative">
         <SortableList
           items={creatures}
           onSortEnd={this.handleSortEnd}
         />
-          <CreateButton
+        <CreateButton
           onSubmit={this.handleCreatureCreate}
           buttonLabel="New Creature"
         />
@@ -113,9 +136,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    _creature: bindActionCreators(creatureActions, dispatch),
-    _counter: bindActionCreators(counterActions, dispatch),
-    _timer: bindActionCreators(timerActions, dispatch)
+    actions: {
+      creature: bindActionCreators(creatureActions, dispatch),
+      timer: bindActionCreators(timerActions, dispatch),
+    },
   };
 };
 

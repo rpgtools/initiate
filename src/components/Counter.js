@@ -35,7 +35,8 @@ export default class Counter extends React.Component {
   };
 
   onClickDelete = event => {
-    this.props.onClickDelete(event, this.props.label);
+    console.log(this.props.id)
+    this.props.onCounterDelete(this.props.id);
   };
 
   handleFocus = event => {
@@ -53,7 +54,7 @@ export default class Counter extends React.Component {
   updateValue = amount => {
     var new_value = this.props.value + amount;
     this.props.onUpdateValue({
-      id: this.props.label,
+      id: this.props.id,
       value: new_value
     });
     this.setState({value: new_value.toString()});
