@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import uuid from 'uuid/v4';
 
 import Counter from '../components/Counter';
 import CreateButton from './CreateButton';
@@ -8,21 +9,19 @@ import * as creatureActions from '../actions/creatures';
 class InitiativeToken extends React.Component {
 
   handleCounterCreate = label => {
-    let creature = this.props.creature;
-    creature.counters.push({label, value: 0});
-    this.props.actions.creature.creatureUpdate(creature);
+    this.props.createCounter(this.props.creature.id, label);
   };
 
   handleCounterUpdate = counter => {
     let creature = this.props.creature;
     creature.counters[counter.id].value = counter.value;
-    this.props.actions.creature.creatureUpdate(creature);
+    this.props.creatureUpdate(creature);
   };
 
   handleCounterDelete = counterId => {
     let creature = this.props.creature;
     creature.counters.splice(counterId, 1);
-    this.props.actions.creature.creatureUpdate(creature);
+    this.props.creatureUpdate(creature);
   };
 
   render () {
@@ -31,9 +30,10 @@ class InitiativeToken extends React.Component {
       <div className="initiative-token">
         <h2 className="initiative-token_title">{creature.name}</h2>
         <div className="initiative-token_left">
-          {creature.counters.map((counter, index) =>
+          {creature.counters.map((counter) =>
             <Counter
-              key={index}
+              key={counter.id}
+              id={counter.id}
               label={counter.label}
               value={counter.value}
               onUpdateValue={this.handleCounterUpdate}
@@ -62,7 +62,8 @@ class InitiativeToken extends React.Component {
 
 const mapDispatchToProps = {
   creatureUpdate: creatureActions.creatureUpdate,
-  creatureDelete: creatureActions.creatureDelete
+  creatureDelete: creatureActions.creatureDelete,
+  createCounter: creatureActions.createCounter,
 };
 
 export default connect(null, mapDispatchToProps)(InitiativeToken);

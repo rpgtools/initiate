@@ -15,7 +15,6 @@ export const creatureCreate = creature => {
 
 export const creatureUpdate = creature => {
   return {
-    type: 'CREATURE_UPDATE',
     payload: {creature}
   };
 };
@@ -34,3 +33,15 @@ export const reorderCreatures = (previousIndex, nextIndex) => {
     nextIndex
   };
 };
+
+export const createCounter = (creatureId, label) => ({
+  type: 'COUNTER_CREATE',
+  payload: {
+    creatureId,
+    counter: {
+      label,
+      value: 0,
+      id: uuid(),
+    }
+  }
+});

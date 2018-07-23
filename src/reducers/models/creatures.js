@@ -16,7 +16,7 @@ const byId = (state = {}, action) => {
       const creature = action.payload.creature;
       return _.omit(state, creature.id);
     }
-    case 'CREATURE_UPDATE': {
+    case 'CREATURE_UPDATE':
       return {
         ...state,
         [action.payload.creature.id]: {
@@ -24,7 +24,19 @@ const byId = (state = {}, action) => {
           ...action.payload.creature,
         },
       };
-    }
+    case 'COUNTER_CREATE':
+      return {
+        ...state,
+        [action.payload.creatureId]: {
+          ...state[action.payload.creatureId],
+          counters: [
+            ...state[action.payload.creatureId].counters,
+            action.payload.counter,
+          ]
+        }
+      };
+    case 'COUNTER_UPDATE':
+      return state;
     default: {
       return state;
     }
