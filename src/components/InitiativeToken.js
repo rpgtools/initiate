@@ -27,7 +27,7 @@ class InitiativeToken extends React.Component {
   handleCounterDelete = counterId => {
     let creature = this.props.creature;
     creature.counters.splice(counterId, 1);
-    this.props.creatureUpdate(creature);
+    this.props.updateCreature(creature);
   };
 
   render () {
@@ -67,8 +67,8 @@ class InitiativeToken extends React.Component {
 }
 
 const mapDispatchToProps = {
-  creatureUpdate: creatureActions.creatureUpdate,
-  creatureDelete: creatureActions.creatureDelete,
+  updateCreature: creatureActions.updateCreature,
+  deleteCreature: creatureActions.deleteCreature,
   createCounter: creatureActions.createCounter,
   updateCounter: creatureActions.updateCounter,
 };

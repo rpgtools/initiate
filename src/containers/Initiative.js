@@ -31,12 +31,18 @@ class Initiative extends React.Component {
   };
 
   handleCreatureCreate = (name) => {
-    this.props.actions.creature.creatureCreate({name});
+    this.props.actions.creature.createCreature({name});
   };
 
-  handleNextTurn = () => {};
+  handleSortEnd = ({oldIndex, newIndex}) => this.props.reorderCreatures(oldIndex, newIndex);
 
-  handleSortEnd = ({oldIndex, newIndex}) => {};
+  advanceInitiative = () => {
+    this.props.reorderCreatures(0, -1);
+    this.setState({turn: this.state.turn + 1})
+    if (this.state.turn % this.props.creatureIds.length == 0){
+      this.props._timer.addSeconds(6)
+    }
+  }
 
   render() {
     const { creatures, creatureIds } = this.props;
@@ -47,28 +53,28 @@ class Initiative extends React.Component {
           onSortEnd={this.handleSortEnd}
         />
         <CreateButton
-          onSubmit={this.handleCreatureCreate}
           buttonLabel="New Creature"
+          onSubmit={this.handleCreatureCreate}
+        />
+        <CreateButton
+          buttonLabel="Advance Initiative"
+          onSubmit={this.advanceInitiative}
         />
       </div>
     );
   };
 };
 
-const mapStateToProps = (state) => {
-  return {
-    creatureIds: state.creatures.allIds,
-    creatures: state.creatures.byId
-  };
-};
+const mapStateToProps = state => ({
+  creatureIds: state.creatures.allIds,
+  creatures: state.creatures.byId
+});
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    actions: {
-      creature: bindActionCreators(creatureActions, dispatch),
-      timer: bindActionCreators(timerActions, dispatch),
-    },
-  };
+const mapDispatchToProps = {
+  createCreature: creatureActions.createCreature,
+  updateCreature: creatureActions.updateCreature,
+  deleteCreature: creatureActions.deleteCreature,
+  reorderCreatures: creatureActions.reorderCreatures,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Initiative);

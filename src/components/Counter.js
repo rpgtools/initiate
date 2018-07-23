@@ -35,7 +35,6 @@ export default class Counter extends React.Component {
   };
 
   onClickDelete = event => {
-    console.log(this.props.id)
     this.props.onCounterDelete(this.props.id);
   };
 

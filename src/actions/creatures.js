@@ -1,6 +1,6 @@
 const uuid = require('uuid/v4');
 
-export const creatureCreate = creature => {
+export const createCreature = creature => {
   return {
     type: 'CREATURE_CREATE',
     payload: {
@@ -13,13 +13,13 @@ export const creatureCreate = creature => {
   };
 };
 
-export const creatureUpdate = creature => {
+export const updateCreature = creature => {
   return {
     payload: {creature}
   };
 };
 
-export const creatureDelete = creature => {
+export const deleteCreature = creature => {
   return {
     type: 'CREATURE_DELETE',
     payload: {creature}
