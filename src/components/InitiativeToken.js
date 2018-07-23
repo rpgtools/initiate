@@ -9,13 +9,19 @@ import * as creatureActions from '../actions/creatures';
 class InitiativeToken extends React.Component {
 
   handleCounterCreate = label => {
-    this.props.createCounter(this.props.creature.id, label);
+    this.props.createCounter(
+      this.props.creature.id,
+      label,
+      this.props.creature.counters.length
+    );
   };
 
-  handleCounterUpdate = counter => {
-    let creature = this.props.creature;
-    creature.counters[counter.id].value = counter.value;
-    this.props.creatureUpdate(creature);
+  handleCounterUpdate = ({id, value}) => {
+    this.props.updateCounter(
+      this.props.creature.id,
+      id,
+      value
+    );
   };
 
   handleCounterDelete = counterId => {
@@ -64,6 +70,7 @@ const mapDispatchToProps = {
   creatureUpdate: creatureActions.creatureUpdate,
   creatureDelete: creatureActions.creatureDelete,
   createCounter: creatureActions.createCounter,
+  updateCounter: creatureActions.updateCounter,
 };
 
 export default connect(null, mapDispatchToProps)(InitiativeToken);

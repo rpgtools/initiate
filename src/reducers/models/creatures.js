@@ -1,3 +1,5 @@
+//TODO: add immutability-helper?
+
 import {combineReducers} from 'redux';
 import _ from 'lodash';
 
@@ -36,7 +38,17 @@ const byId = (state = {}, action) => {
         }
       };
     case 'COUNTER_UPDATE':
-      return state;
+      return {
+        ...state,
+        [action.payload.creatureId]: {
+          ...state[action.payload.creatureId],
+          counters: state[action.payload.creatureId].counters.map((counter, index) =>
+            index === action.payload.counterId
+              ? {...counter, value: action.payload.value}
+              : counter
+            )
+        }
+      };
     default: {
       return state;
     }

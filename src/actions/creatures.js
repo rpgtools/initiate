@@ -34,14 +34,23 @@ export const reorderCreatures = (previousIndex, nextIndex) => {
   };
 };
 
-export const createCounter = (creatureId, label) => ({
+export const createCounter = (creatureId, label, numberOfCounters) => ({
   type: 'COUNTER_CREATE',
   payload: {
     creatureId,
     counter: {
       label,
       value: 0,
-      id: uuid(),
+      id: numberOfCounters,
     }
+  }
+});
+
+export const updateCounter = (creatureId, counterId, value) => ({
+  type: 'COUNTER_UPDATE',
+  payload: {
+    creatureId,
+    counterId,
+    value,
   }
 });
