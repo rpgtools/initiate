@@ -34,23 +34,30 @@ export const reorderCreatures = (previousIndex, nextIndex) => {
   };
 };
 
-export const createCounter = (creatureId, label, numberOfCounters) => ({
+export const createCounter = (creatureId, label) => ({
   type: 'COUNTER_CREATE',
   payload: {
     creatureId,
     counter: {
       label,
       value: 0,
-      id: numberOfCounters,
     }
   }
 });
 
-export const updateCounter = (creatureId, counterId, value) => ({
+export const updateCounter = (creatureId, counterIndex, value) => ({
   type: 'COUNTER_UPDATE',
   payload: {
     creatureId,
-    counterId,
+    counterIndex,
     value,
   }
+});
+
+export const deleteCounter = (creatureId, counterIndex) => ({
+  type: 'COUNTER_DELETE',
+  payload: {
+    creatureId,
+    counterIndex
+  },
 });

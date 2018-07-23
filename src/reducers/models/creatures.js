@@ -37,13 +37,24 @@ const byId = (state = {}, action) => {
           ]
         }
       };
+    case 'COUNTER_DELETE':
+      return {
+        ...state,
+        [action.payload.creatureId]: {
+          ...state[action.payload.creatureId],
+          counters: [
+            ...state[action.payload.creatureId].counters.slice(0, action.payload.counterIndex),
+            ...state[action.payload.creatureId].counters.slice(action.payload.counterIndex + 1)
+          ]
+        }
+      }
     case 'COUNTER_UPDATE':
       return {
         ...state,
         [action.payload.creatureId]: {
           ...state[action.payload.creatureId],
           counters: state[action.payload.creatureId].counters.map((counter, index) =>
-            index === action.payload.counterId
+            index === action.payload.counterIndex
               ? {...counter, value: action.payload.value}
               : counter
             )

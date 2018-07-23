@@ -34,10 +34,6 @@ export default class Counter extends React.Component {
     });
   };
 
-  onClickDelete = event => {
-    this.props.onCounterDelete(this.props.id);
-  };
-
   handleFocus = event => {
     event.target.select();
   };
@@ -51,12 +47,9 @@ export default class Counter extends React.Component {
   };
 
   updateValue = amount => {
-    var new_value = this.props.value + amount;
-    this.props.onUpdateValue({
-      id: this.props.id,
-      value: new_value
-    });
-    this.setState({value: new_value.toString()});
+    const newValue = this.props.value + amount;
+    this.props.onUpdateValue(newValue);
+    this.setState({value: newValue.toString()});
   };
 
   toggleForm = () => {
@@ -83,7 +76,7 @@ export default class Counter extends React.Component {
     };
     return(
       <div className="counter_widget">
-        <button className="button button__delete" onClick={this.onClickDelete}>x</button>
+        <button className="button button__delete" onClick={this.props.onClickDelete}>x</button>
         <button className="button button__increment" onClick={this.onClickIncrement}>+</button>
         <a className="counter_count" onClick={this.toggleForm}>{this.state.value}</a>
         <span className="counter_label">{this.props.label}</span>
