@@ -44,10 +44,6 @@ const InitiativeToken = ({
           onSubmit={handleCreateCounter}
           />
         <Button
-          buttonLabel="Edit Creature"
-          onSubmit={console.log('EDIT CREATURE')}
-          />
-        <Button
           buttonLabel="Delete Creature"
           onSubmit={handleDeleteCreature}
           />

@@ -11,7 +11,6 @@ class Initiative extends React.Component {
 
   handleCreatureCreate = name => this.props.createCreature({ name });
 
-
   handleSortEnd = ({ oldIndex, newIndex }) =>
     this.props.reorderCreatures(oldIndex, newIndex);
 
