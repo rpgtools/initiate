@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import uuid from 'uuid/v4';
 
 import Counter from '../components/Counter';
-import CreateButton from './CreateButton';
+import Button from './Button';
 import * as creatureActions from '../actions/creatures';
 
 class InitiativeToken extends React.Component {
@@ -37,15 +37,15 @@ class InitiativeToken extends React.Component {
           )}
         </div>
         <div className="initiative-token_right">
-          <CreateButton
+          <Button
             buttonLabel="New Counter"
             onSubmit={this.handleCreateCounter}
           />
-          <CreateButton
+          <Button
             buttonLabel="Edit Creature"
             onSubmit={console.log('EDIT CREATURE')}
           />
-          <CreateButton
+          <Button
            buttonLabel="Delete Creature"
            onSubmit={this.handleDeleteCounter}
           />

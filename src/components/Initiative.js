@@ -15,10 +15,10 @@ import {connect} from 'react-redux';
 import React from 'react';
 
 // Child Components
-import Counter from '../components/Counter';
-import CreateButton from '../components/CreateButton';
-import InitiativeToken from '../components/InitiativeToken';
-import SortableList from '../components/SortableList';
+import Counter from './Counter';
+import Button from './Button';
+import InitiativeToken from './InitiativeToken';
+import SortableList from './SortableList';
 
 // Actions
 import * as creatureActions from '../actions/creatures';
@@ -52,11 +52,11 @@ class Initiative extends React.Component {
           items={creatureIds.map(creatureId => creatures[creatureId], [])}
           onSortEnd={this.handleSortEnd}
         />
-        <CreateButton
+        <Button
           buttonLabel="New Creature"
           onSubmit={this.handleCreatureCreate}
         />
-        <CreateButton
+        <Button
           buttonLabel="Advance Initiative"
           onSubmit={this.advanceInitiative}
         />

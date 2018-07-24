@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Initiative from './containers/Initiative';
+import Initiative from './components/Initiative';
 import './App.css';
 
 class App extends Component {

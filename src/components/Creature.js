@@ -4,7 +4,7 @@ import _ from 'lodash';
 
 // Child Components
 import Counter from './Counter';
-import {CreateButton} from './CreateButton';
+import {Button} from './Button';
 
 export class Creature extends React.Component {
   constructor(props) {
@@ -50,7 +50,7 @@ export class Creature extends React.Component {
       <div className={className}>
         <h2 className="creature_name">{creature.name}</h2>
         {counters}
-        <CreateButton onSubmit={this.handleCounterSubmit} buttonLabel="New Counter" />
+        <Button onSubmit={this.handleCounterSubmit} buttonLabel="New Counter" />
         <button className="button__edit" onClick={this.toggleCreatureEdit} >Edit Creature</button>
         <button className="button__delete" onClick={this.handleCreatureDelete} >Delete Creature</button>
       </div>
