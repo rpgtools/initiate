@@ -24,6 +24,8 @@ import SortableList from './SortableList';
 import * as creatureActions from '../../actions/creatures';
 import * as timerActions from '../../actions/timers';
 
+import { creaturesSelector } from './selectors';
+
 class Initiative extends React.Component {
   constructor(props) {
     super(props);
@@ -45,11 +47,11 @@ class Initiative extends React.Component {
   }
 
   render() {
-    const { creatures, creatureIds, ...actions } = this.props;
+    const { creatures, ...actions } = this.props;
     return (
       <div className="initiative">
         <SortableList
-          items={creatureIds.map(creatureId => creatures[creatureId], [])}
+          items={creatures}
           onSortEnd={this.handleSortEnd}
           {...actions}
         />
@@ -67,8 +69,7 @@ class Initiative extends React.Component {
 };
 
 const mapStateToProps = state => ({
-  creatureIds: state.creatures.allIds,
-  creatures: state.creatures.byId
+  creatures: creaturesSelector(state),
 });
 
 const mapDispatchToProps = {
