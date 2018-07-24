@@ -12,17 +12,13 @@ const InitiativeToken = ({
 }) => {
   const handleDeleteCreature = () => deleteCreature(creature.id)
 
-  const handleCreateCounter = label => {
-    createCounter(creature.id, label);
-  };
+  const handleCreateCounter = label => createCounter(creature.id, label);
 
-  const handleDeleteCounter = counterIndex => () => {
+  const handleDeleteCounter = counterIndex => () =>
     deleteCounter(creature.id, counterIndex);
-  };
 
-  const handleUpdateCounter = counterIndex => value => {
+  const handleUpdateCounter = counterIndex => value =>
     updateCounter(creature.id, counterIndex, value);
-  };
 
   return (
     <div className="initiative-token">
