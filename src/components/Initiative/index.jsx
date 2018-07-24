@@ -17,10 +17,10 @@ class Initiative extends React.Component {
 
   advanceInitiative = () => {
     this.props.reorderCreatures(0, -1);
-    this.setState({turn: this.state.turn + 1})
-    if (this.state.turn % this.props.creatures.length === 0){
-      this.props._timer.addSeconds(6)
-    }
+    // this.setState({turn: this.state.turn + 1})
+    // if (this.state.turn % this.props.creatures.length === 0){
+    //   this.props._timer.addSeconds(6)
+    // }
   }
 
   render() {
