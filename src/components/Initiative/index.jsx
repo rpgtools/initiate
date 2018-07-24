@@ -15,14 +15,14 @@ import {connect} from 'react-redux';
 import React from 'react';
 
 // Child Components
-import Counter from './Counter';
-import Button from './Button';
 import InitiativeToken from './InitiativeToken';
+import Counter from '../Counter';
+import Button from '../Button';
 import SortableList from './SortableList';
 
 // Actions
-import * as creatureActions from '../actions/creatures';
-import * as timerActions from '../actions/timers';
+import * as creatureActions from '../../actions/creatures';
+import * as timerActions from '../../actions/timers';
 
 class Initiative extends React.Component {
   constructor(props) {
@@ -31,7 +31,7 @@ class Initiative extends React.Component {
   };
 
   handleCreatureCreate = (name) => {
-    this.props.actions.creature.createCreature({name});
+    this.props.createCreature({name});
   };
 
   handleSortEnd = ({oldIndex, newIndex}) => this.props.reorderCreatures(oldIndex, newIndex);

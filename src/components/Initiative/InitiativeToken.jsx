@@ -2,9 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import uuid from 'uuid/v4';
 
-import Counter from '../components/Counter';
-import Button from './Button';
-import * as creatureActions from '../actions/creatures';
+import Counter from '../Counter';
+import Button from '../Button';
+import * as creatureActions from '../../actions/creatures';
 
 class InitiativeToken extends React.Component {
 
