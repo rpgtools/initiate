@@ -45,12 +45,13 @@ class Initiative extends React.Component {
   }
 
   render() {
-    const { creatures, creatureIds } = this.props;
+    const { creatures, creatureIds, ...actions } = this.props;
     return (
       <div className="initiative">
         <SortableList
           items={creatureIds.map(creatureId => creatures[creatureId], [])}
           onSortEnd={this.handleSortEnd}
+          {...actions}
         />
         <Button
           buttonLabel="New Creature"
@@ -75,6 +76,9 @@ const mapDispatchToProps = {
   updateCreature: creatureActions.updateCreature,
   deleteCreature: creatureActions.deleteCreature,
   reorderCreatures: creatureActions.reorderCreatures,
+  createCounter: creatureActions.createCounter,
+  updateCounter: creatureActions.updateCounter,
+  deleteCounter: creatureActions.deleteCounter,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Initiative);

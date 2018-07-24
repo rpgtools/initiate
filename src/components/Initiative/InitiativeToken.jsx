@@ -1,10 +1,7 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import uuid from 'uuid/v4';
 
 import Counter from '../Counter';
 import Button from '../Button';
-import * as creatureActions from '../../actions/creatures';
 
 class InitiativeToken extends React.Component {
 
@@ -54,13 +51,3 @@ class InitiativeToken extends React.Component {
     );
   }
 }
-
-const mapDispatchToProps = {
-  updateCreature: creatureActions.updateCreature,
-  deleteCreature: creatureActions.deleteCreature,
-  createCounter: creatureActions.createCounter,
-  updateCounter: creatureActions.updateCounter,
-  deleteCounter: creatureActions.deleteCounter,
-};
-
-export default connect(null, mapDispatchToProps)(InitiativeToken);
