@@ -5,10 +5,13 @@ import Button from '../Button';
 
 const InitiativeToken = ({
   creature,
+  deleteCreature,
   createCounter,
   deleteCounter,
   updateCounter,
 }) => {
+  const handleDeleteCreature = () => deleteCreature(creature.id)
+
   const handleCreateCounter = label => {
     createCounter(creature.id, label);
   };
@@ -46,7 +49,7 @@ const InitiativeToken = ({
           />
         <Button
           buttonLabel="Delete Creature"
-          onSubmit={handleDeleteCounter}
+          onSubmit={handleDeleteCreature}
           />
       </div>
     </div>

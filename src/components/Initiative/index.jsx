@@ -2,27 +2,18 @@ import React from 'react';
 import {connect} from 'react-redux';
 // import PropTypes from 'prop-types';
 
-// Child Components
 import Button from '../Button';
 import SortableList from './SortableList';
-
-// Actions
 import * as creatureActions from '../../actions/creatures';
-import * as timerActions from '../../actions/timers';
-
 import { creaturesSelector } from './selectors';
 
 class Initiative extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {turn: 1};
-  };
 
-  handleCreatureCreate = (name) => {
-    this.props.createCreature({name});
-  };
+  handleCreatureCreate = name => this.props.createCreature({ name });
 
-  handleSortEnd = ({oldIndex, newIndex}) => this.props.reorderCreatures(oldIndex, newIndex);
+
+  handleSortEnd = ({ oldIndex, newIndex }) =>
+    this.props.reorderCreatures(oldIndex, newIndex);
 
   advanceInitiative = () => {
     this.props.reorderCreatures(0, -1);
@@ -33,13 +24,19 @@ class Initiative extends React.Component {
   }
 
   render() {
-    const { creatures, ...actions } = this.props;
+    const { creatures } = this.props;
+    const tokenActions = {
+      deleteCreature: this.props.deleteCreature,
+      createCounter: this.props.createCounter,
+      updateCounter: this.props.updateCounter,
+      deleteCounter: this.props.deleteCounter,
+    }
     return (
       <div className="initiative">
         <SortableList
           items={creatures}
           onSortEnd={this.handleSortEnd}
-          {...actions}
+          {...tokenActions}
         />
         <Button
           buttonLabel="New Creature"

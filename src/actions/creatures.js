@@ -19,18 +19,20 @@ export const updateCreature = creature => {
   };
 };
 
-export const deleteCreature = creature => {
+export const deleteCreature = creatureId => {
   return {
     type: 'CREATURE_DELETE',
-    payload: {creature}
+    payload: { creatureId }
   };
 };
 
 export const reorderCreatures = (previousIndex, nextIndex) => {
   return {
     type: 'CREATURE_REORDER',
-    previousIndex,
-    nextIndex
+    payload: {
+      previousIndex,
+      nextIndex
+    }
   };
 };
 

@@ -1,7 +1,8 @@
-//TODO: add immutability-helper?
+//TODO: add immutability-helper or combineReducers b/c of nesting
 
 import {combineReducers} from 'redux';
-import _ from 'lodash';
+import filter from 'lodash/filter';
+import omit from 'lodash/omit';
 
 const arrayMove = require('array-move');
 
@@ -14,10 +15,8 @@ const byId = (state = {}, action) => {
         [creature.id]: creature
       };
     }
-    case 'CREATURE_DELETE': {
-      const creature = action.payload.creature;
-      return _.omit(state, creature.id);
-    }
+    case 'CREATURE_DELETE':
+      return omit(state, action.payload.creatureId);
     case 'CREATURE_UPDATE':
       return {
         ...state,
@@ -68,21 +67,17 @@ const byId = (state = {}, action) => {
 
 const allIds = (state = [], action) => {
   switch(action.type) {
-    case 'CREATURE_CREATE': {
+    case 'CREATURE_CREATE':
       return state.concat(action.payload.creature.id);
-    }
-    case 'CREATURE_DELETE': {
-      return _.remove(state, (creatureId) => {
-        return creatureId !== action.payload.creature.id;
-      });
-    }
+    case 'CREATURE_DELETE':
+      return filter(state, creatureId =>
+        creatureId !== action.payload.creatureId);
     case 'CREATURE_REORDER': {
-      const { previousIndex, nextIndex } = action;
+      const { previousIndex, nextIndex } = action.payload;
       return arrayMove(state, previousIndex, nextIndex);
     }
-    default: {
+    default:
       return state;
-    }
   }
 };
 
