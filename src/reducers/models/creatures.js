@@ -93,5 +93,5 @@ const selectedCreature = (state = null, action) => {
 export const creatures = combineReducers({
   byId,
   allIds,
-  selectedCreature
+  selected: selectedCreature,
 });

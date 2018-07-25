@@ -6,10 +6,10 @@ import { connect } from 'react-redux';
 import Counter from './Counter';
 import Button from './Button';
 
-import * as creatureActions from '../../actions/creatures';
-import { creaturesSelector } from './selectors';
+import * as creatureActions from '../actions/creatures';
+import { creaturesSelector, selectedCreatureSelector } from './Initiative/selectors';
 
-class Creature extends React.Component {
+class CreatureDetails extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -68,6 +68,7 @@ class Creature extends React.Component {
 
 const mapStateToProps = state => ({
   creatures: creaturesSelector(state),
+  creature: selectedCreatureSelector(state),
 });
 
 const mapDispatchToProps = {
