@@ -32,7 +32,7 @@ class Initiative extends React.Component {
       deleteCounter: this.props.deleteCounter,
     }
     return (
-      <div className="initiative">
+      <div className="initiative feature">
         <SortableList
           items={creatures}
           onSortEnd={this.handleSortEnd}

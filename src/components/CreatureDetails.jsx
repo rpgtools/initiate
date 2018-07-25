@@ -39,9 +39,9 @@ class CreatureDetails extends React.Component {
     const { creature } = this.props;
     if (creature) {
       return (
-        <div className="initiative-token">
-          <h2 className="initiative-token_title">{creature.name}</h2>
-          <div className="initiative-token_left">
+        <div className="creature-details feature">
+          <h2 className="creature-details__name">{creature.name}</h2>
+          <div className="creature-details__counters">
             {creature.counters.map((counter, index) =>
               <Counter
                 key={index}
@@ -52,7 +52,7 @@ class CreatureDetails extends React.Component {
                 />
             )}
           </div>
-          <div className="initiative-token_right">
+          <div className="creature-details__buttons">
             <Button
               buttonLabel="New Counter"
               onSubmit={this.handleCreateCounter}

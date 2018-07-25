@@ -24,10 +24,10 @@ const InitiativeToken = ({
   const handleSelectCreature = () => selectCreature(creature.id);
 
   return (
-    <div className="initiative-token" onClick={handleSelectCreature}>
-      <h2 className="initiative-token_title">{creature.name}</h2>
+    <div className="initiative__token" onClick={handleSelectCreature}>
+      <h2 className="initiative__token--title">{creature.name}</h2>
       <DragHandle />
-      <div className="initiative-token_left">
+      <div className="initiative__token--counters">
         {creature.counters.map((counter, index) =>
           <Counter
             key={index}
@@ -38,16 +38,18 @@ const InitiativeToken = ({
             />
         )}
       </div>
-      <div className="initiative-token_right">
-        {/*<Button
-          buttonLabel="New Counter"
-          onSubmit={handleCreateCounter}
-          />
-        <Button
-          buttonLabel="Delete Creature"
-          onSubmit={handleDeleteCreature}
-          />*/}
-      </div>
+        {/*
+          <div className="initiative__token">
+            <Button
+            buttonLabel="New Counter"
+            onSubmit={handleCreateCounter}
+            />
+          <Button
+            buttonLabel="Delete Creature"
+            onSubmit={handleDeleteCreature}
+            />
+          </div>
+          */}
     </div>
   );
 };

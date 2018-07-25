@@ -8,10 +8,12 @@ import './styles/index.scss';
 class App extends Component {
   render () {
     return (
-      <div className="App">
-        <StateManagement />
-        <Initiative />
-        <CreatureDetails />
+      <div>
+        <main className="main">
+          {/*<StateManagement />*/}
+          <Initiative />
+          <CreatureDetails />
+        </main>
       </div>
     );
   }
