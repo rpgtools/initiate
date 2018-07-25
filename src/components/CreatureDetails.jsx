@@ -37,32 +37,36 @@ class CreatureDetails extends React.Component {
 
   render () {
     const { creature } = this.props;
-    return (
-      <div className="initiative-token">
-        <h2 className="initiative-token_title">{creature.name}</h2>
-        <div className="initiative-token_left">
-          {creature.counters.map((counter, index) =>
-            <Counter
-              key={index}
-              label={counter.label}
-              value={counter.value}
-              onUpdateValue={this.handleUpdateCounter(index)}
-              onClickDelete={this.handleDeleteCounter(index)}
+    if (creature) {
+      return (
+        <div className="initiative-token">
+          <h2 className="initiative-token_title">{creature.name}</h2>
+          <div className="initiative-token_left">
+            {creature.counters.map((counter, index) =>
+              <Counter
+                key={index}
+                label={counter.label}
+                value={counter.value}
+                onUpdateValue={this.handleUpdateCounter(index)}
+                onClickDelete={this.handleDeleteCounter(index)}
+                />
+            )}
+          </div>
+          <div className="initiative-token_right">
+            <Button
+              buttonLabel="New Counter"
+              onSubmit={this.handleCreateCounter}
               />
-          )}
+            <Button
+              buttonLabel="Delete Creature"
+              onSubmit={this.handleDeleteCreature}
+              />
+          </div>
         </div>
-        <div className="initiative-token_right">
-          <Button
-            buttonLabel="New Counter"
-            onSubmit={this.handleCreateCounter}
-            />
-          <Button
-            buttonLabel="Delete Creature"
-            onSubmit={this.handleDeleteCreature}
-            />
-        </div>
-      </div>
-    );
+      );
+    } else {
+      return (<div>Create a creature to begin.</div>)
+    }
   };
 };
 
