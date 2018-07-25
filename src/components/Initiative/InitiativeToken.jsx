@@ -39,14 +39,14 @@ const InitiativeToken = ({
         )}
       </div>
       <div className="initiative-token_right">
-        <Button
+        {/*<Button
           buttonLabel="New Counter"
           onSubmit={handleCreateCounter}
           />
         <Button
           buttonLabel="Delete Creature"
           onSubmit={handleDeleteCreature}
-          />
+          />*/}
       </div>
     </div>
   );
