@@ -3,10 +3,10 @@ import React, {Component} from 'react';
 import Initiative from './components/Initiative';
 import StateManagement from './components/StateManagement';
 import CreatureDetails from './components/CreatureDetails';
-import './App.css';
+import './styles/index.scss';
 
 class App extends Component {
-  render() {
+  render () {
     return (
       <div className="App">
         <StateManagement />

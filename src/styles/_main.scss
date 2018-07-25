@@ -1,0 +1,89 @@
+body {
+  font-family: monospace;
+  background-image: url('../images/ancient-paper-background.jpg');
+  background-position-x: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+}
+//
+// .creature {
+//   background-color:#ccffff;
+//   margin:0 0 5px;
+//   border-radius: 5px;
+//   text-align: left;
+//   padding: 5px;
+//   cursor: grab;
+// }
+//
+// .creature .counter_widget {
+//   display: inline-block;
+//   margin: 0 12px 0 0;
+// }
+//
+//
+// .creature_name {
+//   display: inline-block;
+//   margin: 0;
+//   margin-right: 24px;
+//   padding:0;
+//   line-height: 1;
+// }
+//
+// .creature .button__create,
+// .creature .button__edit,
+// .creature > .button__delete
+// {
+//   float:right;
+// }
+//
+// .creature .button__delete {
+//   display: none !important;
+// }
+//
+// .creature.editing .button__delete {
+//   display: block !important;
+// }
+//
+// .counter_widget {
+//   cursor: initial;
+//   text-align: center;
+// }
+//
+// .counter_widget .button {
+//   border: 0;
+//   background: none;
+//   -webkit-appearance: none;
+//   cursor: pointer;
+//   border-radius: 3px;
+//   background-color:#ddeeee;
+//   display:block;
+//   margin: 0 auto;
+//   padding:0 5px;
+//   font-size:12px;
+//   line-height: 14px;
+//   height:14px;
+//   width: 28px;
+//   font-weight: bold;
+//   color:#fff;
+// }
+//
+// .counter_widget .button__delete {
+//   margin-top: 2px;
+//   background-color:#600;
+// }
+//
+// .counter_widget .counter_count {
+//   line-height: 20px;
+//   font-size:20px;
+//   font-weight: bold;
+//   display: block;
+// }
+//
+// .counter_widget .counter_label {
+//   opacity: 0.7;
+//   font-size: 12px;
+//   text-transform: uppercase;
+//   line-height: 12px;
+//   display: block;
+// }

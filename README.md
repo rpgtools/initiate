@@ -25,4 +25,4 @@ Features:
 
 # Example
 Here's an example from my latest game session:
-![Example usage of initiate](screenshot.png?raw=true "Example Usage")
+![Example usage of initiate](src/images/screenshot.png?raw=true "Example Usage")
