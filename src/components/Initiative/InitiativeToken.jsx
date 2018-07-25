@@ -26,7 +26,6 @@ const InitiativeToken = ({
   return (
     <div className="initiative__token" onClick={handleSelectCreature}>
       <h2 className="initiative__token--title">{creature.name}</h2>
-      <DragHandle />
       <div className="initiative__token--counters">
         {creature.counters.map((counter, index) =>
           <Counter
@@ -50,6 +49,7 @@ const InitiativeToken = ({
             />
           </div>
           */}
+        <DragHandle />
     </div>
   );
 };

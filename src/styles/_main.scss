@@ -40,9 +40,15 @@ body {
       margin-top: 7px;
       background-color: #FFF;
       border-radius: 10px;
-
+      position: relative;
       &--title {
         margin: 3px 0 0 3px;
+      }
+
+      .drag-handle {
+        position: absolute;
+        right: 10px;
+        top: 10px;
       }
     }
   }
