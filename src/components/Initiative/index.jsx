@@ -26,6 +26,7 @@ class Initiative extends React.Component {
     const { creatures } = this.props;
     const tokenActions = {
       deleteCreature: this.props.deleteCreature,
+      selectCreature: this.props.selectCreature,
       createCounter: this.props.createCounter,
       updateCounter: this.props.updateCounter,
       deleteCounter: this.props.deleteCounter,
@@ -59,6 +60,7 @@ const mapDispatchToProps = {
   updateCreature: creatureActions.updateCreature,
   deleteCreature: creatureActions.deleteCreature,
   reorderCreatures: creatureActions.reorderCreatures,
+  selectCreature: creatureActions.selectCreature,
   createCounter: creatureActions.createCounter,
   updateCounter: creatureActions.updateCounter,
   deleteCounter: creatureActions.deleteCounter,

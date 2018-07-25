@@ -9,6 +9,7 @@ const InitiativeToken = ({
   createCounter,
   deleteCounter,
   updateCounter,
+  selectCreature,
 }) => {
   const handleDeleteCreature = () => deleteCreature(creature.id)
 
@@ -20,8 +21,10 @@ const InitiativeToken = ({
   const handleUpdateCounter = counterIndex => value =>
     updateCounter(creature.id, counterIndex, value);
 
+  const handleSelectCreature = () => selectCreature(creature.id);
+
   return (
-    <div className="initiative-token">
+    <div className="initiative-token" onClick={handleSelectCreature}>
       <h2 className="initiative-token_title">{creature.name}</h2>
       <div className="initiative-token_left">
         {creature.counters.map((counter, index) =>

@@ -60,6 +60,13 @@ export const deleteCounter = (creatureId, counterIndex) => ({
   type: 'COUNTER_DELETE',
   payload: {
     creatureId,
-    counterIndex
+    counterIndex,
   },
+});
+
+export const selectCreature = creatureId => ({
+  type: 'CREATURE_SELECT',
+  payload: {
+    creatureId,
+  }
 });

@@ -81,7 +81,16 @@ const allIds = (state = [], action) => {
   }
 };
 
+const selectedCreature = (state = null, action) => {
+  if (action.type === 'CREATURE_SELECT') {
+    return action.payload.creatureId;
+  } else {
+    return state;
+  }
+};
+
 export const creatures = combineReducers({
   byId,
-  allIds
+  allIds,
+  selectedCreature
 });
