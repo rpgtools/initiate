@@ -36,6 +36,7 @@ class Initiative extends React.Component {
         <SortableList
           items={creatures}
           onSortEnd={this.handleSortEnd}
+          useDragHandle
           {...tokenActions}
         />
         <Button

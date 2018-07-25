@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "array-move": "^1.0.0",
     "babel-polyfill": "^6.23.0",
     "lodash": "^4.17.4",
     "moment": "^2.18.1",

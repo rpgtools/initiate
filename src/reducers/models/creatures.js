@@ -4,7 +4,8 @@ import {combineReducers} from 'redux';
 import filter from 'lodash/filter';
 import omit from 'lodash/omit';
 
-const arrayMove = require('array-move');
+//TODO remove arrayMove lib, import from
+import { arrayMove } from 'react-sortable-hoc';
 
 const byId = (state = {}, action) => {
   switch(action.type) {

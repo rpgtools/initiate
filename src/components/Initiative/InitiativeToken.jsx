@@ -1,7 +1,7 @@
 import React from 'react';
-
 import Counter from '../Counter';
 import Button from '../Button';
+import { DragHandle } from './SortableList';
 
 const InitiativeToken = ({
   creature,
@@ -26,6 +26,7 @@ const InitiativeToken = ({
   return (
     <div className="initiative-token" onClick={handleSelectCreature}>
       <h2 className="initiative-token_title">{creature.name}</h2>
+      <DragHandle />
       <div className="initiative-token_left">
         {creature.counters.map((counter, index) =>
           <Counter

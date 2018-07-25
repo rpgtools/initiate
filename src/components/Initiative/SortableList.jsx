@@ -1,6 +1,12 @@
 import React from 'react';
-import {SortableContainer, SortableElement} from 'react-sortable-hoc';
+import {
+  SortableContainer,
+  SortableElement,
+  SortableHandle
+} from 'react-sortable-hoc';
 import InitiativeToken from './InitiativeToken';
+
+export const DragHandle = SortableHandle(() => <span>::</span>);
 
 const SortableItem = SortableElement(({creature, ...tokenActions}) =>
   <InitiativeToken
