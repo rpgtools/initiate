@@ -8,7 +8,7 @@ import InitiativeToken from './InitiativeToken';
 import DragHandleImage from '../../images/drag-handle.png';
 
 export const DragHandle = SortableHandle(() =>
-  <img className="drag-handle" src={DragHandleImage} width={18} />
+  <img className="drag-handle" src={DragHandleImage} width={18} alt="::" />
 );
 
 const SortableItem = SortableElement(({creature, ...tokenActions}) =>

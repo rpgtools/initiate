@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
 import Initiative from './components/Initiative';
-import StateManagement from './components/StateManagement';
+// import StateManagement from './components/StateManagement';
 import CreatureDetails from './components/CreatureDetails';
 import './styles/index.scss';
 

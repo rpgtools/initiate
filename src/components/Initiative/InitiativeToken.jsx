@@ -1,19 +1,13 @@
 import React from 'react';
 import Counter from '../Counter';
-import Button from '../Button';
 import { DragHandle } from './SortableList';
 
 const InitiativeToken = ({
   creature,
-  deleteCreature,
-  createCounter,
   deleteCounter,
   updateCounter,
   selectCreature,
 }) => {
-  const handleDeleteCreature = () => deleteCreature(creature.id)
-
-  const handleCreateCounter = label => createCounter(creature.id, label);
 
   const handleDeleteCounter = counterIndex => () =>
     deleteCounter(creature.id, counterIndex);
