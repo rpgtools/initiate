@@ -1,24 +1,24 @@
-  .initiative {
-    flex: 1 1 60%;
+.initiative {
+  flex: 1 1 60%;
 
-    &__token {
-      width: 94%;
-      height: 80px;
-      padding: 5px;
-      margin: auto;
-      margin-top: 7px;
-      background-color: $opaque-white;
-      border-radius: 10px;
-      position: relative;
-      box-shadow: inset 0 0 15px black;
-      &--title {
-        margin: 3px 0 0 3px;
-      }
+  &__token {
+    width: 94%;
+    height: 80px;
+    padding: 5px;
+    margin: auto;
+    margin-top: 7px;
+    background-color: $opaque-white;
+    border-radius: 10px;
+    position: relative;
+    box-shadow: inset 0 0 15px black;
+    &--title {
+      margin: 3px 0 0 3px;
+    }
 
-      .drag-handle {
-        position: absolute;
-        right: 10px;
-        top: 10px;
-      }
+    .drag-handle {
+      position: absolute;
+      right: 10px;
+      top: 10px;
     }
   }
+}

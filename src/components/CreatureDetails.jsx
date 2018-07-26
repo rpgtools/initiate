@@ -39,7 +39,7 @@ class CreatureDetails extends React.Component {
     const { creature } = this.props;
     if (creature) {
       return (
-        <div className="creature-details feature">
+        <div className="creature-details widget">
           <h2 className="creature-details__name">{creature.name}</h2>
           <div className="creature-details__counters">
             {creature.counters.map((counter, index) =>
