@@ -32,7 +32,7 @@ const InitiativeToken = ({
             key={index}
             label={counter.label}
             value={counter.value}
-            onUpdateValue={handleUpdateCounter(index)}
+            handleUpdateValue={handleUpdateCounter(index)}
             onClickDelete={handleDeleteCounter(index)}
             />
         )}
