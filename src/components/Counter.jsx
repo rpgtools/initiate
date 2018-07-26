@@ -7,6 +7,7 @@ export default class Counter extends React.Component {
     super(props);
     this.state = {
       isEditing: false,
+      isEditingWithForm: false
     };
   };
 
@@ -16,7 +17,7 @@ export default class Counter extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    this.toggleIsEditing();
+    this.doneEditing();
   }
 
   getAmountFromModifiers = event => {
@@ -37,37 +38,60 @@ export default class Counter extends React.Component {
   onClickIncrement = event =>
     this.props.handleUpdateValue(this.props.value + this.getAmountFromModifiers(event));
 
-  toggleIsEditing = () => {
+  handleClickToEdit = () => {
+    this.state.isEditing
+      ? this.setState({ isEditingWithForm: true })
+      : this.setState({ isEditing: true })
+    document.addEventListener('mouseup', this.handleClickOutsideCounter)
+  }
+
+  doneEditing = () => {
     this.setState({
-      isEditing: !this.state.isEditing
+      isEditing: false,
+      isEditingWithForm: false
     });
-  };
+    document.removeEventListener('mouseup', this.handleClickOutsideCounter);
+  }
+
+  handleClickOutsideCounter = event => {
+    if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
+      this.doneEditing();
+    }
+  }
+
+  setWrapperRef = node => this.wrapperRef = node;
 
   render () {
-    if (this.state.isEditing) {
-      return (
-        <div className="counter counter__editing">
+    const { isEditing, isEditingWithForm } = this.state;
+    const { value, label, onClickDelete } = this.props;
+
+    return (
+      <div className="counter" ref={this.setWrapperRef}>
+        {!isEditingWithForm ? (
+          <div className="counter__value">
+            <a className="counter_count" onClick={this.handleClickToEdit}>{value}</a>
+            <span className="counter_label">{label}</span>
+          </div>
+        ) : (
           <form onSubmit={this.handleSubmit}>
             <input
               autoFocus
               type="number"
-              value={this.props.value}
+              value={value}
               onFocus={this.handleFocus}
               onChange={this.handleChange}
               required
               />
             <input type="submit" value="Save" />
           </form>
-        </div>
-      );
-    };
-    return(
-      <div className="counter">
-        <button className="button button__delete" onClick={this.props.onClickDelete}>x</button>
-        <button className="button button__increment" onClick={this.onClickIncrement}>+</button>
-        <a className="counter_count" onClick={this.toggleIsEditing}>{this.props.value}</a>
-        <span className="counter_label">{this.props.label}</span>
-        <button className="button button__decrement" onClick={this.onClickDecrement}>-</button>
+        )}
+        {isEditing &&
+          <div className="counter__buttons">
+            <button className="button button__delete" onClick={onClickDelete}>x</button>
+            <button className="button button__increment" onClick={this.onClickIncrement}>+</button>
+            <button className="button button__decrement" onClick={this.onClickDecrement}>-</button>
+          </div>
+        }
       </div>
     );
   };
