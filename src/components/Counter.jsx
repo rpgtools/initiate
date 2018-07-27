@@ -66,11 +66,14 @@ export default class Counter extends React.Component {
     const { value, label, onClickDelete } = this.props;
 
     return (
-      <div className="counter" ref={this.setWrapperRef}>
+      <div
+        className={`counter${isEditing ? ' counter__editing' : ''}`}
+        ref={this.setWrapperRef}
+      >
         {!isEditingWithForm ? (
           <div className="counter__value">
-            <a className="counter_count" onClick={this.handleClickToEdit}>{value}</a>
-            <span className="counter_label">{label}</span>
+            <a className="counter__value--count" onClick={this.handleClickToEdit}>{value}</a>
+            <span className="counter__value--label">{label}</span>
           </div>
         ) : (
           <form onSubmit={this.handleSubmit}>
