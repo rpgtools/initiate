@@ -15,7 +15,11 @@ const InitiativeToken = ({
   const handleUpdateCounter = counterIndex => value =>
     updateCounter(creature.id, counterIndex, value);
 
-  const handleSelectCreature = () => selectCreature(creature.id);
+  const handleSelectCreature = e => {
+    if (!e.target.className.startsWith('counter')) {
+      selectCreature(creature.id);
+    }
+  }
 
   return (
     <div className="initiative__token" onClick={handleSelectCreature}>
