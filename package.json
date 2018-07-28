@@ -33,13 +33,12 @@
     "postcss-flexbugs-fixes": "3.0.0",
     "postcss-loader": "2.0.6",
     "promise": "7.1.1",
-    "react": "^15.6.1",
+    "react": "^16.4.1",
     "react-dev-utils": "^3.0.2",
-    "react-dom": "^15.6.1",
     "react-error-overlay": "^1.0.9",
     "react-redux": "^5.0.5",
-    "react-sortable-hoc": "^0.6.5",
-    "redux": "^3.7.2",
+    "react-sortable-hoc": "^0.8.2",
+    "redux": "^4.0.0",
     "redux-localstorage": "^0.4.1",
     "redux-thunk": "^2.2.0",
     "reselect": "^3.0.1",
@@ -100,6 +99,7 @@
   "devDependencies": {
     "mini-css-extract-plugin": "^0.4.1",
     "node-sass": "^4.9.2",
+    "react-dom": "^16.4.1",
     "sass-loader": "^7.0.3"
   }
 }
