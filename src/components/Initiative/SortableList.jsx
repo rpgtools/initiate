@@ -21,7 +21,7 @@ const SortableItem = SortableElement(({creature, ...tokenActions}) =>
 
 const SortableList = SortableContainer(({items, ...tokenActions}) => {
   return (
-    <div className="SortableList">
+    <div className="initiative__sortable-list-container">
       {items.map((creature, index) => (
         <SortableItem
           key={creature.id}
