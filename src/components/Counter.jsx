@@ -9,6 +9,7 @@ export default class Counter extends React.Component {
       isEditing: false,
       isEditingWithForm: false
     };
+    this.myRef = React.createRef();
   };
 
   handleChange = e => this.props.handleUpdateValue(Number(e.target.value));
@@ -54,12 +55,10 @@ export default class Counter extends React.Component {
   }
 
   handleClickOutsideCounter = event => {
-    if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
+    if (this.myRef && !this.myRef.current.contains(event.target)) {
       this.doneEditing();
     }
   }
-
-  setWrapperRef = node => this.wrapperRef = node;
 
   render () {
     const { isEditing, isEditingWithForm } = this.state;
@@ -68,7 +67,7 @@ export default class Counter extends React.Component {
     return (
       <div
         className={`counter${isEditing ? ' counter__editing' : ''}`}
-        ref={this.setWrapperRef}
+        ref={this.myRef}
       >
         {!isEditingWithForm ? (
           <div className="counter__value">
