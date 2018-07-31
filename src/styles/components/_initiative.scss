@@ -1,31 +1,34 @@
 .initiative {
-  flex: 1 1 60%;
+  flex: 1 1 350px;
+  @media (min-width: 765px) {
+    max-width: 60%;
+  }
 
   &__sortable-list-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 7px;
     height: 100%;
     justify-items: flex-start;
     box-sizing: border-box;
     overflow-y: auto;
+    overflow-x: hidden;
   }
 
   &__token {
     width: 100%;
     flex: 0 0 100px;
     padding: 5px;
-    margin-bottom: 7px;
+    margin-bottom: 3px;
     background-color: $opaque-white;
-    border-radius: 10px;
+    border-radius: 8px;
     position: relative;
     box-shadow: inset 0 0 15px black;
     box-sizing: border-box;
     &:last-child {
       margin-bottom: 0;
     }
-    
+
     &--title {
       margin: 3px 0 0 5px;
     }

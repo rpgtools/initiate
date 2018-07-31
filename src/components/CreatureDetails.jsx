@@ -65,7 +65,11 @@ class CreatureDetails extends React.Component {
         </div>
       );
     } else {
-      return (<div>Create a creature to begin.</div>)
+      return (
+        <div className="creature-details widget">
+          <p>Create a creature to begin.</p>
+        </div>
+      )
     }
   };
 };

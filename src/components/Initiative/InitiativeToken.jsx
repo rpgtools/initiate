@@ -26,12 +26,10 @@ export default class InitiativeToken extends React.Component {
   };
 
   handleComponentResize = debounce(() => {
-    console.log('this.tokenRef', this.tokenRef.current.offsetWidth * 0.94)
-    this.setState(
-      { maxCountersToDisplay:
-          Math.floor(this.tokenRef.current.offsetWidth / COUNTER_WIDTH)
-      }
-    );
+    this.setState({
+      maxCountersToDisplay:
+        Math.floor(this.tokenRef.current.offsetWidth / COUNTER_WIDTH)
+    });
   }, 100);
 
   handleDeleteCounter = counterIndex => () =>
