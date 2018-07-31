@@ -14,13 +14,13 @@ export default class InitiativeToken extends React.Component {
     };
   };
 
-  componentDidMount () {
+  componentDidMount() {
     // TODO: if/when we add grid layout we will also need to listen for those resize events
     window.addEventListener('resize', this.handleComponentResize);
     this.handleComponentResize();
   };
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     window.removeEventListener('resize', this.handleComponentResize);
     this.handleComponentResize.cancel();
   };

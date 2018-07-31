@@ -2,25 +2,14 @@ import React from 'react';
 import {connect} from 'react-redux';
 // import PropTypes from 'prop-types';
 
-import Button from '../Button';
 import SortableList from './SortableList';
 import * as creatureActions from '../../actions/creatures';
 import { creaturesSelector } from './selectors';
 
 class Initiative extends React.Component {
-
-  handleCreatureCreate = name => this.props.createCreature({ name });
-
+//TODO: make functional class
   handleSortEnd = ({ oldIndex, newIndex }) =>
     this.props.reorderCreatures(oldIndex, newIndex);
-
-  advanceInitiative = () => {
-    this.props.reorderCreatures(0, this.props.creatures.length -1);
-    // this.setState({turn: this.state.turn + 1})
-    // if (this.state.turn % this.props.creatures.length === 0){
-    //   this.props._timer.addSeconds(6)
-    // }
-  }
 
   render() {
     const { creatures } = this.props;
@@ -37,15 +26,7 @@ class Initiative extends React.Component {
           useDragHandle
           {...tokenActions}
         />
-        <Button
-          buttonLabel="New Creature"
-          onSubmit={this.handleCreatureCreate}
-        />
-        <Button
-          buttonLabel="Advance Initiative"
-          onSubmit={this.advanceInitiative}
-        />
-      </div>
+    </div>
     );
   };
 };

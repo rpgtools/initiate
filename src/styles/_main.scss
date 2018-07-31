@@ -44,5 +44,8 @@ main.main {
     margin: 5px;
     box-shadow: inset 0 0 15px $dark-grey, 0 0 5px $grey;
     padding: 3px;
+    ::-webkit-scrollbar-track {
+      margin: 2px;
+    }
   }
 }
