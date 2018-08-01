@@ -48,4 +48,11 @@ main.main {
       margin: 2px;
     }
   }
+
+  .temporary-right-side {
+    flex: 1 1 250px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+  }
 }

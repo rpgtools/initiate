@@ -13,8 +13,10 @@ class App extends Component {
         <main className="main">
           {/*<StateManagement />*/}
           <Initiative />
-          <InitiativeButtonsWidget />
-          <CreatureDetails />
+          <div className="temporary-right-side">
+            <InitiativeButtonsWidget />
+            <CreatureDetails />
+          </div>
         </main>
       </div>
     );

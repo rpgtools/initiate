@@ -3,6 +3,7 @@ import debounce from 'lodash/debounce';
 import Counter from '../Counter';
 import { DragHandle } from './SortableList';
 
+// Used to determine how many counters to display on each token
 const COUNTER_WIDTH = 62;
 
 export default class InitiativeToken extends React.Component {
@@ -45,11 +46,7 @@ export default class InitiativeToken extends React.Component {
   };
 
   render () {
-    const {
-      creature,
-      // deleteCounter,
-      // updateCounter,
-    } = this.props;
+    const { creature } = this.props;
     const {
       tokenRef,
       handleSelectCreature,

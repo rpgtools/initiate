@@ -11,12 +11,12 @@ const InitiativeButtonsWidget = ({ creatures, createCreature, reorderCreatures }
   return (
     <div className='initiative-buttons'>
       <Button
-        buttonLabel="New Creature"
-        onSubmit={createCreature}
-        />
-      <Button
         buttonLabel="Advance Initiative"
         onSubmit={advanceInitiative}
+        />
+      <Button
+        buttonLabel="New Creature"
+        onSubmit={createCreature}
         />
     </div>
   );
