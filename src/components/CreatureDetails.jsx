@@ -10,12 +10,7 @@ import * as creatureActions from '../actions/creatures';
 import { creaturesSelector, selectedCreatureSelector } from './Initiative/selectors';
 
 class CreatureDetails extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      editing: false
-    };
-  };
+  // TODO make functional component
 
   handleDeleteCreature = () => this.props.deleteCreature(this.props.creature.id)
 
@@ -27,22 +22,35 @@ class CreatureDetails extends React.Component {
   handleUpdateCounter = counterIndex => value =>
     this.updateCounter(this.props.creature.id, counterIndex, value);
 
-  toggleCreatureEdit = () => {
-    this.setState({editing: !this.state.editing});
-  };
-
   handleCounterUpdate = counter => {
     this.props.onCounterUpdate({...counter, creatureId: this.props.creature.id});
   };
 
+  handleCreateCreature = e => {
+    e.preventDefault();
+    this.props.submitCreateCreature(e.target.name.value);
+  }
   render () {
-    const { creature } = this.props;
-    if (creature) {
+    const { creature, isCreatingCreature, cancelCreateCreature } = this.props;
+    if (creature || isCreatingCreature) {
       return (
         <div className="creature-details widget">
-          <h2 className="creature-details__name">{creature.name}</h2>
+
+          {isCreatingCreature ? (
+            <form onSubmit={this.handleCreateCreature}>
+              <label>
+                Name:
+                <input type="text" name="name" autoFocus/>
+              </label>
+              <input type="submit" value="Submit" />
+              <input type="submit" value="Cancel" onClick={cancelCreateCreature} />
+            </form>
+          ) : (
+            <h2 className="creature-details__name">{creature.name}</h2>
+          )}
+
           <div className="creature-details__counters">
-            {creature.counters.map((counter, index) =>
+            {creature && creature.counters.map((counter, index) =>
               <Counter
                 key={index}
                 label={counter.label}
@@ -69,7 +77,7 @@ class CreatureDetails extends React.Component {
         <div className="creature-details widget">
           <p>Create a creature to begin.</p>
         </div>
-      )
+      );
     }
   };
 };
@@ -77,11 +85,12 @@ class CreatureDetails extends React.Component {
 const mapStateToProps = state => ({
   creatures: creaturesSelector(state),
   creature: selectedCreatureSelector(state),
+  isCreatingCreature: state.creatures.isCreating,
 });
 
 const mapDispatchToProps = {
-  createCreature: creatureActions.createCreature,
-  updateCreature: creatureActions.updateCreature,
+  submitCreateCreature: creatureActions.submitCreateCreature,
+  cancelCreateCreature: creatureActions.cancelCreateCreature,
   deleteCreature: creatureActions.deleteCreature,
   reorderCreatures: creatureActions.reorderCreatures,
   createCounter: creatureActions.createCounter,

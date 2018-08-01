@@ -1,23 +1,24 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as creatureActions from '../../actions/creatures';
-import Button from '../Button';
 
-const InitiativeButtonsWidget = ({ creatures, createCreature, reorderCreatures }) => {
+const InitiativeButtonsWidget = ({ creatures, initCreateCreature, reorderCreatures }) => {
   const advanceInitiative = () => {
     reorderCreatures(0, creatures.length - 1);
   };
 
   return (
     <div className='initiative-buttons'>
-      <Button
-        buttonLabel="Advance Initiative"
-        onSubmit={advanceInitiative}
-        />
-      <Button
-        buttonLabel="New Creature"
-        onSubmit={createCreature}
-        />
+      <button
+        name="Advance Initiative"
+        onClick={advanceInitiative}
+      >Advance Initiative
+    </button>
+      <button
+        name="New Creature"
+        onClick={initCreateCreature}
+      >New Creature
+      </button>
     </div>
   );
 };
@@ -27,7 +28,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  createCreature: creatureActions.createCreature,
+  initCreateCreature: creatureActions.initCreateCreature,
   reorderCreatures: creatureActions.reorderCreatures,
 };
 

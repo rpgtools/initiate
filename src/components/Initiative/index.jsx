@@ -36,7 +36,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  createCreature: creatureActions.createCreature,
   updateCreature: creatureActions.updateCreature,
   deleteCreature: creatureActions.deleteCreature,
   reorderCreatures: creatureActions.reorderCreatures,
