@@ -95,8 +95,6 @@ const isCreating = (state = false, { type }) => {
     return true;
   } else if (type === 'CREATURE_CREATE_SUBMIT' || 'CREATURE_CREATE_CANCEL') {
     return false;
-  } else if (type === ''){
-    return false;
   } else {
     return state;
   }
