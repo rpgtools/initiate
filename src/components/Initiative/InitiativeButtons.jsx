@@ -11,15 +11,17 @@ const InitiativeButtonsWidget = ({ creatures, initCreateCreature, reorderCreatur
   return (
     <div className='initiative-buttons'>
       <Button
+        className="initiative-buttons__advance-initiative"
         label="Advance Initiative"
         onClick={advanceInitiative}
         color="yellow"
       />
-    <Button
-      label="New Creature"
-      onClick={initCreateCreature}
-      color="blue"
-      />
+      <Button
+        className="initiative-buttons__new-creature"
+        label="New Creature"
+        onClick={initCreateCreature}
+        color="blue"
+        />
     </div>
   );
 };
