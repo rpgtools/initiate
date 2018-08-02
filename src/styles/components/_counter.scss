@@ -13,10 +13,11 @@
   border-right: 6px solid $lighter-grey;
   border-left: 6px solid $lighter-grey;
   border-bottom: 6px solid $grey;
+  box-shadow: 1px 1px 3px $dark-grey, inset 1px 1px rgba(255, 255, 255, 0.4);
   cursor: pointer;
   transition: box-shadow 0.1s ease-in-out;
   &:active {
-    box-shadow: -1px -1px 3px $dark-grey;
+    box-shadow: -1px -1px 3px $dark-grey, inset -1px -1px rgba(255, 255, 255, 0.4);
   }
   &:before {
     // START HACK: Can't transition linear-gradients normally. See link for details.

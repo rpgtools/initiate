@@ -4,7 +4,9 @@ body {
   background-position-x: center;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 100vh;
+  *:focus {
+    outline: none;
+  }
 
   ::-webkit-scrollbar {
     width: 9px;

@@ -1,0 +1,52 @@
+.button {
+  display: inline-block;
+  vertical-align: top;
+  position: relative;
+  overflow: hidden;
+  min-width: 96px;
+  line-height: 46px;
+  padding: 0 17px;
+  font-size: 17px;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  text-shadow: 0 1px $green-darkest;
+  background-color: $green;
+  background-clip: padding-box;
+  border: 3px solid;
+  border-color: $green-lightest $green-light $green-dark;
+  border-radius: 13px;
+  box-shadow: inset 1px 2px rgba(255, 255, 255, 0.4);
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.12) 51%, rgba(0, 0, 0, 0.04));
+}
+
+.button:before {
+  content: '';
+  position: absolute;
+  top: -25%;
+  bottom: -25%;
+  left: -20%;
+  right: -20%;
+  border-radius: 50%;
+  background: transparent;
+  box-shadow: inset 0 0 38px rgba(255, 255, 255, 0.5);
+}
+
+.button:hover { background-color: $green-dark; }
+
+.button:active {
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 -1px #154c86;
+  background: #1f71c8;
+  border-color: #113f70 #154c86 #1c65b2;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2), 0 1px rgba(255, 255, 255, 0.4);
+  background-image: linear-gradient(to bottom, #1a5da5, #3a8be0);
+}
+
+.button:active:before {
+  top: -50%;
+  bottom: -125%;
+  left: -15%;
+  right: -15%;
+  box-shadow: inset 0 0 96px rgba(0, 0, 0, 0.2);
+}

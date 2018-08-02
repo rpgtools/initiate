@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as creatureActions from '../../actions/creatures';
+import Button from '../Button';
 
 const InitiativeButtonsWidget = ({ creatures, initCreateCreature, reorderCreatures }) => {
   const advanceInitiative = () => {
@@ -9,19 +10,17 @@ const InitiativeButtonsWidget = ({ creatures, initCreateCreature, reorderCreatur
 
   return (
     <div className='initiative-buttons'>
-      <button
-        name="Advance Initiative"
+      <Button
+        label="Advance Initiative"
         onClick={advanceInitiative}
-      >Advance Initiative
-    </button>
-      <button
-        name="New Creature"
-        onClick={initCreateCreature}
-      >New Creature
-      </button>
+      />
     </div>
   );
 };
+// <Button
+//   label="New Creature"
+//   onClick={initCreateCreature}
+// />
 
 const mapStateToProps = state => ({
   creatures: state.creatures.allIds,

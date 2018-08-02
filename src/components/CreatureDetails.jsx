@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 
 // Child Components
 import Counter from './Counter';
-import Button from './Button';
 
 import * as creatureActions from '../actions/creatures';
 import { creaturesSelector, selectedCreatureSelector } from './Initiative/selectors';

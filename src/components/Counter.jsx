@@ -64,6 +64,7 @@ export default class Counter extends React.Component {
     const { isEditing, isEditingWithForm } = this.state;
     const { value, label, onClickDelete } = this.props;
 
+    //TODO: use the <button /> tag instead of <div />
     return (
       <div
         className={`counter${isEditing ? ' counter__editing' : ''}`}
