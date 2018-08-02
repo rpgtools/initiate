@@ -13,14 +13,16 @@ const InitiativeButtonsWidget = ({ creatures, initCreateCreature, reorderCreatur
       <Button
         label="Advance Initiative"
         onClick={advanceInitiative}
+        color="yellow"
+      />
+    <Button
+      label="New Creature"
+      onClick={initCreateCreature}
+      color="blue"
       />
     </div>
   );
 };
-// <Button
-//   label="New Creature"
-//   onClick={initCreateCreature}
-// />
 
 const mapStateToProps = state => ({
   creatures: state.creatures.allIds,
