@@ -8,6 +8,7 @@
   padding: 0 17px;
   margin: 3px;
   font-size: 18px;
+  font-weight: 600;
   color: white;
   text-align: center;
   text-decoration: none;
@@ -43,7 +44,7 @@
   }
 
   &--blue {
-    text-shadow: 0 1px $blue-darkest;
+    text-shadow: 0 1.5px $blue-darkest;
     background-color: $blue;
     border-color: $blue-lightest $blue-light $blue-darkest;
     &:hover {
@@ -56,16 +57,16 @@
     }
   }
   &--yellow {
-    text-shadow: 0 1px $yellow-darkest;
-    background-color: $yellow;
-    border-color: $yellow-lightest $yellow-light $yellow-darkest;
+    text-shadow: 0 1.5px $saffron-darkest;
+    background-color: $saffron;
+    border-color: $saffron-lightest $saffron-light $saffron-darkest;
     &:hover {
-      background-color: $yellow-light;
-      border-bottom: 4px solid $yellow-dark;
+      background-color: $saffron-light;
+      border-bottom: 4px solid $saffron-dark;
     }
     &:active {
-      background-color: $yellow;
-      border-bottom: 4px solid $yellow-darkest;
+      background-color: $saffron;
+      border-bottom: 4px solid $saffron-darkest;
     }
   }
 }

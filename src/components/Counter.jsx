@@ -12,6 +12,12 @@ export default class Counter extends React.Component {
     this.myRef = React.createRef();
   };
 
+  componentWillUnmount() {
+    if (this.state.isEditing) {
+      this.doneEditing();
+    }
+  }
+
   handleChange = e => this.props.handleUpdateValue(Number(e.target.value));
 
   handleFocus = event => event.target.select();
@@ -58,6 +64,11 @@ export default class Counter extends React.Component {
     if (this.myRef && !this.myRef.current.contains(event.target)) {
       this.doneEditing();
     }
+  }
+
+  handleDeleteCounter = () => {
+    this.doneEditing();
+    this.props.onClickDelete();
   }
 
   render () {
