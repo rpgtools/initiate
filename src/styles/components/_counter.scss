@@ -6,8 +6,9 @@
   cursor: pointer;
   flex: 0 0 auto;
   position: relative;
-  background-size: 100%;
-  z-index: 100;
+  z-index: 1;
+  // transform set so that counter becomes containing parent for fixed pos. buttons
+  // transform: translate(0, 0);
   text-shadow: 1px 1px $lightest-grey;
   border: 6px solid;
   border-color: $lightest-grey $lighter-grey $grey;
@@ -29,7 +30,7 @@
     width: 100%;
     position: absolute;
     top: 0; left: 0;
-    z-index: -100;
+    z-index: -1;
     opacity: 0;
     transition: opacity 0.1s ease-in-out;
     background-image: linear-gradient(317deg, $light-grey, $grey 95%);
@@ -61,4 +62,94 @@
       text-align: center;
     }
   }
+
+  .transition-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    transform: translate(0, 0);
+    .counter__buttons {
+      position: fixed;
+      height: 55px;
+      width: 55px;
+      border-radius: 50%;
+      border: none;
+      transition: transform 2s;
+      font-size: 18px;
+
+      background-image: -webkit-linear-gradient(top, #f4f1ee, #fff);
+      background-image: linear-gradient(top, #f4f1ee, #fff);
+      border-radius: 50%;
+      box-shadow: 0px 8px 10px 0px rgba(0, 0, 0, .3),
+                  inset 0px 4px 1px 1px white,
+                  inset 0px -3px 1px 1px rgba(204,198,197,.5);
+      -webkit-transition: all .1s linear;
+      transition: all .1s linear;
+
+      &:after {
+        color:#e9e6e4;
+        content: "";
+        display: block;
+        font-size: 30px;
+        height: 30px;
+        text-decoration: none;
+        text-shadow: 0px -1px 1px #bdb5b4, 1px 1px 1px white;
+        position: absolute;
+        width: 30px;
+      }
+
+      &:hover {
+        background-image: -webkit-linear-gradient(top, #fff, #f4f1ee);
+        background-image: linear-gradient(top, #fff, #f4f1ee);
+        color:#0088cc;
+      }
+
+      &:active {
+        background-image: -webkit-linear-gradient(top, #efedec, #f7f4f4);
+        background-image: linear-gradient(top, #efedec, #f7f4f4);
+        box-shadow: 0 3px 5px 0 rgba(0,0,0,.4), inset 0px -3px 1px 1px rgba(204,198,197,.5);
+      }
+
+      &:active:after {
+        color:#dbd2d2;
+        text-shadow: 0px -1px 1px #bdb5b4, 0px 1px 1px white;
+      }
+
+
+    //-------
+
+    }
+    &--enter {
+      .counter__buttons {
+        transform: translate(6px, 6px);
+      }
+    }
+    &--enter-active {}
+    &--enter-done {
+      .counter__buttons {
+        &--top-1 {
+          transform: translate(60px, 60px);
+        }
+      }
+    }
+    &--exit {}
+    &--exit-active {}
+  }
+    &--top-1 {
+      // transform:  rotate(-90deg) translate(45px);
+    }
+    &--top-2 {
+    }
+    &--top-3 {
+    }
+    &--bottom-1 {
+    }
+    &--bottom-2 {
+    }
+    &--bottom-3 {
+    }
+    &--delete {
+    }
 }

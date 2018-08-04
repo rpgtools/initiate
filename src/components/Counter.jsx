@@ -1,6 +1,7 @@
 // Libs
 import React from 'react';
 // import PropTypes from 'prop-types';
+import CSSTransition from 'react-transition-group/CSSTransition';
 
 export default class Counter extends React.Component {
   constructor(props) {
@@ -99,13 +100,22 @@ export default class Counter extends React.Component {
             <input type="submit" value="Save" />
           </form>
         )}
-        {isEditing &&
-          <div className="counter__buttons">
-            <button className="button button__delete" onClick={onClickDelete}>x</button>
-            <button className="button button__increment" onClick={this.onClickIncrement}>+</button>
-            <button className="button button__decrement" onClick={this.onClickDecrement}>-</button>
+        <CSSTransition
+          in={isEditing}
+          classNames="transition-container-"
+          timeout={3000}
+          unmountOnExit
+        >
+          <div className="transition-container">
+            <button className="counter__buttons counter__buttons--top-1" onClick={this.onClickIncrement}>+1</button>
+            <button className="counter__buttons counter__buttons--top-2" onClick={this.onClickIncrement}>+10</button>
+            <button className="counter__buttons counter__buttons--top-3" onClick={this.onClickIncrement}>+100</button>
+            <button className="counter__buttons counter__buttons--delete" onClick={onClickDelete}>x</button>
+            <button className="counter__buttons counter__buttons--bottom-1" onClick={this.onClickDecrement}>-1</button>
+            <button className="counter__buttons counter__buttons--bottom-2" onClick={this.onClickDecrement}>-10</button>
+            <button className="counter__buttons counter__buttons--bottom-3" onClick={this.onClickDecrement}>-100</button>
           </div>
-        }
+        </CSSTransition>
       </div>
     );
   };
