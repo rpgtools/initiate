@@ -2,6 +2,7 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
 import CSSTransition from 'react-transition-group/CSSTransition';
+import CounterControls from './CounterControls';
 
 export default class Counter extends React.Component {
   constructor(props) {
@@ -10,8 +11,14 @@ export default class Counter extends React.Component {
       isEditing: false,
       isEditingWithForm: false
     };
-    this.myRef = React.createRef();
+    this.counterRef = React.createRef();
   };
+
+  componentDidMount() {
+    const { top, left } = this.counterRef.current.getBoundingClientRect();
+    this.top = top;
+    this.left = left;
+  }
 
   componentWillUnmount() {
     if (this.state.isEditing) {
@@ -62,7 +69,7 @@ export default class Counter extends React.Component {
   }
 
   handleClickOutsideCounter = event => {
-    if (this.myRef && !this.myRef.current.contains(event.target)) {
+    if (this.counterRef && !this.counterRef.current.contains(event.target)) {
       this.doneEditing();
     }
   }
@@ -74,13 +81,12 @@ export default class Counter extends React.Component {
 
   render () {
     const { isEditing, isEditingWithForm } = this.state;
-    const { value, label, onClickDelete } = this.props;
-
-    //TODO: use the <button /> tag instead of <div />
+    const { value, label } = this.props;
+    console.log(this.top, this.left);
     return (
       <div
         className={`counter${isEditing ? ' counter__editing' : ''}`}
-        ref={this.myRef}
+        ref={this.counterRef}
       >
         {!isEditingWithForm ? (
           <div className="counter__value">
@@ -106,15 +112,13 @@ export default class Counter extends React.Component {
           timeout={1500}
           unmountOnExit
         >
-          <div className="transition-container">
-            <button className="counter__buttons counter__buttons--top-1" onClick={this.onClickIncrement}>+1</button>
-            <button className="counter__buttons counter__buttons--top-2" onClick={this.onClickIncrement}>+10</button>
-            <button className="counter__buttons counter__buttons--top-3" onClick={this.onClickIncrement}>+100</button>
-            <button className="counter__buttons counter__buttons--delete" onClick={onClickDelete}>{'\u2715'}</button>
-            <button className="counter__buttons counter__buttons--bottom-1" onClick={this.onClickDecrement}>-1</button>
-            <button className="counter__buttons counter__buttons--bottom-2" onClick={this.onClickDecrement}>-10</button>
-            <button className="counter__buttons counter__buttons--bottom-3" onClick={this.onClickDecrement}>-100</button>
-          </div>
+          <CounterControls
+            onClickDelete={this.onClickDelete}
+            onClickDecrement={this.onClickDecrement}
+            onClickIncrement={this.onClickIncrement}
+            top={this.top}
+            left={this.left}
+          />
         </CSSTransition>
       </div>
     );
