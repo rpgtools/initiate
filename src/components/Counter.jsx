@@ -84,7 +84,6 @@ export default class Counter extends React.Component {
     this.props.onClickDelete();
   }
 
-  // TODO: make touch zones larger for counters
   render () {
     const { isEditing, isEditingWithForm } = this.state;
     const { value, label } = this.props;
@@ -92,10 +91,11 @@ export default class Counter extends React.Component {
       <div
         className={`counter${isEditing ? ' counter__editing' : ''}`}
         ref={this.counterRef}
+        onClick={this.handleClickToEdit}
       >
         {!isEditingWithForm ? (
           <div className="counter__value">
-            <a className="counter__value--count" onClick={this.handleClickToEdit}>{value}</a>
+            <a className="counter__value--count">{value}</a>
             <span className="counter__value--label">{label}</span>
           </div>
         ) : (

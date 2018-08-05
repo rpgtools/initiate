@@ -1,15 +1,14 @@
 .transition-container {
   position: absolute;
-  top: 0;
-  left: 0;
   height: 52px;
   width: 52px;
-  transform: translate(0, 0);
+  pointer-events: none;
+
   .counter__buttons {
     position: fixed;
     height: 55px;
     width: 55px;
-    z-index: 1000;
+    pointer-events: all;
     border-radius: 50%;
     border: none;
     font-size: 18px;
