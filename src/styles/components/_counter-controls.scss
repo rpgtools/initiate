@@ -23,7 +23,7 @@
                 inset 0px -3px 1px 1px rgba(204,198,197,.5);
     transition: transform 0.15s, opacity 0.1s;
     transition-timing-function: cubic-bezier(.45,.14,.35,1.31);
-    -webkit-transition: transform 0.15s, opacity 0.1s;
+    -webkit-transition: transform 0.1s, opacity 0.08s;
     -webkit-transition-timing-function: cubic-bezier(.45,.14,.35,1.31);
 
     &--delete {

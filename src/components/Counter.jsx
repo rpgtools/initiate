@@ -12,6 +12,7 @@ export default class Counter extends React.Component {
       isEditingWithForm: false
     };
     this.counterRef = React.createRef();
+    this.counterControlsRef = React.createRef();
   };
 
   componentDidMount() {
@@ -69,7 +70,11 @@ export default class Counter extends React.Component {
   }
 
   handleClickOutsideCounter = event => {
-    if (this.counterRef && !this.counterRef.current.contains(event.target)) {
+    if (
+      this.counterRef &&
+      !this.counterRef.current.contains(event.target) &&
+      !event.target.className.startsWith('counter__buttons')
+    ) {
       this.doneEditing();
     }
   }
@@ -79,6 +84,7 @@ export default class Counter extends React.Component {
     this.props.onClickDelete();
   }
 
+  // TODO: make touch zones larger for counters
   render () {
     const { isEditing, isEditingWithForm } = this.state;
     const { value, label } = this.props;
@@ -108,15 +114,16 @@ export default class Counter extends React.Component {
         <CSSTransition
           in={isEditing}
           classNames="transition-container-"
-          timeout={200}
+          timeout={120}
           unmountOnExit
         >
           <CounterControls
-            onClickDelete={this.onClickDelete}
+            onClickDelete={this.handleDeleteCounter}
             onClickDecrement={this.onClickDecrement}
             onClickIncrement={this.onClickIncrement}
             top={this.top}
             left={this.left}
+            ref={this.counterControlsRef}
           />
         </CSSTransition>
       </div>
