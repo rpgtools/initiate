@@ -82,7 +82,6 @@ export default class Counter extends React.Component {
   render () {
     const { isEditing, isEditingWithForm } = this.state;
     const { value, label } = this.props;
-    console.log(this.top, this.left);
     return (
       <div
         className={`counter${isEditing ? ' counter__editing' : ''}`}
@@ -109,7 +108,7 @@ export default class Counter extends React.Component {
         <CSSTransition
           in={isEditing}
           classNames="transition-container-"
-          timeout={1500}
+          timeout={200}
           unmountOnExit
         >
           <CounterControls
