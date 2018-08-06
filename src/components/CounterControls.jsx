@@ -3,15 +3,15 @@ import ReactDOM from 'react-dom';
 
 const portalRoot = document.getElementById("portal-root");
 
-const CounterControls = React.forwardRef(({
+const CounterControls =({
   onClickDelete,
   onClickDecrement,
   onClickIncrement,
   top,
   left,
-}, ref) => {
+}) => {
   const portalComponent = (
-    <div className="transition-container" style={{ top, left }} ref={ref}>
+    <div className="transition-container" style={{ top, left }}>
       <button className="counter__buttons counter__buttons--top-1" onClick={onClickIncrement}>+1</button>
       <button className="counter__buttons counter__buttons--top-2" onClick={onClickIncrement}>+10</button>
       <button className="counter__buttons counter__buttons--top-3" onClick={onClickIncrement}>+100</button>
@@ -23,6 +23,6 @@ const CounterControls = React.forwardRef(({
   );
 
   return ReactDOM.createPortal(portalComponent, portalRoot);
-});
+};
 
 export default CounterControls;

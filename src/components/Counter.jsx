@@ -9,22 +9,34 @@ export default class Counter extends React.Component {
     super(props);
     this.state = {
       isEditing: false,
-      isEditingWithForm: false
+      isEditingWithForm: false,
+      top: (props.initiativeWindowScrollTop * -1), // TODO: find a better way
+      left: 0
     };
     this.counterRef = React.createRef();
-    this.counterControlsRef = React.createRef();
   };
 
   componentDidMount() {
-    const { top, left } = this.counterRef.current.getBoundingClientRect();
-    this.top = top;
-    this.left = left;
+    this.updateCounterPosition();
   }
 
   componentWillUnmount() {
     if (this.state.isEditing) {
       this.doneEditing();
     }
+  }
+
+  componentDidUpdate(prevProps) {
+    console.log(prevProps.initiativeWindowScrollTop)
+    // if (prevProps.initiativeWindowScrollTop && prevProps.initiativeWindowScrollTop !== this.sprops.initiativeWindowScrollTop) {
+    //   this.updateCounterPosition();
+    //   console.log('FIRE')
+    // }
+  }
+
+  updateCounterPosition = () => {
+    const { top, left } = this.counterRef.current.getBoundingClientRect();
+    this.setState({ top: top - this.props.initiativeWindowScrollTop, left });
   }
 
   handleChange = e => this.props.handleUpdateValue(Number(e.target.value));
@@ -85,7 +97,7 @@ export default class Counter extends React.Component {
   }
 
   render () {
-    const { isEditing, isEditingWithForm } = this.state;
+    const { isEditing, isEditingWithForm , top, left } = this.state;
     const { value, label } = this.props;
     return (
       <div
@@ -121,9 +133,8 @@ export default class Counter extends React.Component {
             onClickDelete={this.handleDeleteCounter}
             onClickDecrement={this.onClickDecrement}
             onClickIncrement={this.onClickIncrement}
-            top={this.top}
-            left={this.left}
-            ref={this.counterControlsRef}
+            top={top}
+            left={left}
           />
         </CSSTransition>
       </div>

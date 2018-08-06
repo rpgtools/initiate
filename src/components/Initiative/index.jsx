@@ -7,7 +7,14 @@ import * as creatureActions from '../../actions/creatures';
 import { creaturesSelector } from './selectors';
 
 class Initiative extends React.Component {
-//TODO: make functional class
+  state = {
+    scrollTop: 0
+  }
+
+  handleScroll = ref => event => {
+    this.setState({ scrollTop: ref.current.offsetTop - 20 });
+  }
+
   handleSortEnd = ({ oldIndex, newIndex }) =>
     this.props.reorderCreatures(oldIndex, newIndex);
 
@@ -19,11 +26,13 @@ class Initiative extends React.Component {
       deleteCounter: this.props.deleteCounter,
     }
     return (
-      <div className="initiative widget">
+      <div className="initiative widget" >
         <SortableList
           items={creatures}
           onSortEnd={this.handleSortEnd}
           useDragHandle
+          handleScroll={this.handleScroll}
+          initiativeWindowScrollTop={this.state.scrollTop}
           {...tokenActions}
         />
     </div>
