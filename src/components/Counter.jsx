@@ -39,7 +39,6 @@ export default class Counter extends React.Component {
     this.setState({ top: top, left });
   }
 
-  handleChange = e => this.props.handleUpdateValue(Number(e.target.value));
 
   handleFocus = event => event.target.select();
 
@@ -48,23 +47,16 @@ export default class Counter extends React.Component {
     this.doneEditing();
   }
 
-  getAmountFromModifiers = event => {
-    if(event.metaKey && event.altKey)
-      return 1000
-    if(event.metaKey)
-      return 10
-    if(event.altKey)
-      return 100
-    if(event.shiftKey)
-      return 5
-    return 1
-  };
+  handleUpdateCounterValue = amount => () => {
+    this.props.handleUpdateValue(this.props.value + amount);
+  }
 
-  onClickDecrement = event =>
-    this.props.handleUpdateValue(this.props.value + this.getAmountFromModifiers(event) * -1);
+  handleUpdateCounterValueFromForm = event => this.props.handleUpdateValue(Number(event.target.value));
 
-  onClickIncrement = event =>
-    this.props.handleUpdateValue(this.props.value + this.getAmountFromModifiers(event));
+  handleDeleteCounter = () => {
+    this.doneEditing();
+    this.props.onClickDelete();
+  }
 
   handleClickToEdit = event => {
     this.state.isEditing && this.counterRef.current.contains(event.target)
@@ -91,11 +83,6 @@ export default class Counter extends React.Component {
     }
   }
 
-  handleDeleteCounter = () => {
-    this.doneEditing();
-    this.props.onClickDelete();
-  }
-
   render () {
     const { isEditing, isEditingWithForm , top, left } = this.state;
     const { value, label } = this.props;
@@ -117,7 +104,7 @@ export default class Counter extends React.Component {
               type="number"
               value={value}
               onFocus={this.handleFocus}
-              onChange={this.handleChange}
+              onChange={this.handleUpdateCounterValueFromForm}
               required
               />
             <input type="submit" value="Save" />
@@ -131,8 +118,7 @@ export default class Counter extends React.Component {
         >
           <CounterControls
             onClickDelete={this.handleDeleteCounter}
-            onClickDecrement={this.onClickDecrement}
-            onClickIncrement={this.onClickIncrement}
+            handleUpdateCounterValue={this.handleUpdateCounterValue}
             top={top}
             left={left}
           />
