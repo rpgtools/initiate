@@ -12,7 +12,7 @@ class Initiative extends React.Component {
   }
 
   handleScroll = ref => event => {
-    this.setState({ scrollTop: ref.current.offsetTop - 20 });
+    this.setState({ scrollTop: ref.current.scrollTop });
   }
 
   handleSortEnd = ({ oldIndex, newIndex }) =>

@@ -10,7 +10,7 @@ export default class Counter extends React.Component {
     this.state = {
       isEditing: false,
       isEditingWithForm: false,
-      top: (props.initiativeWindowScrollTop * -1), // TODO: find a better way
+      top: 0,
       left: 0
     };
     this.counterRef = React.createRef();
@@ -27,16 +27,16 @@ export default class Counter extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    console.log(prevProps.initiativeWindowScrollTop)
-    // if (prevProps.initiativeWindowScrollTop && prevProps.initiativeWindowScrollTop !== this.sprops.initiativeWindowScrollTop) {
-    //   this.updateCounterPosition();
-    //   console.log('FIRE')
-    // }
+    if (prevProps.initiativeWindowScrollTop &&
+        prevProps.initiativeWindowScrollTop !== this.props.initiativeWindowScrollTop) {
+      this.updateCounterPosition();
+      this.doneEditing();
+    }
   }
 
   updateCounterPosition = () => {
     const { top, left } = this.counterRef.current.getBoundingClientRect();
-    this.setState({ top: top - this.props.initiativeWindowScrollTop, left });
+    this.setState({ top: top, left });
   }
 
   handleChange = e => this.props.handleUpdateValue(Number(e.target.value));
