@@ -1,7 +1,7 @@
 .counter {
-  height: 40px;
-  width: 40px;
-  border-radius: 16px;
+  height: 50px;
+  width: 50px;
+  border-radius: 10px;
   margin: 3px 3px 10px 7px;
   cursor: pointer;
   flex: 0 0 auto;
@@ -10,7 +10,7 @@
   // transform set so that counter becomes containing parent for fixed pos. buttons
   // transform: translate(0, 0);
   text-shadow: 1px 1px $lightest-grey;
-  border: 6px solid;
+  border: 3px solid;
   border-color: $lightest-grey $lighter-grey $grey;
   box-shadow: 1px 1px 3px $dark-grey, inset 1px 1px $very-opaque-white;
   background-image: linear-gradient(147deg, $light-grey, $grey 95%);
@@ -34,7 +34,7 @@
     opacity: 0;
     transition: opacity 0.1s ease-in-out;
     background-image: linear-gradient(317deg, $light-grey, $grey 95%);
-    border-radius: 11px;
+    border-radius: 7px;
   }
   &:active:before {
     opacity: 1;

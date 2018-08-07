@@ -74,18 +74,6 @@ export default class InitiativeToken extends React.Component {
               />
           )}
         </div>
-        {/*
-          <div className="initiative__token">
-          <Button
-          buttonLabel="New Counter"
-          onSubmit={handleCreateCounter}
-          />
-          <Button
-          buttonLabel="Delete Creature"
-          onSubmit={handleDeleteCreature}
-          />
-          </div>
-          */}
           <DragHandle />
         </div>
       );
