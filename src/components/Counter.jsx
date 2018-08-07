@@ -66,8 +66,8 @@ export default class Counter extends React.Component {
   onClickIncrement = event =>
     this.props.handleUpdateValue(this.props.value + this.getAmountFromModifiers(event));
 
-  handleClickToEdit = () => {
-    this.state.isEditing
+  handleClickToEdit = event => {
+    this.state.isEditing && this.counterRef.current.contains(event.target)
       ? this.setState({ isEditingWithForm: true })
       : this.setState({ isEditing: true })
     document.addEventListener('mouseup', this.handleClickOutsideCounter)
