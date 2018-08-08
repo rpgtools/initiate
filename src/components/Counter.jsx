@@ -97,9 +97,11 @@ export default class Counter extends React.Component {
         {!isEditingWithForm ? (
           <div className="counter__value">
             <div className="counter__value--count">
-              <p style={{ fontSize: abbrVal.length > 5
-                   ? '14px'
-                   : '20px'}}>
+              <p style={{ fontSize: abbrVal.length > 6
+                   ? '12px'
+                   : abbrVal.length > 5
+                     ? '14px'
+                     : '20px'}}>
                 {abbrVal}
               </p>
             </div>

@@ -1,4 +1,8 @@
 export function abbrNum(number, decPlaces) {
+  const isNegative = number < 0;
+   if (isNegative) {
+     number = number * -1;
+   }
     // 2 decimal places => 100, 3 => 1000, etc
     decPlaces = Math.pow(10,decPlaces);
 
@@ -30,6 +34,9 @@ export function abbrNum(number, decPlaces) {
              break;
         }
     }
+   if (isNegative) {
+     number = '-' + number;
+   }
 
     return number;
 }
