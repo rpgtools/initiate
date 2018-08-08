@@ -3,6 +3,7 @@ import React from 'react';
 // import PropTypes from 'prop-types';
 import CSSTransition from 'react-transition-group/CSSTransition';
 import CounterControls from './CounterControls';
+import { abbrNum } from '../utils';
 
 export default class Counter extends React.Component {
   constructor(props) {
@@ -86,6 +87,7 @@ export default class Counter extends React.Component {
   render () {
     const { isEditing, isEditingWithForm , top, left } = this.state;
     const { value, label } = this.props;
+    const abbrVal = abbrNum(value, 1);
     return (
       <div
         className={`counter${isEditing ? ' counter__editing' : ''}`}
@@ -94,8 +96,16 @@ export default class Counter extends React.Component {
       >
         {!isEditingWithForm ? (
           <div className="counter__value">
-            <a className="counter__value--count">{value}</a>
-            <span className="counter__value--label">{label}</span>
+            <div className="counter__value--count">
+              <p style={{ fontSize: abbrVal.length > 5
+                   ? '14px'
+                   : '20px'}}>
+                {abbrVal}
+              </p>
+            </div>
+            <div className="counter__value--label">
+              <p>{label}</p>
+            </div>
           </div>
         ) : (
           <form onSubmit={this.handleSubmit}>
