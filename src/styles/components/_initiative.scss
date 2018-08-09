@@ -3,6 +3,7 @@
   @media (min-width: 765px) {
     max-width: 60%;
   }
+  @media (max-width: 765px) { order: 2; }
 
   &__sortable-list-container {
     display: flex;

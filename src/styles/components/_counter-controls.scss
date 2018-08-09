@@ -17,7 +17,7 @@
     background-image: linear-gradient(top, #f4f1ee, #fff);
     border-radius: 50%;
     box-shadow: 1px 7px 4px 1px rgba(0, 0, 0, .5),
-                0px 2px 3px 0px $turquoise,
+                0px 4px 3px 0px $turquoise,
                 inset 0px 4px 1px 1px white,
                 inset 0px -3px 1px 1px rgba(204,198,197,.5);
     transition: transform 0.15s, opacity 0.1s;
@@ -27,9 +27,9 @@
 
     &--delete {
       box-shadow: 1px 7px 4px 1px rgba(0, 0, 0, .5),
-      0px 4px 3px 0.6px $red-light,
-      inset 0px 4px 1px 1px white,
-      inset 0px -3px 1px 1px rgba(204,198,197,.5);
+                  0px 6px 3px 0.6px $red-light,
+                  inset 0px 4px 1px 1px white,
+                  inset 0px -3px 1px 1px rgba(204,198,197,.5);
       font-size: 24px;
     }
 
