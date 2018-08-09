@@ -1,10 +1,7 @@
-// Libs
 import React from 'react';
 import { connect } from 'react-redux';
-
-// Child Components
 import Counter from './Counter';
-
+import Button from './Button';
 import * as creatureActions from '../actions/creatures';
 import { creaturesSelector, selectedCreatureSelector } from './Initiative/selectors';
 
@@ -13,6 +10,11 @@ class CreatureDetails extends React.Component {
     isAddingNewCounter: false
   };
 
+  handleCreateCreature = e => {
+    e.preventDefault();
+    this.props.submitCreateCreature(e.target.name.value);
+  }
+
   handleDeleteCreature = () => this.props.deleteCreature(this.props.creature.id)
 
   handleCreateCounter = e => {
@@ -20,20 +22,11 @@ class CreatureDetails extends React.Component {
     this.toggleCounterForm();
   }
 
-  handleDeleteCounter = counterIndex => () =>
-    this.deleteCounter(this.props.creature.id, counterIndex);
-
   handleUpdateCounter = counterIndex => value =>
-    this.updateCounter(this.props.creature.id, counterIndex, value);
+  this.props.updateCounter(this.props.creature.id, counterIndex, value);
 
-  handleCounterUpdate = counter => {
-    this.props.onCounterUpdate({...counter, creatureId: this.props.creature.id});
-  }
-
-  handleCreateCreature = e => {
-    e.preventDefault();
-    this.props.submitCreateCreature(e.target.name.value);
-  }
+  handleDeleteCounter = counterIndex => () =>
+    this.props.deleteCounter(this.props.creature.id, counterIndex);
 
   toggleCounterForm = () => {
     this.setState({ isAddingNewCounter: !this.state.isAddingNewCounter });
@@ -43,7 +36,7 @@ class CreatureDetails extends React.Component {
     const { creature, isCreatingCreature, cancelCreateCreature } = this.props;
     if (creature || isCreatingCreature) {
       return (
-        <div className="creature-details widget">
+        <div className="widget creature-details">
 
           {isCreatingCreature ? (
             <form onSubmit={this.handleCreateCreature}>
@@ -64,12 +57,11 @@ class CreatureDetails extends React.Component {
                 key={index}
                 label={counter.label}
                 value={counter.value}
-                onUpdateValue={this.handleUpdateCounter(index)}
+                handleUpdateValue={this.handleUpdateCounter(index)}
                 onClickDelete={this.handleDeleteCounter(index)}
                 />
             )}
           </div>
-          <p>Creature notes - coming soon!</p>
           <div className="creature-details__buttons">
             {this.state.isAddingNewCounter ? (
               <form onSubmit={this.handleCreateCounter}>
@@ -81,20 +73,25 @@ class CreatureDetails extends React.Component {
                 <input type="button" value="Cancel" onClick={this.toggleCounterForm} />
               </form>
             ) : (
-              <button type="button" onClick={this.toggleCounterForm}>
-                New Counter
-              </button>
+              <Button
+                label="New Counter"
+                onClick={this.toggleCounterForm}
+                color="blue"
+                />
             )}
-            <button onClick={this.handleDeleteCreature}>
-              Delete Creature
-            </button>
+            <Button
+              onClick={this.handleDeleteCreature}
+              label="Delete Creature"
+              color="red"
+            />
           </div>
+          <p>Creature notes - coming soon!</p>
         </div>
       );
     } else {
       return (
         <div className="creature-details widget">
-          <p>Create a creature to begin.</p>
+          <p>Create or select a creature to begin.</p>
         </div>
       );
     }

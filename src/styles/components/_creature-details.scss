@@ -1,3 +1,19 @@
   .creature-details {
     flex: 1 1 400px;
+    padding: 10px 3px !important;
+    &__name {
+      margin: 2px 7px 8px;
+    }
+    &__counters {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      padding-right: 7px;
+    }
+    &__buttons {
+      // TODO: remove when button size standardized
+      button {
+        width: 180px;
+      }
+    }
   }

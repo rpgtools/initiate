@@ -1,12 +1,6 @@
 $white: #FFF;
-$opaque-white: rgba(255, 255, 255, 0.97);
-$very-opaque-white: rgba(255, 255, 255, 0.4);
-
-$lightest-grey: #c9c9c9;
-$light-grey: #bbbbbb;
-$lighter-grey: #aeaeae;
-$grey: #787878;
-$dark-grey: #1e1e1e;
+$white-opaque: rgba(255, 255, 255, 0.97);
+$white-very-opaque: rgba(255, 255, 255, 0.4);
 
 $charcoal: #373f71;
 
@@ -17,6 +11,15 @@ $aquamarine-green: #71f79f;
 $sunny: #fff275;
 $royal-purple: #7a43bc;
 $crimson: #990000;
+
+// COLOR SETS ----------
+
+$grey-lightest: #c9c9c9;
+$grey-light: #bbbbbb;
+$grey-lighter: #aeaeae;
+$grey: #787878;
+$grey-dark: #474747;
+$grey-darkest: #1e1e1e;
 
 $green-lightest: #99edb3;
 $green-light: #3abc61;
