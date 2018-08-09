@@ -8,7 +8,19 @@ import { creaturesSelector } from './selectors';
 
 class Initiative extends React.Component {
   state = {
-    scrollTop: 0
+    scrollTop: 0,
+    shouldUpdateCounterPositions: false
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if  (
+          prevState.scrollTop !== this.state.scrollTop ||
+          prevProps.creatureOrder !== this.props.creatureOrder
+        ) {
+          this.setState({ shouldUpdateCounterPositions: true });
+        } else if (prevState.shouldUpdateCounterPositions) {
+          this.setState({ shouldUpdateCounterPositions: false });
+        }
   }
 
   handleScroll = ref => event => {
@@ -32,7 +44,7 @@ class Initiative extends React.Component {
           onSortEnd={this.handleSortEnd}
           useDragHandle
           handleScroll={this.handleScroll}
-          initiativeWindowScrollTop={this.state.scrollTop}
+          shouldUpdateCounterPositions={this.state.shouldUpdateCounterPositions}
           {...tokenActions}
         />
     </div>
@@ -42,6 +54,7 @@ class Initiative extends React.Component {
 
 const mapStateToProps = state => ({
   creatures: creaturesSelector(state),
+  creatureOrder: state.creatures.allIds,
 });
 
 const mapDispatchToProps = {

@@ -28,10 +28,9 @@ export default class Counter extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.initiativeWindowScrollTop &&
-        prevProps.initiativeWindowScrollTop !== this.props.initiativeWindowScrollTop) {
-      this.updateCounterPosition();
+    if (this.props.shouldUpdateCounterPositions !== prevProps.shouldUpdateCounterPositions) {
       this.doneEditing();
+      this.updateCounterPosition();
     }
   }
 

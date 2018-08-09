@@ -46,7 +46,7 @@ export default class InitiativeToken extends React.Component {
   };
 
   render () {
-    const { creature, initiativeWindowScrollTop } = this.props;
+    const { creature, shouldUpdateCounterPositions } = this.props;
     const {
       tokenRef,
       handleSelectCreature,
@@ -70,7 +70,7 @@ export default class InitiativeToken extends React.Component {
               value={counter.value}
               handleUpdateValue={handleUpdateCounter(index)}
               onClickDelete={handleDeleteCounter(index)}
-              initiativeWindowScrollTop={initiativeWindowScrollTop}
+              shouldUpdateCounterPositions={shouldUpdateCounterPositions}
               />
           )}
         </div>
