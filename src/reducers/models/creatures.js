@@ -75,7 +75,11 @@ const allIds = (state = [], action) => {
         creatureId !== action.payload.creatureId);
     case 'CREATURE_REORDER': {
       const { previousIndex, nextIndex } = action.payload;
-      return arrayMove(state, previousIndex, nextIndex);
+      if (state.length === 0) {
+        return state;
+      } else {
+        return arrayMove(state, previousIndex, nextIndex);
+      }
     }
     default:
       return state;
