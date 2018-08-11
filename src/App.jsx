@@ -1,14 +1,15 @@
 import React, {Component} from 'react';
-import {CreatureList, StateManagement, Timer} from './components';
+
+import Initiative from './components/Initiative';
+import StateManagement from './components/StateManagement';
 import './App.css';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <StateManagement/>
-        <CreatureList/>
-        <Timer/>
+        <StateManagement />
+        <Initiative />
       </div>
     );
   }

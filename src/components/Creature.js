@@ -4,7 +4,7 @@ import _ from 'lodash';
 
 // Child Components
 import Counter from './Counter';
-import {CreateButton} from './CreateButton';
+import {Button} from './Button';
 
 export class Creature extends React.Component {
   constructor(props) {
@@ -26,15 +26,21 @@ export class Creature extends React.Component {
     this.setState({editing: !this.state.editing});
   };
 
+  handleCounterUpdate = counter => {
+    this.props.onCounterUpdate({...counter, creatureId: this.props.creature.id});
+  };
+
   render() {
     const {creature} = this.props;
     const counters = [];
-    if(_.size(this.props.counters) > 0) {
-      _.forEach(this.props.counters, (counter) => {
+    if(_.size(this.props.creature.counters) > 0) {
+      _.forOwn(this.props.creature.counters, (value, id) => {
         counters.push(
           <Counter
-            key={counter.id}
-            counter={counter}
+            key={id}
+            label={id}
+            value={value}
+            onUpdateValue={this.handleCounterUpdate}
           />
         );
       });
@@ -44,7 +50,7 @@ export class Creature extends React.Component {
       <div className={className}>
         <h2 className="creature_name">{creature.name}</h2>
         {counters}
-        <CreateButton onSubmit={this.handleCounterSubmit} buttonLabel="New Counter" />
+        <Button onSubmit={this.handleCounterSubmit} buttonLabel="New Counter" />
         <button className="button__edit" onClick={this.toggleCreatureEdit} >Edit Creature</button>
         <button className="button__delete" onClick={this.handleCreatureDelete} >Delete Creature</button>
       </div>
