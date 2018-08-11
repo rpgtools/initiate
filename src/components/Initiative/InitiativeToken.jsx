@@ -1,56 +1,81 @@
 import React from 'react';
-
+import debounce from 'lodash/debounce';
 import Counter from '../Counter';
-import Button from '../Button';
+import { DragHandle } from './SortableList';
 
-const InitiativeToken = ({
-  creature,
-  createCounter,
-  deleteCounter,
-  updateCounter,
-}) => {
-  const handleCreateCounter = label => {
-    createCounter(creature.id, label);
+// Used to determine how many counters to display on each token
+const COUNTER_WIDTH = 62;
+
+export default class InitiativeToken extends React.Component {
+  constructor (props) {
+    super(props);
+    this.tokenRef = React.createRef();
+    this.state = {
+      maxCountersToDisplay: 0
+    };
   };
 
-  const handleDeleteCounter = counterIndex => () => {
-    deleteCounter(creature.id, counterIndex);
+  componentDidMount() {
+    // TODO: if/when we add grid layout we will also need to listen for those resize events
+    window.addEventListener('resize', this.handleComponentResize);
+    this.handleComponentResize();
   };
 
-  const handleUpdateCounter = counterIndex => value => {
-    updateCounter(creature.id, counterIndex, value);
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.handleComponentResize);
+    this.handleComponentResize.cancel();
   };
 
-  return (
-    <div className="initiative-token">
-      <h2 className="initiative-token_title">{creature.name}</h2>
-      <div className="initiative-token_left">
-        {creature.counters.map((counter, index) =>
-          <Counter
-            key={index}
-            label={counter.label}
-            value={counter.value}
-            onUpdateValue={handleUpdateCounter(index)}
-            onClickDelete={handleDeleteCounter(index)}
-            />
-        )}
-      </div>
-      <div className="initiative-token_right">
-        <Button
-          buttonLabel="New Counter"
-          onSubmit={handleCreateCounter}
-          />
-        <Button
-          buttonLabel="Edit Creature"
-          onSubmit={console.log('EDIT CREATURE')}
-          />
-        <Button
-          buttonLabel="Delete Creature"
-          onSubmit={handleDeleteCounter}
-          />
-      </div>
-    </div>
-  );
+  handleComponentResize = debounce(() => {
+    this.setState({
+      maxCountersToDisplay:
+        Math.floor(this.tokenRef.current.offsetWidth / COUNTER_WIDTH)
+    });
+  }, 100);
+
+  handleDeleteCounter = counterIndex => () =>
+    this.props.deleteCounter(this.props.creature.id, counterIndex);
+
+  handleUpdateCounter = counterIndex => value =>
+    this.props.updateCounter(this.props.creature.id, counterIndex, value);
+
+  handleSelectCreature = e => {
+    if (!e.target.className.startsWith('counter')) {
+      this.props.selectCreature(this.props.creature.id);
+    }
+  };
+
+  render () {
+    const { creature, shouldUpdateCounterPositions } = this.props;
+    const {
+      tokenRef,
+      handleSelectCreature,
+      handleUpdateCounter,
+      handleDeleteCounter
+    } = this;
+    const { maxCountersToDisplay } = this.state;
+
+    return (
+      <div
+        className="initiative__token"
+        onClick={handleSelectCreature}
+        ref={tokenRef}
+        >
+        <h2 className="initiative__token--title">{creature.name}</h2>
+        <div className="initiative__token--counters">
+          {creature.counters.slice(0, maxCountersToDisplay).map((counter, index) =>
+            <Counter
+              key={index}
+              label={counter.label}
+              value={counter.value}
+              handleUpdateValue={handleUpdateCounter(index)}
+              onClickDelete={handleDeleteCounter(index)}
+              shouldUpdateCounterPositions={shouldUpdateCounterPositions}
+              />
+          )}
+        </div>
+          <DragHandle />
+        </div>
+      );
+  }
 };
-
-export default InitiativeToken;

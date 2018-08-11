@@ -24,5 +24,6 @@ Features:
  - You can now access the site at [http://127.0.0.1:3000](http://127.0.0.1:3000)
 
 # Example
-Here's an example from my latest game session:
-![Example usage of initiate](screenshot.png?raw=true "Example Usage")
+### Note: This is a Work In Progress branch!
+Here's an screenshot of the soon-to-be new and improved UI:
+![Example usage of initiate](src/images/WIP-Initiate.png?raw=true "Example Usage")

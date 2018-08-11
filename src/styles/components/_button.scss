@@ -1,0 +1,115 @@
+.button {
+  display: inline-block;
+  vertical-align: top;
+  position: relative;
+  overflow: hidden;
+  // TODO: standardize sizes (height, width)
+  min-width: 96px;
+  min-height: 32px;
+  line-height: 20px;
+  padding: 0 17px;
+  margin: 3px;
+  font-size: 18px;
+  font-weight: 600;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  background-clip: padding-box;
+  border: 4px solid;
+  border-radius: 14px;
+  box-shadow: inset 2px 2px $white-very-opaque,
+              1px 2px 4px $grey-darkest;
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.12) 51%, rgba(0, 0, 0, 0.04));
+  transition: box-shadow 0.18s ease-in-out, background-color 0.15s ease-in-out;
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: -25%;
+    bottom: -25%;
+    left: -20%;
+    right: -20%;
+    border-radius: 50%;
+    background: transparent;
+    box-shadow: inset 0 0 38px rgba(255, 255, 255, 0.5);
+  }
+  &:active {
+    // Note: muse keep box shadows in same order (by insets) for transition to work
+    box-shadow: inset 2px 2px $white-very-opaque,
+                -1px -1px 2px $grey-darkest;
+  }
+  &:active:before {
+    top: -50%;
+    bottom: -125%;
+    left: -15%;
+    right: -15%;
+  }
+
+  // COLORS ------------
+
+  &--blue {
+    text-shadow: 0 1.5px $blue-darkest;
+    background-color: $blue;
+    border-color: $blue-lightest $blue-light $blue-darkest;
+    &:hover {
+      background-color: $blue-light;
+      border-bottom: 4px solid $blue-dark;
+    }
+    &:active {
+      background-color: $blue;
+      border-bottom: 4px solid $blue-darkest;
+    }
+  }
+  &--yellow {
+    text-shadow: 0 1.5px $saffron-darkest;
+    background-color: $saffron;
+    border-color: $saffron-lightest $saffron-light $saffron-darkest;
+    &:hover {
+      background-color: $saffron-light;
+      border-bottom: 4px solid $saffron-dark;
+    }
+    &:active {
+      background-color: $saffron;
+      border-bottom: 4px solid $saffron-darkest;
+    }
+  }
+  &--red {
+    text-shadow: 0 1.5px $red-darkest;
+    background-color: $red;
+    border-color: $red-lightest $red-light $red-darkest;
+    &:hover {
+      background-color: $red-light;
+      border-bottom: 4px solid $red-dark;
+    }
+    &:active {
+      background-color: $red;
+      border-bottom: 4px solid $red-darkest;
+    }
+  }
+  &--grey {
+    text-shadow: 0 1.5px $grey-darkest;
+    background-color: $grey;
+    border-color: $grey-lightest $grey-light $grey-darkest;
+    &:hover {
+      background-color: $grey-light;
+      border-bottom: 4px solid $grey-dark;
+    }
+    &:active {
+      background-color: $grey;
+      border-bottom: 4px solid $grey-darkest;
+    }
+  }
+  &--white {
+    text-shadow: 0 1.5px $grey;
+    background-color: $grey-lighter;
+    border-color: $white $grey-lightest $grey;
+    &:hover {
+      background-color: $grey-lightest;
+      border-bottom: 4px solid $grey-lighter;
+    }
+    &:active {
+      background-color: $white;
+      border-bottom: 4px solid black;
+    }
+  }
+}

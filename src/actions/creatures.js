@@ -1,17 +1,23 @@
 const uuid = require('uuid/v4');
 
-export const createCreature = creature => {
-  return {
-    type: 'CREATURE_CREATE',
-    payload: {
-      creature: {
-        ...creature,
-        id: uuid(),
-        counters: [],
-      },
+export const initCreateCreature = () => ({
+  type: 'CREATURE_CREATE_INIT'
+});
+
+export const cancelCreateCreature = () => ({
+  type: 'CREATURE_CREATE_CANCEL'
+});
+
+export const submitCreateCreature = name => ({
+  type: 'CREATURE_CREATE_SUBMIT',
+  payload: {
+    creature: {
+      name,
+      id: uuid(),
+      counters: [],
     },
-  };
-};
+  }
+});
 
 export const updateCreature = creature => {
   return {
@@ -19,18 +25,20 @@ export const updateCreature = creature => {
   };
 };
 
-export const deleteCreature = creature => {
+export const deleteCreature = creatureId => {
   return {
     type: 'CREATURE_DELETE',
-    payload: {creature}
+    payload: { creatureId }
   };
 };
 
 export const reorderCreatures = (previousIndex, nextIndex) => {
   return {
     type: 'CREATURE_REORDER',
-    previousIndex,
-    nextIndex
+    payload: {
+      previousIndex,
+      nextIndex
+    }
   };
 };
 
@@ -58,6 +66,13 @@ export const deleteCounter = (creatureId, counterIndex) => ({
   type: 'COUNTER_DELETE',
   payload: {
     creatureId,
-    counterIndex
+    counterIndex,
   },
+});
+
+export const selectCreature = creatureId => ({
+  type: 'CREATURE_SELECT',
+  payload: {
+    creatureId,
+  }
 });
