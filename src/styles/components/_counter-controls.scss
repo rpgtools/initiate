@@ -13,8 +13,8 @@
     border: none;
     font-size: 18px;
     // https://codepen.io/yesilfasulye/pen/iGHru
-    background-image: -webkit-linear-gradient(top, #f4f1ee, #fff);
-    background-image: linear-gradient(top, #f4f1ee, #fff);
+    background-image: -webkit-linear-gradient(to bottom, #f4f1ee, #fff);
+    background-image: linear-gradient(to bottom, #f4f1ee, #fff);
     border-radius: 50%;
     box-shadow: 1px 7px 4px 1px rgba(0, 0, 0, .5),
                 0px 4px 3px 0px $turquoise,
@@ -46,15 +46,15 @@
     }
 
     &:hover {
-      background-image: -webkit-linear-gradient(top, #fff, #f4f1ee);
-      background-image: linear-gradient(top, #fff, #f4f1ee);
+      background-image: -webkit-linear-gradient(to bottom, #fff, #f4f1ee);
+      background-image: linear-gradient(to bottom, #fff, #f4f1ee);
       color: $turquoise;
       @at-root .counter__buttons--delete:hover { color: $red-dark !important; }
     }
 
     &:active {
-      background-image: -webkit-linear-gradient(top, #efedec, #f7f4f4);
-      background-image: linear-gradient(top, #efedec, #f7f4f4);
+      background-image: -webkit-linear-gradient(to bottom, #efedec, #f7f4f4);
+      background-image: linear-gradient(to bottom, #efedec, #f7f4f4);
       box-shadow: 0 3px 5px 0 rgba(0,0,0,.4), inset 0px -3px 1px 1px rgba(204,198,197,.5);
     }
 
