@@ -1,0 +1,84 @@
+.counter {
+  height: 50px;
+  width: 50px;
+  border-radius: 10px;
+  margin: 3px 3px 10px 7px;
+  cursor: pointer;
+  flex: 0 0 auto;
+  position: relative;
+  z-index: 1;
+  // transform set so that counter becomes containing parent for fixed pos. buttons
+  // transform: translate(0, 0);
+  text-shadow: 1px 1px $grey-lightest;
+  border: 3px solid;
+  border-color: $grey-lightest $grey-lighter $grey;
+  box-shadow: 1px 1px 3px $grey-darkest, inset 1px 1px $white-very-opaque;
+  background-image: linear-gradient(147deg, $grey-light, $grey 95%);
+  &:active {
+    box-shadow: -1px -1px 3px $grey-darkest,
+                inset -2px -2px rgba(255, 255, 255, 0.4),
+                inset 2px 2px rgba(0, 0, 0, 0.4);
+    text-shadow: -1px -1px $grey-lightest;
+    transition: box-shadow 0.13s ease-in-out;
+  }
+  &:before {
+    // START HACK: Can't transition linear-gradients normally. See link for details.
+    // https://medium.com/@dave_lunny/animating-css-gradients-using-only-css-d2fd7671e759
+    content: '';
+    display: block;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0; left: 0;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.1s ease-in-out;
+    background-image: linear-gradient(317deg, $grey-light, $grey 95%);
+    border-radius: 7px;
+  }
+  &:active:before {
+    opacity: 1;
+    // END HACK
+  }
+
+  &__value {
+    height: 100%;
+
+    &--count {
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      font-size: 20px;
+      line-height: 17px;
+      font-weight: bold;
+      position: absolute;
+      top: 2px;
+      width: 97%;
+      height: 29px;
+      text-align: center;
+      flex-wrap: wrap;
+      p { max-width: 100%; margin: 4px 0; }
+    }
+
+    &--label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      bottom: 2px;
+      width: 100%;
+      height: 22px;
+      overflow: hidden;
+      text-align: center;
+      &:hover { overflow: visible; }
+      p {
+        line-height: 11px;
+        word-wrap: break-word;
+        max-height: 100%;
+        max-width: 100%;
+        margin: 0;
+        text-overflow: clip;
+      }
+    }
+  }
+}
