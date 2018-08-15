@@ -3,8 +3,8 @@ import jwtdecode from 'jwt-decode';
 const userReducer = (state = {}, action) => {
   switch(action.type) {
     case 'GET_USER': {
-      const user = jwtdecode(document.cookie).user;
-      return user;
+      let user = jwtdecode(document.cookie).user;
+      return { ...user, token: document.cookie };
     }
     default:
       return state;
