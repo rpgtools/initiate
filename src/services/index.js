@@ -1,5 +1,10 @@
-const URL = window.URL;
+import AuthApi from '../auth';
 
-export {
-  URL,
+export default class Api {
+  constructor({
+    apiHost = process.env.API_URL,
+    fetch,
+  } = {}) {
+    this.Auth = new AuthApi({ apiHost, fetch });
+  }
 }
