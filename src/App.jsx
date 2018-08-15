@@ -8,7 +8,11 @@ import { userSelector } from './selectors';
 import './styles/index.scss';
 
 class App extends Component {
+  componentDidMount() {
+
+  }
   render () {
+    if (document.cookie === '') { console.log('EMPTY')}
     return (
       <div>
         {document.cookie === this.props.user.token ? (
@@ -17,7 +21,7 @@ class App extends Component {
             <div className="temporary-right-side">
               <InitiativeButtonsWidget />
               <CreatureDetails />
-              <a href={'http://localhost:3001/logout'} onClick={() => { document.cookie = ''}}> LOGOUT</a>
+              <button onClick={() => { document.cookie = 'token=;'; this.forceUpdate()}}> LOGOUT</button>
             </div>
           </main>
         ) : (
