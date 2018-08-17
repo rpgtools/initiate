@@ -1,33 +1,25 @@
 import { createSelector } from 'reselect';
-import get from 'lodash/get';
 import find from 'lodash/find';
+import {
+  campaignCreaturesByIdStateSelector,
+  campaignCreaturesAllIdsStateSelector,
+  selectedCreatureStateSelector,
+} from '../../services/creatures/selectors';
 
-const creaturesStateSelector = state => get(state, 'creatures', {});
-
-const creaturesByIdSelector = createSelector(
-  creaturesStateSelector,
-  creatures => get(creatures, 'byId', {})
-);
-
-const creaturesAllIdsSelector = createSelector(
-  creaturesStateSelector,
-  creatures => get(creatures, 'allIds', [])
-);
-
-const selectedCreatureStateSelector = createSelector(
-  creaturesStateSelector,
-  state => get(state, 'selected')
-);
-
+// TODO: check if this is inefficient
 export const creaturesSelector = createSelector(
-  creaturesByIdSelector,
-  creaturesAllIdsSelector,
-  (byId, allIds) => allIds.map(creatureId => byId[creatureId], [])
+  campaignCreaturesByIdStateSelector,
+  campaignCreaturesAllIdsStateSelector,
+  (byId, allIds) => {
+    const res = allIds.map(creatureId => byId[creatureId], [])
+    console.log(allIds, byId);
+    return res
+  }
 );
 
 export const selectedCreatureSelector = createSelector(
-  creaturesByIdSelector,
-  creaturesAllIdsSelector,
+  campaignCreaturesByIdStateSelector,
+  campaignCreaturesAllIdsStateSelector,
   selectedCreatureStateSelector,
   (byId, allIds, selected) => selected
     ? find(byId, {id: selected})

@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Counter from './Counter';
 import Button from './Button';
-import * as creatureActions from '../actions/creatures';
+import { actions as creatureActions } from '../services/creatures';
 import { creaturesSelector, selectedCreatureSelector } from './Initiative/selectors';
 
 class CreatureDetails extends React.Component {
@@ -101,7 +101,7 @@ class CreatureDetails extends React.Component {
 const mapStateToProps = state => ({
   creatures: creaturesSelector(state),
   creature: selectedCreatureSelector(state),
-  isCreatingCreature: state.creatures.isCreating,
+  isCreatingCreature: state.isCreatingCreature,
 });
 
 const mapDispatchToProps = {
