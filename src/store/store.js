@@ -47,7 +47,7 @@ const sagaInjections = {
 
 function* rootSaga() {
   yield all([
-    ...campaign.campaignSaga(sagaInjections),
+    ...campaign.campaignRootSaga(sagaInjections),
   ]);
 };
 

@@ -2,7 +2,8 @@ import { makeApiServiceActionTypes } from '../../util';
 
 export const actionTypes = {
   ...makeApiServiceActionTypes('GET_CAMPAIGN', 'campaign/GET'),
-  ...makeApiServiceActionTypes('POST_CAMPAIGN', 'campaing/POST'),
+  POST_CAMPAIGN: 'campaign/POST',
+  POST_CAMPAIGN_ERROR: 'campaign/POST_ERROR',
 };
 
 const initialState = {
@@ -23,5 +24,8 @@ export const campainMetadataReducer = (state = initialState, action) => {
 };
 
 export const actions = {
-
+  getCampaignResponse: campaign => ({
+    type: actionTypes.GET_CAMPAIGN_RESPONSE,
+    payload: campaign,
+  }),
 };
