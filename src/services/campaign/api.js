@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-export default class CampaignsApi {
+export default class CampaignApi {
   static asCampaignData = PropTypes.object.isRequired;
 
   constructor({ apiHost, fetch }) {
@@ -10,7 +10,7 @@ export default class CampaignsApi {
 
   getCampaign = campaignId =>
     this.fetch(`${this.apiHost}/campaigns/${campaignId}`, { method: 'GET' }).then(
-      CampaignsApi.asCampaignData
+      CampaignApi.asCampaignData
     );
 
   postCampain = campaignData => {};

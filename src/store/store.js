@@ -5,6 +5,7 @@ import { all } from 'redux-saga/effects';
 import reduxFetch from './redux-fetch';
 import Api from '../services';
 import rootReducer from '../reducers';
+import campaign from '../services/campaign';
 
 const sagaMiddleware = createSagaMiddleware()
 const composer = (process.env.NODE_ENV === 'development' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
@@ -31,7 +32,7 @@ const sagaInjections = {
 
 function* rootSaga() {
   yield all([
-    ...campaigns.campaignsSaga(sagaInjections),
+    ...campaign.campaignSaga(sagaInjections),
   ]);
 };
 

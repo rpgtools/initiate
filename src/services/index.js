@@ -1,5 +1,5 @@
 // import AuthApi from './auth/api';
-import CampaignsApi from '.campaigns/api';
+import CampaignApi from '.campaigns/api';
 
 export default class Api {
   constructor({
@@ -7,6 +7,6 @@ export default class Api {
     fetch,
   } = {}) {
     // this.Auth = new AuthApi({ apiHost, fetch });
-    this.Campaigns = new CampaignsApi({ apiHost, fetch });
+    this.Campaign = new CampaignApi({ apiHost, fetch });
   }
 }
