@@ -2,7 +2,7 @@ import moment from 'moment';
 
 const start = moment('1991-07-27 08:32');
 
-export const time = (state = start, action) => {
+export const timeReducer = (state = start, action) => {
   switch (action.type) {
     case 'TIME_ADD_SECONDS':
       return moment(state).add(action.seconds, 's')
@@ -13,16 +13,17 @@ export const time = (state = start, action) => {
   }
 };
 
-export const updateTime = time => {
-  return {
-    type: 'TIME_UPDATE',
-    time
-  };
-};
-
-export const addSeconds = seconds => {
-  return {
-    type: 'TIME_ADD_SECONDS',
-    seconds
-  };
+export const actions {
+  updateTime: time => {
+    return {
+      type: 'TIME_UPDATE',
+      time
+    };
+  }
+  addSeconds: seconds => {
+    return {
+      type: 'TIME_ADD_SECONDS',
+      seconds
+    };
+  },
 };
