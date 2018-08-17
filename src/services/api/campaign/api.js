@@ -14,5 +14,13 @@ export default class CampaignApi {
       check(CampaignApi.asCampaignData, 'Campaigns Api: getCampaign')
     );
 
-  postCampaign = campaignData => {};
+  postCampaign = campaignData => {
+    const request = {
+      method: 'POST',
+      body: JSON.stringify({
+        redux_state: campaignData,
+      })
+    };
+    return this.fetch(`${this.apiHost}/campaigns/${campaignData.id}`, request);
+  }
 }
