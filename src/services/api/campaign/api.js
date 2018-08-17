@@ -4,8 +4,8 @@ export default class CampaignApi {
   static asCampaignData = PropTypes.object.isRequired;
 
   constructor({ apiHost, fetch }) {
-    this.apiHost = apiHost,
-    this.fetch = fetch,
+    this.apiHost = apiHost;
+    this.fetch = fetch;
   };
 
   getCampaign = campaignId =>

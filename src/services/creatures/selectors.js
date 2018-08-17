@@ -1,10 +1,10 @@
 import { createSelector } from 'reselect';
 import get from 'lodash/get';
-import { campaignStateSelector } from '../api/campaign';
+import { campaignStateSelector } from '../api/campaign/selectors';
 
 export const campaignCreaturesStateSelector = createSelector(
   campaignStateSelector,
-  state => get(state, 'creatures', {});
+  state => get(state, 'creatures', {})
 );
 
 export const campaignCreaturesByIdStateSelector = createSelector(

@@ -1,5 +1,11 @@
 import PropTypes from 'prop-types';
 
+export const makeError = e => `ApiError.${e}`;
+
+export const Errors = {
+  EXPIRED_TOKEN: makeError('EXPIRED_TOKEN'),
+};
+
 export const getRequestHeaders = token => ({
   Authorization: token ? `Bearer ${token}` : null,
   Accept: 'application/json',

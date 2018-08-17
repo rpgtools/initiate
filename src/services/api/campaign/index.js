@@ -8,5 +8,5 @@ export {
   CampaignApi,
   campaignMetadataReducer,
   campaignSagas,
-  campaignRootSaga: rootSaga,
+  rootSaga as campaignRootSaga,
 };

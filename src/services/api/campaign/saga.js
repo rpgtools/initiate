@@ -34,7 +34,8 @@ export function postCampaignSagaFactory({ postCampaign }, logger) {
     } catch (error) {
       yield put({ type: actionTypes.POST_CAMPAIGN_ERROR });
       yield call([logger, 'console'], actionTypes.POST_CAMPAIGN_ERROR, error);
-  };
+    };
+  }
 }
 
 export default function rootSaga({ api, logger }) {

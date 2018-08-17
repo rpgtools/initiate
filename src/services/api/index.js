@@ -1,5 +1,5 @@
 // import AuthApi from './auth/api';
-import { CampaignApi } from './api/campaign';
+import { CampaignApi } from './campaign';
 
 export default class Api {
   constructor({

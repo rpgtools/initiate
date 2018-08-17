@@ -1,4 +1,4 @@
-import {applyMiddleware, compose, createStore} from 'redux';
+import { applyMiddleware, compose, createStore, combineReducers } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import persistState from 'redux-localstorage'
 import { all } from 'redux-saga/effects';
