@@ -6,12 +6,6 @@ export const Errors = {
   EXPIRED_TOKEN: makeError('EXPIRED_TOKEN'),
 };
 
-export const getRequestHeaders = token => ({
-  Authorization: token ? `Bearer ${token}` : null,
-  Accept: 'application/json',
-  'Content-Type': 'application/json',
-});
-
 export const unpackResponse = response => {
   if (response.ok) {
     return response.json();

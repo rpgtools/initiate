@@ -19,12 +19,12 @@ const rootReducer = combineReducers({
   user: auth.userReducer,
   campaign: combineReducers({
     metadata: campaign.campaignMetadataReducer,
-    selectedCreature: creatures.selectedCreatureReducer,
     creatures: combineReducers({
-      byIds: creatures.byIdReducer,
+      byId: creatures.byIdReducer,
       allIds: creatures.allIdsReducer,
     }),
   }),
+  selectedCreature: creatures.selectedCreatureReducer,
   isCreatingCreature: creatures.isCreatingReducer,
   // isCreatingCampaign: campaign.isCreatingReducer,
 });

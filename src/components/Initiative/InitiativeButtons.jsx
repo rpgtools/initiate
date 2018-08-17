@@ -1,8 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { actions as creatureActions } from '../../services/creatures';
+import {
+  actions as creatureActions,
+  selectors as creatureSelectors
+} from '../../services/creatures';
 import Button from '../Button';
-
 const InitiativeButtonsWidget = ({ creatures, initCreateCreature, reorderCreatures }) => {
   const advanceInitiative = () => {
     reorderCreatures(0, creatures.length - 1);
@@ -27,7 +29,7 @@ const InitiativeButtonsWidget = ({ creatures, initCreateCreature, reorderCreatur
 };
 
 const mapStateToProps = state => ({
-  creatures: state.creatures.allIds,
+  creatures: creatureSelectors.campaignCreaturesAllIdsStateSelector(state),
 });
 
 const mapDispatchToProps = {

@@ -12,10 +12,11 @@ class App extends Component {
 
   }
   render () {
+    const { user } = this.props;
     if (document.cookie === '') { console.log('EMPTY')}
     return (
       <div>
-        {document.cookie === this.props.user.token ? (
+        {user.token && user.token === document.cookie ? (
           <main className="main">
             <Initiative />
             <div className="temporary-right-side">

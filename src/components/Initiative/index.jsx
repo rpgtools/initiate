@@ -35,6 +35,7 @@ class Initiative extends React.Component {
 
   render() {
     const { creatures } = this.props;
+    console.log(creatures)
     const tokenActions = {
       selectCreature: this.props.selectCreature,
       updateCounter: this.props.updateCounter,

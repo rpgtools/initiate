@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { check } from '../../util';
 
 export default class CampaignApi {
   static asCampaignData = PropTypes.object.isRequired;
@@ -10,7 +11,7 @@ export default class CampaignApi {
 
   getCampaign = campaignId =>
     this.fetch(`${this.apiHost}/campaigns/${campaignId}`, { method: 'GET' }).then(
-      CampaignApi.asCampaignData
+      check(CampaignApi.asCampaignData, 'Campaigns Api: getCampaign')
     );
 
   postCampaign = campaignData => {};

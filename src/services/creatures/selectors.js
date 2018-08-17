@@ -17,7 +17,5 @@ export const campaignCreaturesAllIdsStateSelector = createSelector(
   creatures => get(creatures, 'allIds', [])
 );
 
-export const selectedCreatureStateSelector = createSelector(
-  campaignCreaturesStateSelector,
-  state => get(state, 'selectedCreature')
-);
+export const selectedCreatureStateSelector = state =>
+  get(state, 'selectedCreature');

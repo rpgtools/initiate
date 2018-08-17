@@ -10,7 +10,11 @@ import {
 export const creaturesSelector = createSelector(
   campaignCreaturesByIdStateSelector,
   campaignCreaturesAllIdsStateSelector,
-  (byId, allIds) => allIds.map(creatureId => byId[creatureId], [])
+  (byId, allIds) => {
+    const res = allIds.map(creatureId => byId[creatureId], [])
+    console.log(allIds, byId);
+    return res
+  }
 );
 
 export const selectedCreatureSelector = createSelector(
