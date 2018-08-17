@@ -2,7 +2,7 @@ import filter from 'lodash/filter';
 import omit from 'lodash/omit';
 import { arrayMove } from 'react-sortable-hoc';
 
-export const byId = (state = {}, action) => {
+export const byIdReducer = (state = {}, action) => {
   switch(action.type) {
     case 'CREATURE_CREATE_SUBMIT': {
       const creature = action.payload.creature;
@@ -61,7 +61,7 @@ export const byId = (state = {}, action) => {
   }
 };
 
-export const allIds = (state = [], action) => {
+export const allIdsReducer = (state = [], action) => {
   switch(action.type) {
     case 'CREATURE_CREATE_SUBMIT':
       return state.concat(action.payload.creature.id);
@@ -81,7 +81,7 @@ export const allIds = (state = [], action) => {
   }
 };
 
-export const selectedCreature = (state = null, action) => {
+export const selectedCreatureReducer = (state = null, action) => {
   if (action.type === 'CREATURE_SELECT') {
     return action.payload.creatureId;
   } else {
@@ -89,7 +89,7 @@ export const selectedCreature = (state = null, action) => {
   }
 };
 
-export const isCreating = (state = false, { type }) => {
+export const isCreatingReducer = (state = false, { type }) => {
   if (type === 'CREATURE_CREATE_INIT') {
     return true;
   } else if (type === 'CREATURE_CREATE_SUBMIT' || 'CREATURE_CREATE_CANCEL') {

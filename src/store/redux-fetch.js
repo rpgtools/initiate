@@ -1,5 +1,5 @@
 import mapKeys from 'lodash/mapKeys';
-import { tokenSelector } from '../services/auth/selectors';
+import { tokenSelector } from '../services/api/auth/selectors';
 
 export const FAILED_REQUEST = 'FAILED_REQUEST';
 

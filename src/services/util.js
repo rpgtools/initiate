@@ -37,3 +37,19 @@ export const checkNonObject = (schema, api = 'Api') => data => {
   }
   return data;
 };
+
+export const makeApiServiceActionTypes = (key, value) => ({
+  [key]: value,
+  [`${key}_REQUEST`]: `${value}_REQUEST`,
+  [`${key}_RESPONSE`]: `${value}_RESPONSE`,
+  [`${key}_ERROR`]: `${value}_ERROR`,
+  [`${key}_CANCELLED`]: `${value}_CANCELLED`,
+});
+
+export const makeControlServiceActionTypes = (key, value) => ({
+  [key]: value,
+  [`${key}_INIT`]: `${value}_INIT`,
+  [`${key}_COMPLETE`]: `${value}_COMPLETE`,
+  [`${key}_ERROR`]: `${value}_ERROR`,
+  [`${key}_CANCELLED`]: `${value}_CANCELLED`,
+});

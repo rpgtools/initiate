@@ -3,16 +3,31 @@ import createSagaMiddleware from 'redux-saga';
 import persistState from 'redux-localstorage'
 import { all } from 'redux-saga/effects';
 import reduxFetch from './redux-fetch';
-import Api from '../services';
-import rootReducer from '../reducers';
-import campaign from '../services/campaign';
+import Api from '../services/api';
+import { * as auth } from '../services/api/auth';
+import { * as campaign } from '../services/api/campaign';
+import { * as creatures } from '../services/creatures';
 
-const sagaMiddleware = createSagaMiddleware()
+const sagaMiddleware = createSagaMiddleware();
 const composer = (process.env.NODE_ENV === 'development' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
 const enhancements = composer(
   applyMiddleware(sagaMiddleware),
   persistState(),
 );
+
+const rootReducer = combineReducers({
+  user: auth.userReducer,
+  campaign: combineReducers({
+    metadata: campain.campaignMetadataReducer,
+    selectedCreature: creatures.selectedCreatureReducer,
+    creatures: combineReducers({
+      byIds: creatures.byIdReducer,
+      allIds: creatures.allIdsReducer,
+    }),
+  }),
+  isCreatingCreature: creatures.isCreatingReducer,
+  // isCreatingCampaign: campain.isCreatingReducer,
+});
 
 const store = createStore(
   rootReducer,
