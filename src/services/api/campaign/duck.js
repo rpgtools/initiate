@@ -12,7 +12,7 @@ const initialState = {
   timestamp: null,
 };
 
-export const campainMetadataReducer = (state = initialState, action) => {
+export const campaignMetadataReducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.GET_CAMPAIGN:
       return state;

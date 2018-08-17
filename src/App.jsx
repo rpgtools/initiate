@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import Initiative from './components/Initiative';
 import CreatureDetails from './components/CreatureDetails';
 import InitiativeButtonsWidget from './components/Initiative/InitiativeButtons';
-import { userSelector } from './selectors';
+import { userSelector } from './services/api/auth/selectors';
 import './styles/index.scss';
 
 class App extends Component {

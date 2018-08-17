@@ -1,10 +1,13 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 // import PropTypes from 'prop-types';
 
 import SortableList from './SortableList';
-import * as creatureActions from '../../actions/creatures';
+import { actions as creatureActions } from '../../services/creatures';
 import { creaturesSelector } from './selectors';
+import {
+  campaignCreaturesAllIdsStateSelector
+} from '../../services/creatures/selectors';
 
 class Initiative extends React.Component {
   state = {
@@ -54,7 +57,7 @@ class Initiative extends React.Component {
 
 const mapStateToProps = state => ({
   creatures: creaturesSelector(state),
-  creatureOrder: state.creatures.allIds,
+  creatureOrder: campaignCreaturesAllIdsStateSelector(state),
 });
 
 const mapDispatchToProps = {

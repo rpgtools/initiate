@@ -6,6 +6,7 @@ import {
   selectedCreatureReducer,
   isCreatingReducer,
 } from './duck';
+import { * as selectors } from './selectors';
 
 export {
   actions,
@@ -14,4 +15,5 @@ export {
   allIdsReducer,
   selectedCreatureReducer,
   isCreatingReducer,
+  selectors,
 };

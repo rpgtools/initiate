@@ -13,5 +13,5 @@ export default class CampaignApi {
       CampaignApi.asCampaignData
     );
 
-  postCampain = campaignData => {};
+  postCampaign = campaignData => {};
 }

@@ -18,7 +18,7 @@ const enhancements = composer(
 const rootReducer = combineReducers({
   user: auth.userReducer,
   campaign: combineReducers({
-    metadata: campain.campaignMetadataReducer,
+    metadata: campaign.campaignMetadataReducer,
     selectedCreature: creatures.selectedCreatureReducer,
     creatures: combineReducers({
       byIds: creatures.byIdReducer,
@@ -26,7 +26,7 @@ const rootReducer = combineReducers({
     }),
   }),
   isCreatingCreature: creatures.isCreatingReducer,
-  // isCreatingCampaign: campain.isCreatingReducer,
+  // isCreatingCampaign: campaign.isCreatingReducer,
 });
 
 const store = createStore(
