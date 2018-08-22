@@ -27,10 +27,11 @@ export function getCampaignSagaFactory({ getCampaign }) {
 }
 
 export function postCampaignSagaFactory({ postCampaign }, logger) {
-  return function*({ payload }) {
+  return function*() {
     try {
-      const campaign = select(campaignStateSelector);
-      yield call(postCampaign, campaign);
+      const campaignState = yield select(campaignStateSelector);
+      console.log('campaignState', campaignState);
+      yield call(postCampaign, campaignState);
     } catch (error) {
       yield put({ type: actionTypes.POST_CAMPAIGN_ERROR });
       yield call([logger, 'console'], actionTypes.POST_CAMPAIGN_ERROR, error);

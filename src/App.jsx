@@ -23,6 +23,7 @@ class App extends Component {
               <InitiativeButtonsWidget />
               <CreatureDetails />
               <button onClick={() => { document.cookie = 'token=;'; this.forceUpdate()}}> LOGOUT</button>
+              <button onClick={() => this.props.postCampaign() }>POST Campaign</button>
             </div>
           </main>
         ) : (
@@ -38,7 +39,9 @@ class App extends Component {
 }
 
 const mapDispatch = dispatch => ({
-  getUser: () => dispatch({ type: 'GET_USER' })
+  getUser: () => dispatch({ type: 'GET_USER' }),
+  postCampaign: () => dispatch({ type: 'campaign/POST' }),
+
 });
 
 const mapState = state => ({

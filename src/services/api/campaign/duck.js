@@ -7,7 +7,7 @@ export const actionTypes = {
 };
 
 const initialState = {
-  id: null,
+  id: 'first campaign id',
   name: null,
   timestamp: null,
 };

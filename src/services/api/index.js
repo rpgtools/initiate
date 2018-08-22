@@ -3,7 +3,7 @@ import { CampaignApi } from './campaign';
 
 export default class Api {
   constructor({
-    apiHost = process.env.API_URL,
+    apiHost = 'http://localhost:3001',
     fetch,
   } = {}) {
     // this.Auth = new AuthApi({ apiHost, fetch });

@@ -21,6 +21,6 @@ export default class CampaignApi {
         redux_state: campaignData,
       })
     };
-    return this.fetch(`${this.apiHost}/campaigns/${campaignData.id}`, request);
+    return this.fetch(`${this.apiHost}/campaigns/${campaignData.metadata.id}`, request);
   }
 }
