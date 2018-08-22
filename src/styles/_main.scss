@@ -57,3 +57,12 @@ main.main {
     flex-wrap: nowrap;
   }
 }
+
+.drag-handle {
+  width: 20px;
+  height: 20px;
+  display: block;
+  background:url('../images/drag-handle.png') center center no-repeat;
+  background-size:contain;
+  cursor: pointer;
+}

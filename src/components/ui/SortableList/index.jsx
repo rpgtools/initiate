@@ -7,7 +7,7 @@ import {
 } from 'react-sortable-hoc';
 
 export const DragHandle = SortableHandle(() =>
-  <button className="drag-handle" />
+  <div className="drag-handle" />
 );
 
 const SortableItem = SortableElement(({item, ...rest}) =>
@@ -36,7 +36,6 @@ export default class SortableList extends React.Component {
   componentDidMount() {
     const elem = ReactDOM.findDOMNode(this);
     elem.addEventListener('scroll', this.handleScroll);
-    console.log("Scroll top", elem.scrollTop);
     this.setState({scrollTop: elem.scrollTop});
   };
 
@@ -47,7 +46,6 @@ export default class SortableList extends React.Component {
 
   handleScroll(event) {
     const elem = ReactDOM.findDOMNode(this);
-    console.log("Scroll top", elem.scrollTop);
     this.setState({scrollTop: elem.scrollTop})
   }
 

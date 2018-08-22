@@ -41,11 +41,12 @@
     }
 
     &--counters {
-      width: 100%;
       height: 60px;
       display: flex;
       flex-direction: row;
-      flex-wrap: nowrap;
+      flex-wrap: wrap;
+      overflow: hidden;
+      margin-right:60px;
     }
   }
 }

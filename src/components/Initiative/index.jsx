@@ -12,15 +12,14 @@ class Initiative extends React.Component {
   }
 
   render() {
-    const creatures = this.props.creatures.map((creature, index) => {
-      return(<InitiativeToken creature={creature} />);
-    });
     const tokenActions = {
-      selectCreature: this.props.selectCreature,
-      updateCounter: this.props.updateCounter,
-      deleteCounter: this.props.deleteCounter,
+      onSelect: this.props.selectCreature,
+      onUpdateCounter: this.props.updateCounter,
+      onDeleteCounter: this.props.deleteCounter,
     }
-    console.log(creatures.length);
+    const creatures = this.props.creatures.map((creature, index) => {
+      return(<InitiativeToken creature={creature} {...tokenActions} />);
+    });
     return (
       <div className="initiative widget" >
         <SortableList

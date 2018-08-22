@@ -39,7 +39,6 @@ export default class Counter extends React.Component {
     this.setState({ top: top, left });
   }
 
-
   handleFocus = event => event.target.select();
 
   handleSubmit = e => {
@@ -48,10 +47,10 @@ export default class Counter extends React.Component {
   }
 
   handleUpdateCounterValue = amount => () => {
-    this.props.handleUpdateValue(this.props.value + amount);
+    this.props.onUpdateValue(this.props.value + amount);
   }
 
-  handleUpdateCounterValueFromForm = event => this.props.handleUpdateValue(Number(event.target.value));
+  handleUpdateCounterValueFromForm = event => this.props.onUpdateValue(Number(event.target.value));
 
   handleDeleteCounter = () => {
     this.doneEditing();

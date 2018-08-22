@@ -2,8 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Initiative from './Initiative';
 import CreatureDetails from './CreatureDetails';
-import InitiativeButtonsWidget from './Initiative/InitiativeButtons';
-// import CreateCreatureForm from './CreateCreatureForm'
+import InitiativeButtons from './Initiative/InitiativeButtons';
 import { creaturesSelector } from './selectors';
 
 class CampaignWindow extends React.Component {
@@ -14,6 +13,8 @@ class CampaignWindow extends React.Component {
       return (
         <main className="main">
           <Initiative />
+          <InitiativeButtons />
+          <CreatureDetails />
         </main>
       );
     } else {
