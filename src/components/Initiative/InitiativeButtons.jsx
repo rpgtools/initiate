@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as creatureActions from '../../actions/creatures';
-import Button from '../Button';
+import Button from '../ui/Button';
 
 const InitiativeButtonsWidget = ({ creatures, initCreateCreature, reorderCreatures }) => {
   const advanceInitiative = () => {

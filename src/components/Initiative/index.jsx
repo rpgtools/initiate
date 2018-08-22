@@ -1,51 +1,32 @@
 import React from 'react';
 import {connect} from 'react-redux';
-// import PropTypes from 'prop-types';
 
-import SortableList from './SortableList';
+import SortableList from '../ui/SortableList';
+import InitiativeToken from './InitiativeToken';
 import * as creatureActions from '../../actions/creatures';
-import { creaturesSelector } from './selectors';
+import { creaturesSelector } from '../selectors';
 
 class Initiative extends React.Component {
-  state = {
-    scrollTop: 0,
-    shouldUpdateCounterPositions: false
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    if  (
-          prevState.scrollTop !== this.state.scrollTop ||
-          prevProps.creatureOrder !== this.props.creatureOrder
-        ) {
-          this.setState({ shouldUpdateCounterPositions: true });
-        } else if (prevState.shouldUpdateCounterPositions) {
-          this.setState({ shouldUpdateCounterPositions: false });
-        }
-  }
-
-  handleScroll = ref => event => {
-    this.setState({ scrollTop: ref.current.scrollTop });
-  }
-
-  handleSortEnd = ({ oldIndex, newIndex }) =>
+  handleSortEnd = ({ oldIndex, newIndex }) => {
     this.props.reorderCreatures(oldIndex, newIndex);
+  }
 
   render() {
-    const { creatures } = this.props;
+    const creatures = this.props.creatures.map((creature, index) => {
+      return(<InitiativeToken creature={creature} />);
+    });
     const tokenActions = {
       selectCreature: this.props.selectCreature,
       updateCounter: this.props.updateCounter,
       deleteCounter: this.props.deleteCounter,
     }
+    console.log(creatures.length);
     return (
       <div className="initiative widget" >
         <SortableList
           items={creatures}
           onSortEnd={this.handleSortEnd}
           useDragHandle
-          handleScroll={this.handleScroll}
-          shouldUpdateCounterPositions={this.state.shouldUpdateCounterPositions}
-          {...tokenActions}
         />
     </div>
     );

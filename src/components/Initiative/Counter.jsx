@@ -3,7 +3,7 @@ import React from 'react';
 // import PropTypes from 'prop-types';
 import CSSTransition from 'react-transition-group/CSSTransition';
 import CounterControls from './CounterControls';
-import { abbrNum } from '../utils';
+import { abbrNum } from '../../utils';
 
 export default class Counter extends React.Component {
   constructor(props) {
@@ -28,7 +28,7 @@ export default class Counter extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.shouldUpdateCounterPositions !== prevProps.shouldUpdateCounterPositions) {
+    if (this.props.scrollTop !== prevProps.scrollTop) {
       this.doneEditing();
       this.updateCounterPosition();
     }

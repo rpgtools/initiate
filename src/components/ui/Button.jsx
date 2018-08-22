@@ -19,7 +19,7 @@ const Button = ({
 }
 
 Button.propTypes = {
-  color: PropTypes.oneOf(['blue', 'yellow'])
+  color: PropTypes.oneOf(['blue', 'yellow', 'red']) //@TODO: these should be semantic, not presentational (e.g. primary, secondary, warning)
 };
 Button.defaultProps = {
   color: 'blue'
