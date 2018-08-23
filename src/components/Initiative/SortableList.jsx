@@ -21,9 +21,9 @@ const SortableItem = SortableElement(({creature, ...rest}) =>
 
 let ref = React.createRef();
 
-const SortableList = SortableContainer(({items, handleScroll, ...rest}) => {
+const SortableList = SortableContainer(({items, ...rest}) => {
   return (
-    <div className="initiative__sortable-list-container" ref={ref} onScroll={handleScroll(ref)}>
+    <div className="initiative__sortable-list-container">
       {items.map((creature, index) => (
         <SortableItem
           key={creature.id}

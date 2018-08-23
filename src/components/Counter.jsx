@@ -27,18 +27,10 @@ export default class Counter extends React.Component {
     }
   }
 
-  componentDidUpdate(prevProps) {
-    if (this.props.shouldUpdateCounterPositions !== prevProps.shouldUpdateCounterPositions) {
-      this.doneEditing();
-      this.updateCounterPosition();
-    }
-  }
-
   updateCounterPosition = () => {
     const { top, left } = this.counterRef.current.getBoundingClientRect();
     this.setState({ top: top, left });
   }
-
 
   handleFocus = event => event.target.select();
 
@@ -59,6 +51,7 @@ export default class Counter extends React.Component {
   }
 
   handleClickToEdit = event => {
+    this.updateCounterPosition();
     this.state.isEditing && this.counterRef.current.contains(event.target)
       ? this.setState({ isEditingWithForm: true })
       : this.setState({ isEditing: true })

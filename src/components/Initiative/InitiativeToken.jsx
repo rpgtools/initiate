@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import debounce from 'lodash/debounce';
 import Counter from '../Counter';
 import { DragHandle } from './SortableList';
@@ -9,7 +10,6 @@ const COUNTER_WIDTH = 62;
 export default class InitiativeToken extends React.Component {
   constructor (props) {
     super(props);
-    this.tokenRef = React.createRef();
     this.state = {
       maxCountersToDisplay: 0
     };
@@ -29,7 +29,7 @@ export default class InitiativeToken extends React.Component {
   handleComponentResize = debounce(() => {
     this.setState({
       maxCountersToDisplay:
-        Math.floor(this.tokenRef.current.offsetWidth / COUNTER_WIDTH)
+        Math.floor(ReactDOM.findDOMNode(this).offsetWidth / COUNTER_WIDTH)
     });
   }, 100);
 
@@ -46,9 +46,8 @@ export default class InitiativeToken extends React.Component {
   };
 
   render () {
-    const { creature, shouldUpdateCounterPositions } = this.props;
+    const { creature } = this.props;
     const {
-      tokenRef,
       handleSelectCreature,
       handleUpdateCounter,
       handleDeleteCounter
@@ -59,7 +58,6 @@ export default class InitiativeToken extends React.Component {
       <div
         className="initiative__token"
         onClick={handleSelectCreature}
-        ref={tokenRef}
         >
         <h2 className="initiative__token--title">{creature.name}</h2>
         <div className="initiative__token--counters">
@@ -70,7 +68,6 @@ export default class InitiativeToken extends React.Component {
               value={counter.value}
               handleUpdateValue={handleUpdateCounter(index)}
               onClickDelete={handleDeleteCounter(index)}
-              shouldUpdateCounterPositions={shouldUpdateCounterPositions}
               />
           )}
         </div>

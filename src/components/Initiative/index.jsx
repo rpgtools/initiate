@@ -23,10 +23,6 @@ class Initiative extends React.Component {
         }
   }
 
-  handleScroll = ref => event => {
-    this.setState({ scrollTop: ref.current.scrollTop });
-  }
-
   handleSortEnd = ({ oldIndex, newIndex }) =>
     this.props.reorderCreatures(oldIndex, newIndex);
 
@@ -43,7 +39,6 @@ class Initiative extends React.Component {
           items={creatures}
           onSortEnd={this.handleSortEnd}
           useDragHandle
-          handleScroll={this.handleScroll}
           shouldUpdateCounterPositions={this.state.shouldUpdateCounterPositions}
           {...tokenActions}
         />
