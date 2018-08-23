@@ -1,17 +1,17 @@
 import React from 'react';
 import Counter from '../Counter';
-import { DragHandle } from './SortableList';
+import { DragHandle } from '../reusable/SortableList';
 
 export default class InitiativeToken extends React.Component {
   handleDeleteCounter = counterIndex => () =>
-    this.props.deleteCounter(this.props.creature.id, counterIndex);
+    this.props.onDeleteCounter(this.props.creature.id, counterIndex);
 
   handleUpdateCounter = counterIndex => value =>
-    this.props.updateCounter(this.props.creature.id, counterIndex, value);
+    this.props.onUpdateCounter(this.props.creature.id, counterIndex, value);
 
   handleSelectCreature = e => {
     if (!e.target.className.startsWith('counter')) {
-      this.props.selectCreature(this.props.creature.id);
+      this.props.onSelect(this.props.creature.id);
     }
   };
 

@@ -4,31 +4,25 @@ import {
   SortableElement,
   SortableHandle
 } from 'react-sortable-hoc';
-import InitiativeToken from './InitiativeToken';
 import DragHandleImage from '../../images/drag-handle.png';
 
 export const DragHandle = SortableHandle(() =>
   <img className="drag-handle" src={DragHandleImage} width={18} alt="::" />
 );
 
-const SortableItem = SortableElement(({creature, ...rest}) =>
-  <InitiativeToken
-    key={creature.id}
-    creature={creature}
-    {...rest}
-  />
+const SortableItem = SortableElement(({item, ...rest}) =>
+  <div className="sortable-list__element" {...rest}>
+    {item}
+  </div>
 );
-
-let ref = React.createRef();
 
 const SortableList = SortableContainer(({items, ...rest}) => {
   return (
-    <div className="initiative__sortable-list-container">
-      {items.map((creature, index) => (
+    <div className="sortable-list">
+      {items.map((item, index) => (
         <SortableItem
-          key={creature.id}
           index={index}
-          creature={creature}
+          item={item}
           {...rest}
         />
       ))}

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Counter from './Counter';
-import Button from './Button';
+import Button from './reusable/Button';
 import * as creatureActions from '../actions/creatures';
 import { creaturesSelector, selectedCreatureSelector } from './Initiative/selectors';
 
