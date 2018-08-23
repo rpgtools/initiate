@@ -1,38 +1,8 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import debounce from 'lodash/debounce';
 import Counter from '../Counter';
 import { DragHandle } from './SortableList';
 
-// Used to determine how many counters to display on each token
-const COUNTER_WIDTH = 62;
-
 export default class InitiativeToken extends React.Component {
-  constructor (props) {
-    super(props);
-    this.state = {
-      maxCountersToDisplay: 0
-    };
-  };
-
-  componentDidMount() {
-    // TODO: if/when we add grid layout we will also need to listen for those resize events
-    window.addEventListener('resize', this.handleComponentResize);
-    this.handleComponentResize();
-  };
-
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.handleComponentResize);
-    this.handleComponentResize.cancel();
-  };
-
-  handleComponentResize = debounce(() => {
-    this.setState({
-      maxCountersToDisplay:
-        Math.floor(ReactDOM.findDOMNode(this).offsetWidth / COUNTER_WIDTH)
-    });
-  }, 100);
-
   handleDeleteCounter = counterIndex => () =>
     this.props.deleteCounter(this.props.creature.id, counterIndex);
 
@@ -52,7 +22,6 @@ export default class InitiativeToken extends React.Component {
       handleUpdateCounter,
       handleDeleteCounter
     } = this;
-    const { maxCountersToDisplay } = this.state;
 
     return (
       <div
@@ -61,7 +30,7 @@ export default class InitiativeToken extends React.Component {
         >
         <h2 className="initiative__token--title">{creature.name}</h2>
         <div className="initiative__token--counters">
-          {creature.counters.slice(0, maxCountersToDisplay).map((counter, index) =>
+          {creature.counters.map((counter, index) =>
             <Counter
               key={index}
               label={counter.label}
