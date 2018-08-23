@@ -13,8 +13,6 @@ class CampaignWindow extends React.Component {
       return (
         <main className="main">
           <Initiative />
-          <InitiativeButtons />
-          <CreatureDetails />
         </main>
       );
     } else {

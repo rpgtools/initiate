@@ -18,7 +18,7 @@ const SortableListContainer = SortableContainer(({items, ...rest}) => {
   return (
     <div className="sortable-list-container" {...rest}>
       {items.map((item, index) => (
-        <SortableItem key={`item-${index}`} index={index} item={item} />
+        <SortableItem key={`item-${index}`} disabled={('undefined' !== item.disabled) ? item.disabled : false}index={index} item={item} />
       ))}
     </div>
   );

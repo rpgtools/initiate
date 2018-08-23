@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 
 import SortableList from '../ui/SortableList';
 import InitiativeToken from './InitiativeToken';
+import CreateCreatureForm from '../CreateCreatureForm';
 import * as creatureActions from '../../actions/creatures';
 import { creaturesSelector } from '../selectors';
 
@@ -20,6 +21,7 @@ class Initiative extends React.Component {
     const creatures = this.props.creatures.map((creature, index) => {
       return(<InitiativeToken creature={creature} {...tokenActions} />);
     });
+    creatures.push(<CreateCreatureForm disabled={true} />)
     return (
       <div className="initiative widget" >
         <SortableList
