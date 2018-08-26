@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Counter from './Counter';
 import Button from './reusable/Button';
 import * as creatureActions from '../actions/creatures';
-import { creaturesSelector, selectedCreatureSelector } from './Initiative/selectors';
+import { creaturesSelector, selectedCreatureSelector } from '../reducers/selectors';
 
 class CreatureDetails extends React.Component {
   state = {
@@ -105,8 +105,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  submitCreateCreature: creatureActions.submitCreateCreature,
-  cancelCreateCreature: creatureActions.cancelCreateCreature,
+  submitCreateCreature: creatureActions.createCreature,
   deleteCreature: creatureActions.deleteCreature,
   reorderCreatures: creatureActions.reorderCreatures,
   createCounter: creatureActions.createCounter,

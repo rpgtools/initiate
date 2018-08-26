@@ -11,11 +11,8 @@ class App extends Component {
     return (
       <div>
         <main className="main">
-          {/*<StateManagement />*/}
           <Initiative />
           <div className="temporary-right-side">
-            <InitiativeButtonsWidget />
-            <CreatureDetails />
           </div>
         </main>
       </div>

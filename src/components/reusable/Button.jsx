@@ -5,13 +5,14 @@ const Button = ({
   children,
   label,
   onClick,
-  color
+  color,
+  ...rest
 }) => {
   return (
     <button
       className={`button button--${color}`}
       onClick={onClick}
-      >
+      {...rest}>
       {label}
       {children}
     </button>

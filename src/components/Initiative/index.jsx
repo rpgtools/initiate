@@ -1,14 +1,20 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import SortableList from '../reusable/SortableList';
+import CreatureCreateForm from '../CreatureCreateForm';
 import InitiativeToken from './InitiativeToken';
+import ScrollableContainer from '../reusable/ScrollableContainer';
+import SortableList from '../reusable/SortableList';
 import * as creatureActions from '../../actions/creatures';
-import { creaturesSelector } from './selectors';
+import { creaturesSelector } from '../../reducers/selectors';
 
 class Initiative extends React.Component {
   handleSortEnd = ({ oldIndex, newIndex }) => {
     this.props.reorderCreatures(oldIndex, newIndex);
+  }
+
+  handleCreateCreatureSubmit = (values) => {
+    this.props.createCreature(values.name);
   }
 
   render() {
@@ -22,11 +28,14 @@ class Initiative extends React.Component {
     });
     return (
       <div className="initiative widget" >
-        <SortableList
-          items={creatures}
-          onSortEnd={this.handleSortEnd}
-          useDragHandle
-        />
+        <ScrollableContainer>
+          <SortableList
+            items={creatures}
+            onSortEnd={this.handleSortEnd}
+            useDragHandle
+          />
+        <CreatureCreateForm onSubmit={this.handleCreateCreatureSubmit}/>
+      </ScrollableContainer>
     </div>
     );
   };
@@ -38,6 +47,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
+  createCreature: creatureActions.createCreature,
   updateCreature: creatureActions.updateCreature,
   deleteCreature: creatureActions.deleteCreature,
   reorderCreatures: creatureActions.reorderCreatures,
