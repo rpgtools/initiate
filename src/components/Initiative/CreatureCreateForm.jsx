@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from './reusable/Button';
+import Button from '../reusable/Button';
 
 class CreatureCreateForm extends React.Component {
   constructor(props) {
@@ -22,6 +22,9 @@ class CreatureCreateForm extends React.Component {
   handleSubmit = (event) => {
     event.preventDefault();
     this.props.onSubmit(this.state);
+    this.setState({
+      name: ""
+    })
   }
 
   render() {

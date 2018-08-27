@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-const portalRoot = document.getElementById("portal-root");
 
 const CounterControls =({
   onClickDelete,

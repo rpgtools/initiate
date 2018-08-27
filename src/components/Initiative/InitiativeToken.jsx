@@ -1,47 +1,32 @@
 import React from 'react';
-import Counter from '../Counter';
+import Counter from './Counter';
 import { DragHandle } from '../reusable/SortableList';
+import classNames from 'classnames';
 
 export default class InitiativeToken extends React.Component {
-  handleDeleteCounter = counterIndex => () =>
-    this.props.onDeleteCounter(this.props.creature.id, counterIndex);
-
-  handleUpdateCounter = counterIndex => value =>
-    this.props.onUpdateCounter(this.props.creature.id, counterIndex, value);
-
-  handleSelectCreature = e => {
-    if (!e.target.className.startsWith('counter')) {
-      this.props.onSelect(this.props.creature.id);
-    }
-  };
-
   render () {
-    const { creature } = this.props;
     const {
-      handleSelectCreature,
-      handleUpdateCounter,
-      handleDeleteCounter
-    } = this;
-
+      title,
+      selected,
+      children,
+      actions,
+      className,
+      ...rest
+    } = this.props;
+    const tokenClass = classNames({
+      'initiative-token': true,
+      [`${className}`]: ('undefined' !== className),
+      'selected': selected,
+    });
     return (
-      <div
-        className="initiative__token"
-        onClick={handleSelectCreature}
-        >
-        <h2 className="initiative__token--title">{creature.name}</h2>
-        <div className="initiative__token--counters">
-          {creature.counters.map((counter, index) =>
-            <Counter
-              key={index}
-              label={counter.label}
-              value={counter.value}
-              handleUpdateValue={handleUpdateCounter(index)}
-              onClickDelete={handleDeleteCounter(index)}
-              />
-          )}
-        </div>
+      <div className={tokenClass} {...rest}>
+        <div className="initiative-token__title">{title}</div>
+        <div className="initiative-token__children">{children}</div>
+        <div className="initiative-token__actions">
+          {actions}
           <DragHandle />
         </div>
-      );
+      </div>
+    );
   }
 };

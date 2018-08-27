@@ -1,21 +1,8 @@
-// Libs
 import React from 'react';
-// import PropTypes from 'prop-types';
-import CSSTransition from 'react-transition-group/CSSTransition';
-import CounterControls from './CounterControls';
 import { abbrNum } from '../utils';
+import AnchoredModal from '../reusable/AnchoredModal';
 
 export default class Counter extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isEditing: false,
-      isEditingWithForm: false,
-      top: 0,
-      left: 0
-    };
-    this.counterRef = React.createRef();
-  };
 
   componentDidMount() {
     this.updateCounterPosition();
@@ -45,11 +32,6 @@ export default class Counter extends React.Component {
 
   handleUpdateCounterValueFromForm = event => this.props.handleUpdateValue(Number(event.target.value));
 
-  handleDeleteCounter = () => {
-    this.doneEditing();
-    this.props.onClickDelete();
-  }
-
   handleClickToEdit = event => {
     this.updateCounterPosition();
     this.state.isEditing && this.counterRef.current.contains(event.target)
@@ -77,7 +59,7 @@ export default class Counter extends React.Component {
   }
 
   render () {
-    const { isEditing, isEditingWithForm , top, left } = this.state;
+    const { isEditing, top, left } = this.state;
     const { value, label } = this.props;
     const abbrVal = abbrNum(value, 1);
     return (
@@ -114,12 +96,6 @@ export default class Counter extends React.Component {
             <input type="submit" value="Save" />
           </form>
         )}
-        <CSSTransition
-          in={isEditing}
-          classNames="transition-container-"
-          timeout={120}
-          unmountOnExit
-        >
           <CounterControls
             onClickDelete={this.handleDeleteCounter}
             handleUpdateCounterValue={this.handleUpdateCounterValue}

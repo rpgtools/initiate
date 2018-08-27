@@ -2,15 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 class ScrollableContainer extends React.Component {
-  componentDidUpdate() {
-    const elem = ReactDOM.findDOMNode(this);
-    elem.scrollTop = elem.scrollHeight;
-  }
-
   render() {
+    const { children, className, ...rest } = this.props;
     return (
-      <div style={{overflowY:"scroll", height:"100%"}} className="scrollable">
-        {this.props.children}
+      <div style={{overflowY:"auto", height:"100%"}} className={"scrollable " + className} {...rest}>
+        {children}
       </div>
     );
   }

@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import CreatureCreateForm from '../CreatureCreateForm';
+import CreatureCreateForm from './CreatureCreateForm';
 import InitiativeToken from './InitiativeToken';
 import ScrollableContainer from '../reusable/ScrollableContainer';
 import SortableList from '../reusable/SortableList';
