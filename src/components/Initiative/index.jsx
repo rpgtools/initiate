@@ -10,19 +10,40 @@ import * as creatureActions from '../../actions/creatures';
 import { creaturesSelector } from '../../reducers/selectors';
 
 class Initiative extends React.Component {
-  handleSortEnd = ({ oldIndex, newIndex }) => {
-    this.props.reorderCreatures(oldIndex, newIndex);
+  constructor(props) {
+    super(props);
+    this.state = {
+      openCounter: [],
+    }
+  }
+
+  handleCounterClick = (signature) => {
+    this.setState({openCounter: signature});
   }
 
   handleCreateCreatureSubmit = (values) => {
     this.props.createCreature(values.name);
   }
 
+  handleSortEnd = ({ oldIndex, newIndex }) => {
+    this.props.reorderCreatures(oldIndex, newIndex);
+  }
+
   render() {
-    const creatures = this.props.creatures.map((creature, index) => {
+    const { openCounter } = this.state;
+    const creatures = this.props.creatures.map((creature, creatureIndex) => {
       const counters = creature.counters.map((counter, index) => {
+        let signature = creature.id + "-" + index;
         return(
-          <Counter value={counter.value} label={counter.label} isEditing={false} />
+          <Counter
+            onClick={() => this.handleCounterClick(signature)}
+            onSubmit={() => this.handleCounterClick(signature)}
+            onUpdate={() => this.handleCounterClick(signature)}
+            value={counter.value}
+            label={counter.label}
+            isEditing={(signature == openCounter)}
+            key={index}
+          />
         );
       });
       return(
@@ -46,7 +67,6 @@ class Initiative extends React.Component {
 
 const mapStateToProps = state => ({
   creatures: creaturesSelector(state),
-  creatureOrder: state.creatures.allIds,
 });
 
 const mapDispatchToProps = {
@@ -55,9 +75,6 @@ const mapDispatchToProps = {
   deleteCreature: creatureActions.deleteCreature,
   reorderCreatures: creatureActions.reorderCreatures,
   selectCreature: creatureActions.selectCreature,
-  createCounter: creatureActions.createCounter,
-  updateCounter: creatureActions.updateCounter,
-  deleteCounter: creatureActions.deleteCounter,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Initiative);

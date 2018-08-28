@@ -22,9 +22,12 @@ class AnchoredModal extends React.Component {
     };
   }
 
-  componentDidUpdate = () => {
-    const { top, left } = ReactDOM.findDOMNode(this).getBoundingClientRect();
-    this.setState({ top: top, left });
+  componentDidUpdate = (prevProps) => {
+    //Be sure to update the position before opening the modal
+    if(prevProps.isOpen !== this.props.isOpen) {
+      const { top, left } = ReactDOM.findDOMNode(this).getBoundingClientRect();
+      this.setState({ top: top, left });
+    }
   }
 
   render() {
