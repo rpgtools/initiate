@@ -1,8 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import CreatureCreateForm from './CreatureCreateForm';
+import SingleInputForm from '../reusable/SingleInputForm';
 import InitiativeToken from './InitiativeToken';
+import Counter from './Counter';
 import ScrollableContainer from '../reusable/ScrollableContainer';
 import SortableList from '../reusable/SortableList';
 import * as creatureActions from '../../actions/creatures';
@@ -18,25 +19,27 @@ class Initiative extends React.Component {
   }
 
   render() {
-    const tokenActions = {
-      onSelect: this.props.selectCreature,
-      onUpdateCounter: this.props.updateCounter,
-      onDeleteCounter: this.props.deleteCounter,
-    }
     const creatures = this.props.creatures.map((creature, index) => {
-      return(<InitiativeToken creature={creature} {...tokenActions} />);
+      const counters = creature.counters.map((counter, index) => {
+        return(
+          <Counter value={counter.value} label={counter.label} isEditing={false} />
+        );
+      });
+      return(
+        <InitiativeToken title={creature.name}>
+          {counters}
+        </InitiativeToken>
+      );
     });
     return (
-      <div className="initiative widget" >
-        <ScrollableContainer>
-          <SortableList
-            items={creatures}
-            onSortEnd={this.handleSortEnd}
-            useDragHandle
-          />
-        <CreatureCreateForm onSubmit={this.handleCreateCreatureSubmit}/>
+      <ScrollableContainer className="initiative" >
+        <SortableList
+          items={creatures}
+          onSortEnd={this.handleSortEnd}
+          useDragHandle
+        />
+        <SingleInputForm placeholder="Enter a name..." onSubmit={this.handleCreateCreatureSubmit}/>
       </ScrollableContainer>
-    </div>
     );
   };
 };

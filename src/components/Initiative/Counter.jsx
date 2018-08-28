@@ -1,109 +1,70 @@
 import React from 'react';
-import { abbrNum } from '../utils';
+import classNames from 'classnames';
 import AnchoredModal from '../reusable/AnchoredModal';
+import AbbreviatedNumber from '../reusable/AbbreviatedNumber';
 
-export default class Counter extends React.Component {
+const CounterControls = ({ onUpdate, ...rest }) => {
+  return (
+    <div className="counter-controls" {...rest}>
+      <button className="counter__buttons counter__buttons--top-1" onClick={onUpdate(1)}>+1</button>
+      <button className="counter__buttons counter__buttons--top-2" onClick={onUpdate(10)}>+10</button>
+      <button className="counter__buttons counter__buttons--top-3" onClick={onUpdate(100)}>+100</button>
+      <button className="counter__buttons counter__buttons--bottom-1" onClick={onUpdate(-1)}>-1</button>
+      <button className="counter__buttons counter__buttons--bottom-2" onClick={onUpdate(-10)}>-10</button>
+      <button className="counter__buttons counter__buttons--bottom-3" onClick={onUpdate(-100)}>-100</button>
+    </div>
+  );
+};
 
-  componentDidMount() {
-    this.updateCounterPosition();
-  }
-
-  componentWillUnmount() {
-    if (this.state.isEditing) {
-      this.doneEditing();
-    }
-  }
-
-  updateCounterPosition = () => {
-    const { top, left } = this.counterRef.current.getBoundingClientRect();
-    this.setState({ top: top, left });
-  }
-
+class Counter extends React.Component {
   handleFocus = event => event.target.select();
 
-  handleSubmit = e => {
-    e.preventDefault();
-    this.doneEditing();
-  }
-
   handleUpdateCounterValue = amount => () => {
-    this.props.handleUpdateValue(this.props.value + amount);
+    this.props.onUpdate(this.props.value + amount);
   }
 
-  handleUpdateCounterValueFromForm = event => this.props.handleUpdateValue(Number(event.target.value));
-
-  handleClickToEdit = event => {
-    this.updateCounterPosition();
-    this.state.isEditing && this.counterRef.current.contains(event.target)
-      ? this.setState({ isEditingWithForm: true })
-      : this.setState({ isEditing: true })
-    document.addEventListener('mouseup', this.handleClickOutsideCounter)
-  }
-
-  doneEditing = () => {
-    this.setState({
-      isEditing: false,
-      isEditingWithForm: false
-    });
-    document.removeEventListener('mouseup', this.handleClickOutsideCounter);
-  }
-
-  handleClickOutsideCounter = event => {
-    if (
-      this.counterRef &&
-      !this.counterRef.current.contains(event.target) &&
-      !event.target.className.startsWith('counter__buttons')
-    ) {
-      this.doneEditing();
-    }
-  }
+  handleUpdateCounterValueFromForm = event => this.props.onUpdate(Number(event.target.value));
 
   render () {
-    const { isEditing, top, left } = this.state;
-    const { value, label } = this.props;
-    const abbrVal = abbrNum(value, 1);
-    return (
-      <div
-        className={`counter${isEditing ? ' counter__editing' : ''}`}
-        ref={this.counterRef}
-        onClick={this.handleClickToEdit}
-      >
-        {!isEditingWithForm ? (
-          <div className="counter__value">
-            <div className="counter__value--count">
-              <p style={{ fontSize: abbrVal.length > 6
-                   ? '12px'
-                   : abbrVal.length > 5
-                     ? '14px'
-                     : '20px'}}>
-                {abbrVal}
-              </p>
-            </div>
-            <div className="counter__value--label">
-              <p>{label}</p>
-            </div>
-          </div>
-        ) : (
-          <form onSubmit={this.handleSubmit}>
-            <input
-              autoFocus
-              type="number"
-              value={value}
-              onFocus={this.handleFocus}
-              onChange={this.handleUpdateCounterValueFromForm}
-              required
-              />
-            <input type="submit" value="Save" />
-          </form>
-        )}
-          <CounterControls
-            onClickDelete={this.handleDeleteCounter}
-            handleUpdateCounterValue={this.handleUpdateCounterValue}
-            top={top}
-            left={left}
+    const { value, label, isEditing, onClick, onSubmit } = this.props;
+    const classes = classNames({
+      'counter': true,
+      'counter--editing': isEditing,
+    });
+    const counterControls = (
+      <CounterControls onUpdate={this.handleUpdateCounterValue} />
+    );
+    const counterForm = (
+      <form onSubmit={onSubmit}>
+        <input
+          autoFocus
+          type="number"
+          value={value}
+          onFocus={this.handleFocus}
+          onChange={this.handleUpdateCounterValueFromForm}
+          required
           />
-        </CSSTransition>
+        <input type="submit" value="Save" />
+      </form>
+    );
+    const counterBody = (
+      <div className="counter__count">
+        <div className="counter__value"><AbbreviatedNumber number={value} /></div>
+        <div className="counter__label"><p>{label}</p></div>
       </div>
+    );
+    const display = (isEditing) ? counterForm : counterBody;
+    return (
+      <AnchoredModal
+        className={classes}
+        isOpen={isEditing}
+        onClick={onClick}
+        modal={counterControls}
+      >
+        {display}
+      </AnchoredModal>
     );
   };
 };
+
+export default Counter;

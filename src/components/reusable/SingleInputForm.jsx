@@ -1,7 +1,7 @@
 import React from 'react';
-import Button from '../reusable/Button';
+import Button from './Button';
 
-class CreatureCreateForm extends React.Component {
+class SingleInputForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -11,11 +11,9 @@ class CreatureCreateForm extends React.Component {
   }
 
   handleInputChange = (event) => {
-    const target = event.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
-    const name = target.name;
+    const name = event.target.input;
     this.setState({
-      [name]: value
+      name: name
     });
   }
 
@@ -28,12 +26,13 @@ class CreatureCreateForm extends React.Component {
   }
 
   render() {
+    const { placeholder, ...rest} = this.props;
     return (
-      <form className="creature-create-form" onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit} {...rest}>
         <input
-          name="name"
+          name="input"
           type="text"
-          placeholder="Creature Name"
+          placeholder={placeholder}
           value={this.state.name}
           onChange={this.handleInputChange}
           autoFocus
@@ -44,4 +43,4 @@ class CreatureCreateForm extends React.Component {
   }
 }
 
-export default CreatureCreateForm;
+export default SingleInputForm;

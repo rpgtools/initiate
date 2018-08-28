@@ -1,9 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { CSSTransition } from 'react-transition-group';
-import Modal from './Modal';
 
 const portalRoot = document.getElementById("portal-root");
+
+const Modal = ({ children, ...rest }) => {
+  const portalComponent = (
+    <div className="modal-container" {...rest}>
+      {children}
+    </div>
+  );
+  return ReactDOM.createPortal(portalComponent, portalRoot);
+};
 
 class AnchoredModal extends React.Component {
   constructor(props) {
@@ -14,7 +22,7 @@ class AnchoredModal extends React.Component {
     };
   }
 
-  componentDidUpdate = (props) => {
+  componentDidUpdate = () => {
     const { top, left } = ReactDOM.findDOMNode(this).getBoundingClientRect();
     this.setState({ top: top, left });
   }
@@ -27,7 +35,7 @@ class AnchoredModal extends React.Component {
         {children}
         <CSSTransition
           in={isOpen}
-          classNames="modal-container-"
+          classNames="transition-container-"
           timeout={120}
           unmountOnExit
         >
