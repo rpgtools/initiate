@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import classNames from 'classnames';
 import AnchoredModal from '../reusable/AnchoredModal';
 import AbbreviatedNumber from '../reusable/AbbreviatedNumber';
@@ -17,7 +18,42 @@ const CounterControls = ({ onUpdate, ...rest }) => {
 };
 
 class Counter extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isEditing: false,
+    };
+  }
+
+  startEditing = () => {
+    this.setState({isEditing: true});
+    document.addEventListener('mouseup', this.handleClickOutsideCounter);
+    document.addEventListener('scroll', this.doneEditing, true);
+  }
+
+  doneEditing = () => {
+    this.setState({
+      isEditing: false,
+    });
+    document.removeEventListener('mouseup', this.handleClickOutsideCounter);
+    document.removeEventListener('scroll', this.doneEditing, true);
+  }
+
+  handleClick = event => {
+    if(!this.state.isEditing) {
+      this.startEditing();
+    }
+  }
+
+  handleClickOutsideCounter = event => {
+    const elem = ReactDOM.findDOMNode(this);
+    if (!elem.contains(event.target)) {
+      this.doneEditing();
+    }
+  }
+
   handleFocus = event => event.target.select();
+  handleSubmit = event => this.doneEditing();
 
   handleUpdateCounterValue = amount => () => {
     this.props.onUpdate(this.props.value + amount);
@@ -26,7 +62,8 @@ class Counter extends React.Component {
   handleUpdateCounterValueFromForm = event => this.props.onUpdate(Number(event.target.value));
 
   render () {
-    const { value, label, isEditing, onClick, onSubmit } = this.props;
+    const { value, label } = this.props;
+    const { isEditing } = this.state;
     const classes = classNames({
       'counter': true,
       'counter--editing': isEditing,
@@ -35,7 +72,7 @@ class Counter extends React.Component {
       <CounterControls onUpdate={this.handleUpdateCounterValue} />
     );
     const counterForm = (
-      <form onSubmit={onSubmit}>
+      <form onSubmit={this.handleSubmit}>
         <input
           autoFocus
           type="number"
@@ -58,7 +95,7 @@ class Counter extends React.Component {
       <AnchoredModal
         className={classes}
         isOpen={isEditing}
-        onClick={onClick}
+        onClick={this.handleClick}
         modal={counterControls}
       >
         {display}

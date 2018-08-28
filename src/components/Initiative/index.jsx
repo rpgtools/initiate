@@ -10,19 +10,12 @@ import * as creatureActions from '../../actions/creatures';
 import { creaturesSelector } from '../../reducers/selectors';
 
 class Initiative extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      openCounter: [],
-    }
-  }
-
-  handleCounterClick = (signature) => {
-    this.setState({openCounter: signature});
-  }
-
   handleCreateCreatureSubmit = (values) => {
     this.props.createCreature(values.name);
+  }
+
+  handleCreatureUpdate = (creature) => {
+    
   }
 
   handleSortEnd = ({ oldIndex, newIndex }) => {
@@ -30,30 +23,13 @@ class Initiative extends React.Component {
   }
 
   render() {
-    const { openCounter } = this.state;
     const creatures = this.props.creatures.map((creature, creatureIndex) => {
-      const counters = creature.counters.map((counter, index) => {
-        let signature = creature.id + "-" + index;
-        return(
-          <Counter
-            onClick={() => this.handleCounterClick(signature)}
-            onSubmit={() => this.handleCounterClick(signature)}
-            onUpdate={() => this.handleCounterClick(signature)}
-            value={counter.value}
-            label={counter.label}
-            isEditing={(signature == openCounter)}
-            key={index}
-          />
-        );
-      });
       return(
-        <InitiativeToken title={creature.name}>
-          {counters}
-        </InitiativeToken>
+        <InitiativeToken creature={creature} onUpdate={this.handleCreatureUpdate} />
       );
     });
     return (
-      <ScrollableContainer className="initiative" >
+      <ScrollableContainer className="initiative">
         <SortableList
           items={creatures}
           onSortEnd={this.handleSortEnd}

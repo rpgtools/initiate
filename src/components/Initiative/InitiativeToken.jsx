@@ -4,12 +4,13 @@ import { DragHandle } from '../reusable/SortableList';
 import classNames from 'classnames';
 
 export default class InitiativeToken extends React.Component {
+  handleCounterUpdate = (index, value) => {
+    this.props.onUpdate(this.props.creatureId, index, value);
+  }
   render () {
     const {
-      title,
       selected,
-      children,
-      actions,
+      creature,
       className,
       ...rest
     } = this.props;
@@ -18,12 +19,23 @@ export default class InitiativeToken extends React.Component {
       [`${className}`]: ('undefined' !== className),
       'selected': selected,
     });
+    const counters = creature.counters.map((counter, index) => {
+      return(
+        <Counter
+          onUpdate={() => this.handleCounterUpdate(index)}
+          value={counter.value}
+          label={counter.label}
+          key={index}
+        />
+      );
+    });
     return (
       <div className={tokenClass} {...rest}>
-        <div className="initiative-token__title">{title}</div>
-        <div className="initiative-token__children">{children}</div>
+        <div className="initiative-token__title">{creature.name}</div>
+        <div className="initiative-token__children">
+          {counters}
+        </div>
         <div className="initiative-token__actions">
-          {actions}
           <DragHandle />
         </div>
       </div>
