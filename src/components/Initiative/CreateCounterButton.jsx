@@ -14,19 +14,26 @@ class CreateCounterButton extends React.Component {
 
   startEditing = () => {
     this.setState({isEditing: true});
+    document.addEventListener('mouseup', this.handleClickOutside);
   }
 
   doneEditing = () => {
     this.setState({
       isEditing: false,
     });
+    document.removeEventListener('mouseup', this.handleClickOutside);
   }
 
   handleClick = event => {
     const elem = ReactDOM.findDOMNode(this);
     if(!this.state.isEditing) {
       this.startEditing();
-    } else if( event.target == elem ) {
+    }
+  }
+
+  handleClickOutside = event => {
+    const elem = ReactDOM.findDOMNode(this);
+    if (!(elem.contains(event.target))) {
       this.doneEditing();
     }
   }
