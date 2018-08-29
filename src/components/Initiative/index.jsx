@@ -1,9 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import SingleInputForm from '../reusable/SingleInputForm';
+import CreateCreatureForm from './CreateCreatureForm';
 import InitiativeToken from './InitiativeToken';
-import Counter from './Counter';
 import ScrollableContainer from '../reusable/ScrollableContainer';
 import SortableList from '../reusable/SortableList';
 import * as creatureActions from '../../actions/creatures';
@@ -27,7 +26,7 @@ class Initiative extends React.Component {
           onSortEnd={this.handleSortEnd}
           useDragHandle
         />
-        <SingleInputForm placeholder="Enter a name..." onSubmit={this.handleCreateCreatureSubmit}/>
+        <CreateCreatureForm createCreature={this.props.createCreature} />
       </ScrollableContainer>
     );
   };

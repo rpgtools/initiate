@@ -12,7 +12,6 @@ export default class InitiativeToken extends React.Component {
         return (index === i) ? newCounter : counter;
       })
     };
-    console.log(updated);
     this.props.onUpdateCreature(updated);
   }
 
@@ -37,7 +36,7 @@ export default class InitiativeToken extends React.Component {
     return (
       <div className={tokenClass}>
         <div className="initiative-token__title">{creature.name}</div>
-        <div className="initiative-token__children">
+        <div className="initiative-token__counters">
           {counters}
         </div>
         <div className="initiative-token__actions">
