@@ -1,5 +1,6 @@
 import React from 'react';
 import Counter from './Counter';
+import CreateCounterButton from './CreateCounterButton';
 import { DragHandle } from '../reusable/SortableList';
 import classNames from 'classnames';
 
@@ -11,6 +12,15 @@ export default class InitiativeToken extends React.Component {
       counters: creature.counters.map((counter, i) => {
         return (index === i) ? newCounter : counter;
       })
+    };
+    this.props.onUpdateCreature(updated);
+  }
+
+  handleCreateCounter = (counter) => {
+    const { creature } = this.props;
+    const updated = {
+      ...creature,
+      counters: [...creature.counters, counter]
     };
     this.props.onUpdateCreature(updated);
   }
@@ -37,6 +47,7 @@ export default class InitiativeToken extends React.Component {
       <div className={tokenClass}>
         <div className="initiative-token__title">{creature.name}</div>
         <div className="initiative-token__counters">
+          <CreateCounterButton onSubmit={this.handleCreateCounter}/>
           {counters}
         </div>
         <div className="initiative-token__actions">

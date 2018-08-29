@@ -1,4 +1,4 @@
-.counter {
+.counter, .create-counter-button {
   height: 50px;
   width: 50px;
   border-radius: 10px;
@@ -7,6 +7,7 @@
   flex: 0 0 auto;
   position: relative;
   z-index: 1;
+  text-align: center;
   // transform set so that counter becomes containing parent for fixed pos. buttons
   // transform: translate(0, 0);
   text-shadow: 1px 1px $grey-lightest;
@@ -41,9 +42,27 @@
     // END HACK
   }
 
+  form {
+    width: 97%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    input {
+      font-weight: bold;
+      font-size: 20px;
+      border-bottom: none;
+      text-align: center;
+      max-width: 100%;
+    }
+  }
+
+
   &__count {
     height: 100%;
   }
+
   &__value {
     display: flex;
     align-items: flex-end;
@@ -57,7 +76,6 @@
     height: 29px;
     text-align: center;
     flex-wrap: wrap;
-    p { max-width: 100%; margin: 4px 0; }
   }
 
   &__label {
@@ -78,6 +96,7 @@
       max-width: 100%;
       margin: 0;
       text-overflow: clip;
+      text-align: center;
     }
   }
 }

@@ -9,7 +9,9 @@ export default class CreateCreatureForm extends React.Component {
 
   render() {
     return(
-      <SingleInputForm placeholder="Enter a name..." onSubmit={this.handleCreateCreatureSubmit}/>
+      <div className="create-creature-form">
+        <SingleInputForm placeholder="Enter a name..." onSave={this.handleCreateCreatureSubmit}/>
+      </div>
     );
   }
 }

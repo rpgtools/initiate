@@ -1,17 +1,20 @@
 const uuid = require('uuid/v4');
 
-export const createCreature = name => ({
-  type: 'CREATURE_CREATE',
-  payload: {
-    creature: {
-      name,
-      id: uuid(),
-      counters: [
-        {label: "HP", value:0}
-      ],
-    },
-  }
-});
+export const createCreature = name => {
+  console.log(name);
+  return {
+    type: 'CREATURE_CREATE',
+    payload: {
+      creature: {
+        name: name,
+        id: uuid(),
+        counters: [
+          {label: "HP", value:0}
+        ],
+      },
+    }
+  };
+}
 
 export const updateCreature = creature => {
   return {

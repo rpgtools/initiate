@@ -47,7 +47,7 @@ class Counter extends React.Component {
 
   handleClickOutsideCounter = event => {
     const elem = ReactDOM.findDOMNode(this);
-    if (!elem.contains(event.target)) {
+    if (!(elem.contains(event.target) || event.target.className.startsWith('counter__buttons'))) {
       this.doneEditing();
     }
   }
@@ -59,7 +59,12 @@ class Counter extends React.Component {
     this.updateValue(Number(this.props.counter.value) + Number(adjustBy));
   }
 
-  handleUpdateCounterValueFromForm = event => this.updateValue(Number(event.target.value));
+  handleUpdateCounterValueFromForm = (event) => {
+    const value = Number(event.target.value);
+    if(!isNaN(value)) {
+      this.updateValue(value);
+    }
+  }
 
   updateValue = (newValue) => {
     const { counter } = this.props;

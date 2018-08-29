@@ -1,4 +1,4 @@
-.creature-create-form {
+.create-creature-form {
   width: 100%;
   flex: 0 0 100px;
   padding: 15px;
@@ -11,5 +11,6 @@
 
   input {
     font-size: 24px;
+    font-weight: bold;
   }
 }

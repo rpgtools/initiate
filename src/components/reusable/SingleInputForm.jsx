@@ -7,11 +7,10 @@ class SingleInputForm extends React.Component {
     this.state = {
       name: "",
     };
-    this.handleInputChange = this.handleInputChange.bind(this);
   }
 
   handleInputChange = (event) => {
-    const name = event.target.input;
+    const name = event.target.value;
     this.setState({
       name: name
     });
@@ -19,25 +18,25 @@ class SingleInputForm extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    this.props.onSubmit(this.state);
+    this.props.onSave(this.state.name);
     this.setState({
       name: ""
     })
   }
 
   render() {
-    const { placeholder, ...rest} = this.props;
+    const { placeholder } = this.props;
     return (
-      <form onSubmit={this.handleSubmit} {...rest}>
+      <form onSubmit={this.handleSubmit}>
         <input
-          name="input"
+          name="name"
           type="text"
           placeholder={placeholder}
           value={this.state.name}
           onChange={this.handleInputChange}
           autoFocus
         />
-        <Button type="submit" color="blue" label="Save" />
+        <Button type="submit" color="blue" label="Ok" />
       </form>
     );
   }

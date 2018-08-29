@@ -9,8 +9,8 @@ const AbbreviatedNumber = ({
   const abbrVal = abbrNum(number, 1);
   const classes = classNames({
     'abbreviated-number': true,
-    'abbreviated-number--small': (abbrVal.length > 6),
-    'abbreviated-number--medium': (abbrVal.length == 6),
+    'abbreviated-number--medium': (6 > abbrVal.length && abbrVal.length > 4),
+    'abbreviated-number--small': (abbrVal.length > 5),
   });
   return (
     <div className={classes} {...rest}>
