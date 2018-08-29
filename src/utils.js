@@ -38,5 +38,5 @@ export function abbrNum(number, decPlaces) {
      number = '-' + number;
    }
 
-    return number;
+  return number;
 }

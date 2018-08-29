@@ -1,29 +1,27 @@
 const uuid = require('uuid/v4');
 
-export const initCreateCreature = () => ({
-  type: 'CREATURE_CREATE_INIT'
-});
-
-export const cancelCreateCreature = () => ({
-  type: 'CREATURE_CREATE_CANCEL'
-});
-
-export const submitCreateCreature = name => ({
-  type: 'CREATURE_CREATE_SUBMIT',
-  payload: {
-    creature: {
-      name,
-      id: uuid(),
-      counters: [],
-    },
-  }
-});
+export const createCreature = name => {
+  console.log(name);
+  return {
+    type: 'CREATURE_CREATE',
+    payload: {
+      creature: {
+        name: name,
+        id: uuid(),
+        counters: [
+          {label: "HP", value:0}
+        ],
+      },
+    }
+  };
+}
 
 export const updateCreature = creature => {
   return {
+    type: 'CREATURE_UPDATE',
     payload: {creature}
-  };
-};
+  }
+}
 
 export const deleteCreature = creatureId => {
   return {

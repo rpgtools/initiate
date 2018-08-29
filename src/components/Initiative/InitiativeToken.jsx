@@ -1,47 +1,59 @@
 import React from 'react';
-import Counter from '../Counter';
+import Counter from './Counter';
+import CreateCounterButton from './CreateCounterButton';
 import { DragHandle } from '../reusable/SortableList';
+import classNames from 'classnames';
 
 export default class InitiativeToken extends React.Component {
-  handleDeleteCounter = counterIndex => () =>
-    this.props.onDeleteCounter(this.props.creature.id, counterIndex);
+  handleUpdateCounter = (index, newCounter) => {
+    const { creature } = this.props;
+    const updated = {
+      ...creature,
+      counters: creature.counters.map((counter, i) => {
+        return (index === i) ? newCounter : counter;
+      })
+    };
+    this.props.onUpdateCreature(updated);
+  }
 
-  handleUpdateCounter = counterIndex => value =>
-    this.props.onUpdateCounter(this.props.creature.id, counterIndex, value);
-
-  handleSelectCreature = e => {
-    if (!e.target.className.startsWith('counter')) {
-      this.props.onSelect(this.props.creature.id);
-    }
-  };
+  handleCreateCounter = (counter) => {
+    const { creature } = this.props;
+    const updated = {
+      ...creature,
+      counters: [...creature.counters, counter]
+    };
+    this.props.onUpdateCreature(updated);
+  }
 
   render () {
-    const { creature } = this.props;
     const {
-      handleSelectCreature,
-      handleUpdateCounter,
-      handleDeleteCounter
-    } = this;
-
+      selected,
+      creature,
+    } = this.props;
+    const counters = creature.counters.map((counter, index) => {
+      return(
+        <Counter
+          onUpdate={(counter) => this.handleUpdateCounter(index, counter)}
+          counter={counter}
+          key={index}
+        />
+      );
+    });
+    const tokenClass = classNames({
+      'initiative-token': true,
+      'selected': selected,
+    });
     return (
-      <div
-        className="initiative__token"
-        onClick={handleSelectCreature}
-        >
-        <h2 className="initiative__token--title">{creature.name}</h2>
-        <div className="initiative__token--counters">
-          {creature.counters.map((counter, index) =>
-            <Counter
-              key={index}
-              label={counter.label}
-              value={counter.value}
-              handleUpdateValue={handleUpdateCounter(index)}
-              onClickDelete={handleDeleteCounter(index)}
-              />
-          )}
+      <div className={tokenClass}>
+        <div className="initiative-token__title">{creature.name}</div>
+        <div className="initiative-token__counters">
+          <CreateCounterButton onSubmit={this.handleCreateCounter}/>
+          {counters}
         </div>
+        <div className="initiative-token__actions">
           <DragHandle />
         </div>
-      );
+      </div>
+    );
   }
 };

@@ -22,6 +22,7 @@ const SortableList = SortableContainer(({items, ...rest}) => {
       {items.map((item, index) => (
         <SortableItem
           index={index}
+          key={index}
           item={item}
           {...rest}
         />

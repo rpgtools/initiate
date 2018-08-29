@@ -9,7 +9,7 @@ import { arrayMove } from 'react-sortable-hoc';
 
 const byId = (state = {}, action) => {
   switch(action.type) {
-    case 'CREATURE_CREATE_SUBMIT': {
+    case 'CREATURE_CREATE': {
       const creature = action.payload.creature;
       return {
         ...state,
@@ -68,7 +68,7 @@ const byId = (state = {}, action) => {
 
 const allIds = (state = [], action) => {
   switch(action.type) {
-    case 'CREATURE_CREATE_SUBMIT':
+    case 'CREATURE_CREATE':
       return state.concat(action.payload.creature.id);
     case 'CREATURE_DELETE':
       return filter(state, creatureId =>
@@ -94,19 +94,8 @@ const selectedCreature = (state = null, action) => {
   }
 };
 
-const isCreating = (state = false, { type }) => {
-  if (type === 'CREATURE_CREATE_INIT') {
-    return true;
-  } else if (type === 'CREATURE_CREATE_SUBMIT' || 'CREATURE_CREATE_CANCEL') {
-    return false;
-  } else {
-    return state;
-  }
-};
-
 export const creatures = combineReducers({
   byId,
   allIds,
   selected: selectedCreature,
-  isCreating,
 });

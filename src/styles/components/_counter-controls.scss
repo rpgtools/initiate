@@ -1,70 +1,4 @@
 .transition-container {
-  position: absolute;
-  height: 52px;
-  width: 52px;
-  pointer-events: none;
-
-  .counter__buttons {
-    position: fixed;
-    cursor: pointer;
-    height: 55px;
-    width: 55px;
-    pointer-events: all;
-    border-radius: 50%;
-    border: none;
-    font-size: 18px;
-    // https://codepen.io/yesilfasulye/pen/iGHru
-    background-image: -webkit-linear-gradient(to bottom, #f4f1ee, #fff);
-    background-image: linear-gradient(to bottom, #f4f1ee, #fff);
-    border-radius: 50%;
-    box-shadow: 1px 7px 4px 1px rgba(0, 0, 0, .5),
-                0px 4px 3px 0px $turquoise,
-                inset 0px 4px 1px 1px white,
-                inset 0px -3px 1px 1px rgba(204,198,197,.5);
-    transition: transform 0.15s, opacity 0.1s;
-    transition-timing-function: cubic-bezier(.45,.14,.35,1.31);
-    -webkit-transition: transform 0.1s, opacity 0.08s;
-    -webkit-transition-timing-function: cubic-bezier(.45,.14,.35,1.31);
-
-    &--delete {
-      box-shadow: 1px 7px 4px 1px rgba(0, 0, 0, .5),
-                  0px 6px 3px 0.6px $red-light,
-                  inset 0px 4px 1px 1px white,
-                  inset 0px -3px 1px 1px rgba(204,198,197,.5);
-      font-size: 24px;
-    }
-
-    &:after {
-      color:#e9e6e4;
-      content: "";
-      display: block;
-      font-size: 30px;
-      height: 30px;
-      text-decoration: none;
-      text-shadow: 0px -1px 1px #bdb5b4, 1px 1px 1px white;
-      position: absolute;
-      width: 30px;
-    }
-
-    &:hover {
-      background-image: -webkit-linear-gradient(to bottom, #fff, #f4f1ee);
-      background-image: linear-gradient(to bottom, #fff, #f4f1ee);
-      color: $turquoise;
-      @at-root .counter__buttons--delete:hover { color: $red-dark !important; }
-    }
-
-    &:active {
-      background-image: -webkit-linear-gradient(to bottom, #efedec, #f7f4f4);
-      background-image: linear-gradient(to bottom, #efedec, #f7f4f4);
-      box-shadow: 0 3px 5px 0 rgba(0,0,0,.4), inset 0px -3px 1px 1px rgba(204,198,197,.5);
-    }
-
-    &:active:after {
-      color:#dbd2d2;
-      text-shadow: 0px -1px 1px #bdb5b4, 0px 1px 1px white;
-    }
-
-  }
   // enter + exit classes generated be react-transition-group
   &--enter {
     .counter__buttons {
@@ -107,4 +41,70 @@
       opacity: 0.01;
     }
   }
+}
+
+.modal-container {
+  position: absolute;
+}
+
+.counter__buttons {
+  position: fixed;
+  cursor: pointer;
+  height: 55px;
+  width: 55px;
+  pointer-events: all;
+  border-radius: 50%;
+  border: none;
+  font-size: 18px;
+  // https://codepen.io/yesilfasulye/pen/iGHru
+  background-image: -webkit-linear-gradient(to bottom, #f4f1ee, #fff);
+  background-image: linear-gradient(to bottom, #f4f1ee, #fff);
+  border-radius: 50%;
+  box-shadow: 1px 7px 4px 1px rgba(0, 0, 0, .5),
+              0px 4px 3px 0px $turquoise,
+              inset 0px 4px 1px 1px white,
+              inset 0px -3px 1px 1px rgba(204,198,197,.5);
+  transition: transform 0.15s, opacity 0.1s;
+  transition-timing-function: cubic-bezier(.45,.14,.35,1.31);
+  -webkit-transition: transform 0.1s, opacity 0.08s;
+  -webkit-transition-timing-function: cubic-bezier(.45,.14,.35,1.31);
+
+  &--delete {
+    box-shadow: 1px 7px 4px 1px rgba(0, 0, 0, .5),
+                0px 6px 3px 0.6px $red-light,
+                inset 0px 4px 1px 1px white,
+                inset 0px -3px 1px 1px rgba(204,198,197,.5);
+    font-size: 24px;
+  }
+
+  &:after {
+    color:#e9e6e4;
+    content: "";
+    display: block;
+    font-size: 30px;
+    height: 30px;
+    text-decoration: none;
+    text-shadow: 0px -1px 1px #bdb5b4, 1px 1px 1px white;
+    position: absolute;
+    width: 30px;
+  }
+
+  &:hover {
+    background-image: -webkit-linear-gradient(to bottom, #fff, #f4f1ee);
+    background-image: linear-gradient(to bottom, #fff, #f4f1ee);
+    color: $turquoise;
+    @at-root .counter__buttons--delete:hover { color: $red-dark !important; }
+  }
+
+  &:active {
+    background-image: -webkit-linear-gradient(to bottom, #efedec, #f7f4f4);
+    background-image: linear-gradient(to bottom, #efedec, #f7f4f4);
+    box-shadow: 0 3px 5px 0 rgba(0,0,0,.4), inset 0px -3px 1px 1px rgba(204,198,197,.5);
+  }
+
+  &:active:after {
+    color:#dbd2d2;
+    text-shadow: 0px -1px 1px #bdb5b4, 0px 1px 1px white;
+  }
+
 }

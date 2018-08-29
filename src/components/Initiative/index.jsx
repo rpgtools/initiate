@@ -1,10 +1,12 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import SortableList from '../reusable/SortableList';
+import CreateCreatureForm from './CreateCreatureForm';
 import InitiativeToken from './InitiativeToken';
+import ScrollableContainer from '../reusable/ScrollableContainer';
+import SortableList from '../reusable/SortableList';
 import * as creatureActions from '../../actions/creatures';
-import { creaturesSelector } from './selectors';
+import { creaturesSelector } from '../../reducers/selectors';
 
 class Initiative extends React.Component {
   handleSortEnd = ({ oldIndex, newIndex }) => {
@@ -12,39 +14,34 @@ class Initiative extends React.Component {
   }
 
   render() {
-    const tokenActions = {
-      onSelect: this.props.selectCreature,
-      onUpdateCounter: this.props.updateCounter,
-      onDeleteCounter: this.props.deleteCounter,
-    }
-    const creatures = this.props.creatures.map((creature, index) => {
-      return(<InitiativeToken creature={creature} {...tokenActions} />);
+    const creatures = this.props.creatures.map((creature, creatureIndex) => {
+      return(
+        <InitiativeToken creature={creature} onUpdateCreature={this.props.updateCreature} />
+      );
     });
     return (
-      <div className="initiative widget" >
+      <ScrollableContainer className="initiative">
         <SortableList
           items={creatures}
           onSortEnd={this.handleSortEnd}
           useDragHandle
         />
-    </div>
+        <CreateCreatureForm createCreature={this.props.createCreature} />
+      </ScrollableContainer>
     );
   };
 };
 
 const mapStateToProps = state => ({
   creatures: creaturesSelector(state),
-  creatureOrder: state.creatures.allIds,
 });
 
 const mapDispatchToProps = {
+  createCreature: creatureActions.createCreature,
   updateCreature: creatureActions.updateCreature,
   deleteCreature: creatureActions.deleteCreature,
   reorderCreatures: creatureActions.reorderCreatures,
   selectCreature: creatureActions.selectCreature,
-  createCounter: creatureActions.createCounter,
-  updateCounter: creatureActions.updateCounter,
-  deleteCounter: creatureActions.deleteCounter,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Initiative);
