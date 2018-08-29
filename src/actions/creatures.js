@@ -15,9 +15,10 @@ export const createCreature = name => ({
 
 export const updateCreature = creature => {
   return {
+    type: 'CREATURE_UPDATE',
     payload: {creature}
-  };
-};
+  }
+}
 
 export const deleteCreature = creatureId => {
   return {

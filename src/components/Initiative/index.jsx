@@ -10,14 +10,6 @@ import * as creatureActions from '../../actions/creatures';
 import { creaturesSelector } from '../../reducers/selectors';
 
 class Initiative extends React.Component {
-  handleCreateCreatureSubmit = (values) => {
-    this.props.createCreature(values.name);
-  }
-
-  handleCreatureUpdate = (creature) => {
-    
-  }
-
   handleSortEnd = ({ oldIndex, newIndex }) => {
     this.props.reorderCreatures(oldIndex, newIndex);
   }
@@ -25,7 +17,7 @@ class Initiative extends React.Component {
   render() {
     const creatures = this.props.creatures.map((creature, creatureIndex) => {
       return(
-        <InitiativeToken creature={creature} onUpdate={this.handleCreatureUpdate} />
+        <InitiativeToken creature={creature} onUpdateCreature={this.props.updateCreature} />
       );
     });
     return (

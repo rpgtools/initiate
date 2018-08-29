@@ -6,13 +6,13 @@ import AbbreviatedNumber from '../reusable/AbbreviatedNumber';
 
 const CounterControls = ({ onUpdate, ...rest }) => {
   return (
-    <div className="counter-controls" {...rest}>
-      <button className="counter__buttons counter__buttons--top-1" onClick={onUpdate(1)}>+1</button>
-      <button className="counter__buttons counter__buttons--top-2" onClick={onUpdate(10)}>+10</button>
-      <button className="counter__buttons counter__buttons--top-3" onClick={onUpdate(100)}>+100</button>
-      <button className="counter__buttons counter__buttons--bottom-1" onClick={onUpdate(-1)}>-1</button>
-      <button className="counter__buttons counter__buttons--bottom-2" onClick={onUpdate(-10)}>-10</button>
-      <button className="counter__buttons counter__buttons--bottom-3" onClick={onUpdate(-100)}>-100</button>
+    <div className="counter__controls" {...rest}>
+      <button className="counter__buttons counter__buttons--top-1" onClick={() => onUpdate(1)}>+1</button>
+      <button className="counter__buttons counter__buttons--top-2" onClick={() => onUpdate(10)}>+10</button>
+      <button className="counter__buttons counter__buttons--top-3" onClick={() => onUpdate(100)}>+100</button>
+      <button className="counter__buttons counter__buttons--bottom-1" onClick={() => onUpdate(-1)}>-1</button>
+      <button className="counter__buttons counter__buttons--bottom-2" onClick={() => onUpdate(-10)}>-10</button>
+      <button className="counter__buttons counter__buttons--bottom-3" onClick={() => onUpdate(-100)}>-100</button>
     </div>
   );
 };
@@ -55,14 +55,20 @@ class Counter extends React.Component {
   handleFocus = event => event.target.select();
   handleSubmit = event => this.doneEditing();
 
-  handleUpdateCounterValue = amount => () => {
-    this.props.onUpdate(this.props.value + amount);
+  handleUpdateCounterValue = (adjustBy) => {
+    this.updateValue(Number(this.props.counter.value) + Number(adjustBy));
   }
 
-  handleUpdateCounterValueFromForm = event => this.props.onUpdate(Number(event.target.value));
+  handleUpdateCounterValueFromForm = event => this.updateValue(Number(event.target.value));
+
+  updateValue = (newValue) => {
+    const { counter } = this.props;
+    const updated = {...counter, value: newValue};
+    this.props.onUpdate(updated);
+  }
 
   render () {
-    const { value, label } = this.props;
+    const { counter } = this.props;
     const { isEditing } = this.state;
     const classes = classNames({
       'counter': true,
@@ -75,19 +81,18 @@ class Counter extends React.Component {
       <form onSubmit={this.handleSubmit}>
         <input
           autoFocus
-          type="number"
-          value={value}
+          type="text"
+          value={counter.value}
           onFocus={this.handleFocus}
           onChange={this.handleUpdateCounterValueFromForm}
           required
           />
-        <input type="submit" value="Save" />
       </form>
     );
     const counterBody = (
       <div className="counter__count">
-        <div className="counter__value"><AbbreviatedNumber number={value} /></div>
-        <div className="counter__label"><p>{label}</p></div>
+        <div className="counter__value"><AbbreviatedNumber number={counter.value} /></div>
+        <div className="counter__label"><p>{counter.label}</p></div>
       </div>
     );
     const display = (isEditing) ? counterForm : counterBody;

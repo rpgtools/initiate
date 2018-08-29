@@ -4,33 +4,38 @@ import { DragHandle } from '../reusable/SortableList';
 import classNames from 'classnames';
 
 export default class InitiativeToken extends React.Component {
-  handleCounterUpdate = (index, value) => {
-    this.props.onUpdate(this.props.creatureId, index, value);
+  handleUpdateCounter = (index, newCounter) => {
+    const { creature } = this.props;
+    const updated = {
+      ...creature,
+      counters: creature.counters.map((counter, i) => {
+        return (index === i) ? newCounter : counter;
+      })
+    };
+    console.log(updated);
+    this.props.onUpdateCreature(updated);
   }
+
   render () {
     const {
       selected,
       creature,
-      className,
-      ...rest
     } = this.props;
-    const tokenClass = classNames({
-      'initiative-token': true,
-      [`${className}`]: ('undefined' !== className),
-      'selected': selected,
-    });
     const counters = creature.counters.map((counter, index) => {
       return(
         <Counter
-          onUpdate={() => this.handleCounterUpdate(index)}
-          value={counter.value}
-          label={counter.label}
+          onUpdate={(counter) => this.handleUpdateCounter(index, counter)}
+          counter={counter}
           key={index}
         />
       );
     });
+    const tokenClass = classNames({
+      'initiative-token': true,
+      'selected': selected,
+    });
     return (
-      <div className={tokenClass} {...rest}>
+      <div className={tokenClass}>
         <div className="initiative-token__title">{creature.name}</div>
         <div className="initiative-token__children">
           {counters}
