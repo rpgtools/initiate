@@ -14,18 +14,32 @@ class Initiative extends React.Component {
   }
 
   render() {
-    const creatures = this.props.creatures.map((creature, creatureIndex) => {
-      return(
-        <InitiativeToken creature={creature} onUpdateCreature={this.props.updateCreature} />
-      );
-    });
+    const {
+      creatures,
+      createCounter,
+      updateCounter,
+      deleteCounter,
+      createCreature,
+      // updateCreature,
+      // deleteCreature,
+      reorderCreatures,
+      // selectCreature,
+    } = this.props;
+    const creatureProps = {
+      createCounter,
+      updateCounter,
+      deleteCounter,
+    };
     return (
       <ScrollableContainer className="initiative">
         <SortableList
-          items={creatures}
           onSortEnd={this.handleSortEnd}
           useDragHandle
-        />
+          >
+          {creatures.map((creature, creatureIndex) =>
+            <InitiativeToken key={creature.id} creature={creature} {...creatureProps} />
+          )}
+        </SortableList>
         <CreateCreatureForm createCreature={this.props.createCreature} />
       </ScrollableContainer>
     );
@@ -37,11 +51,14 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
+  createCounter: creatureActions.createCounter,
+  updateCounter: creatureActions.updateCounter,
+  deleteCounter: creatureActions.deleteCounter,
   createCreature: creatureActions.createCreature,
-  updateCreature: creatureActions.updateCreature,
-  deleteCreature: creatureActions.deleteCreature,
+  // updateCreature: creatureActions.updateCreature,
+  // deleteCreature: creatureActions.deleteCreature,
   reorderCreatures: creatureActions.reorderCreatures,
-  selectCreature: creatureActions.selectCreature,
+  // selectCreature: creatureActions.selectCreature,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Initiative);

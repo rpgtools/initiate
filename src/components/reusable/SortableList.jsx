@@ -16,14 +16,14 @@ const SortableItem = SortableElement(({item, ...rest}) =>
   </div>
 );
 
-const SortableList = SortableContainer(({items, ...rest}) => {
+const SortableList = SortableContainer(({children, ...rest}) => {
   return (
     <div className="sortable-list">
-      {items.map((item, index) => (
+      {children.map((child, index) => (
         <SortableItem
           index={index}
           key={index}
-          item={item}
+          item={child}
           {...rest}
         />
       ))}

@@ -56,20 +56,14 @@ class Counter extends React.Component {
   handleSubmit = event => this.doneEditing();
 
   handleUpdateCounterValue = (adjustBy) => {
-    this.updateValue(Number(this.props.counter.value) + Number(adjustBy));
+    this.props.onUpdateCounter(Number(this.props.counter.value) + Number(adjustBy));
   }
 
   handleUpdateCounterValueFromForm = (event) => {
     const value = Number(event.target.value);
     if(!isNaN(value)) {
-      this.updateValue(value);
+      this.props.onUpdateCounter(value);
     }
-  }
-
-  updateValue = (newValue) => {
-    const { counter } = this.props;
-    const updated = {...counter, value: newValue};
-    this.props.onUpdate(updated);
   }
 
   render () {
