@@ -1,7 +1,6 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 
-class ScrollableContainer extends React.Component {
+class ScrollContainer extends React.Component {
   render() {
     const { children, className, ...rest } = this.props;
     return (
@@ -12,4 +11,4 @@ class ScrollableContainer extends React.Component {
   }
 }
 
-export default ScrollableContainer;
+export default ScrollContainer;

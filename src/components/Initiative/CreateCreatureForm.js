@@ -1,6 +1,5 @@
 import React from 'react';
 import SingleInputForm from '../reusable/SingleInputForm';
-import classNames from 'classnames';
 
 export default class CreateCreatureForm extends React.Component {
   handleCreateCreatureSubmit = (name) => {

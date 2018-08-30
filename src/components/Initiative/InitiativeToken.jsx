@@ -8,10 +8,8 @@ export default class InitiativeToken extends React.Component {
   handleDeleteCounter = counterIndex => () =>
     this.props.deleteCounter(this.props.creature.id, counterIndex);
 
-  handleUpdateCounter = counterIndex => value => {
-    console.log(value);
+  handleUpdateCounter = counterIndex => value =>
     this.props.updateCounter(this.props.creature.id, counterIndex, value);
-  }
 
   handleCreateCounter = ({ label }) =>
     this.props.createCounter(this.props.creature.id, label);

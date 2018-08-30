@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 
 import CreateCreatureForm from './CreateCreatureForm';
 import InitiativeToken from './InitiativeToken';
-import ScrollableContainer from '../reusable/ScrollableContainer';
+import ScrollContainer from '../reusable/ScrollContainer';
 import SortableList from '../reusable/SortableList';
 import * as creatureActions from '../../actions/creatures';
 import { creaturesSelector } from '../../reducers/selectors';
@@ -20,10 +20,6 @@ class Initiative extends React.Component {
       updateCounter,
       deleteCounter,
       createCreature,
-      // updateCreature,
-      // deleteCreature,
-      reorderCreatures,
-      // selectCreature,
     } = this.props;
     const creatureProps = {
       createCounter,
@@ -31,7 +27,7 @@ class Initiative extends React.Component {
       deleteCounter,
     };
     return (
-      <ScrollableContainer className="initiative">
+      <ScrollContainer className="initiative">
         <SortableList
           onSortEnd={this.handleSortEnd}
           useDragHandle
@@ -40,8 +36,8 @@ class Initiative extends React.Component {
             <InitiativeToken key={creature.id} creature={creature} {...creatureProps} />
           )}
         </SortableList>
-        <CreateCreatureForm createCreature={this.props.createCreature} />
-      </ScrollableContainer>
+        <CreateCreatureForm createCreature={createCreature} />
+      </ScrollContainer>
     );
   };
 };

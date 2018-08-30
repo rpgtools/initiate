@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import classNames from 'classnames';
-import AnchoredModal from '../reusable/AnchoredModal';
 import SingleInputForm from '../reusable/SingleInputForm';
 
 class CreateCounterButton extends React.Component {
@@ -25,7 +24,6 @@ class CreateCounterButton extends React.Component {
   }
 
   handleClick = event => {
-    const elem = ReactDOM.findDOMNode(this);
     if(!this.state.isEditing) {
       this.startEditing();
     }
