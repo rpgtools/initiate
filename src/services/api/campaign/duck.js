@@ -18,6 +18,8 @@ export const campaignMetadataReducer = (state = initialState, action) => {
       return state;
     case actionTypes.POST_CAMPAIGN:
       return state;
+    case actionTypes.GET_CAMPAIGN_RESPONSE:
+      return state;
     default:
       return state;
   }

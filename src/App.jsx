@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import Initiative from './components/Initiative';
-import CreatureDetails from './components/CreatureDetails';
-import InitiativeButtonsWidget from './components/Initiative/InitiativeButtons';
+// import CreatureDetails from './components/CreatureDetails';
+// import InitiativeButtonsWidget from './components/Initiative/InitiativeButtons';
 import { userSelector } from './services/api/auth/selectors';
 import './styles/index.scss';
 
@@ -16,15 +16,16 @@ class App extends Component {
     if (document.cookie === '') { console.log('EMPTY')}
     return (
       <div>
-        {user.token && user.token === document.cookie ? (
+        {/*user.token && user.token === document.cookie*/}
+        {true  ? (
           <main className="main">
             <Initiative />
-            <div className="temporary-right-side">
+            {/*}<div className="temporary-right-side">
               <InitiativeButtonsWidget />
               <CreatureDetails />
               <button onClick={() => { document.cookie = 'token=;'; this.forceUpdate()}}> LOGOUT</button>
               <button onClick={() => this.props.postCampaign() }>POST Campaign</button>
-            </div>
+            </div>*/}
           </main>
         ) : (
           <main className="main">

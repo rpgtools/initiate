@@ -6,15 +6,10 @@ import {
   selectedCreatureStateSelector,
 } from '../../services/creatures/selectors';
 
-// TODO: check if this is inefficient
 export const creaturesSelector = createSelector(
   campaignCreaturesByIdStateSelector,
   campaignCreaturesAllIdsStateSelector,
-  (byId, allIds) => {
-    const res = allIds.map(creatureId => byId[creatureId], [])
-    console.log(allIds, byId);
-    return res
-  }
+  (byId, allIds) => allIds.map(creatureId => byId[creatureId], [])
 );
 
 export const selectedCreatureSelector = createSelector(

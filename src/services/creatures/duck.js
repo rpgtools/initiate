@@ -7,7 +7,7 @@ import uuid from 'uuid/v4';
 
 export const actionTypes = {
   CREATURE_CREATE_INIT: 'creature/CREATE_INIT',
-  CREATURE_CREATE_SUBMIT: 'creature/CREATE_SUBMIT',
+  CREATURE_CREATE: 'creature/CREATE',
   CREATURE_CREATE_CANCEL: 'creature/CREATE_CANCEL',
   CREATURE_DELETE: 'creature/DELETE',
   CREATURE_UPDATE: 'creature/UPDATE',
@@ -21,7 +21,7 @@ export const actionTypes = {
 // Reducers -------------------------------------
 export const byIdReducer = (state = {}, action) => {
   switch(action.type) {
-    case actionTypes.CREATURE_CREATE_SUBMIT: {
+    case actionTypes.CREATURE_CREATE: {
       const creature = action.payload.creature;
       return {
         ...state,
@@ -80,7 +80,7 @@ export const byIdReducer = (state = {}, action) => {
 
 export const allIdsReducer = (state = [], action) => {
   switch(action.type) {
-    case actionTypes.CREATURE_CREATE_SUBMIT:
+    case actionTypes.CREATURE_CREATE:
       return state.concat(action.payload.creature.id);
     case actionTypes.CREATURE_DELETE:
       return filter(state, creatureId =>
@@ -125,8 +125,8 @@ export const actions = {
   cancelCreateCreature: () => ({
     type: actionTypes.CREATURE_CREATE_CANCEL
   }),
-  submitCreateCreature: name => ({
-    type: actionTypes.CREATURE_CREATE_SUBMIT,
+  createCreature: name => ({
+    type: actionTypes.CREATURE_CREATE,
     payload: {
       creature: {
         name,

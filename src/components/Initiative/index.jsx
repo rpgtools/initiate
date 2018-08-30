@@ -1,8 +1,10 @@
 import React from 'react';
-import { connect } from 'react-redux';
-// import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 
-import SortableList from './SortableList';
+import CreateCreatureForm from './CreateCreatureForm';
+import InitiativeToken from './InitiativeToken';
+import ScrollContainer from '../reusable/ScrollContainer';
+import SortableList from '../reusable/SortableList';
 import { actions as creatureActions } from '../../services/creatures';
 import { creaturesSelector } from './selectors';
 import {
@@ -10,48 +12,35 @@ import {
 } from '../../services/creatures/selectors';
 
 class Initiative extends React.Component {
-  state = {
-    scrollTop: 0,
-    shouldUpdateCounterPositions: false
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    if  (
-          prevState.scrollTop !== this.state.scrollTop ||
-          prevProps.creatureOrder !== this.props.creatureOrder
-        ) {
-          this.setState({ shouldUpdateCounterPositions: true });
-        } else if (prevState.shouldUpdateCounterPositions) {
-          this.setState({ shouldUpdateCounterPositions: false });
-        }
-  }
-
-  handleScroll = ref => event => {
-    this.setState({ scrollTop: ref.current.scrollTop });
-  }
-
-  handleSortEnd = ({ oldIndex, newIndex }) =>
+  handleSortEnd = ({ oldIndex, newIndex }) => {
     this.props.reorderCreatures(oldIndex, newIndex);
+  }
 
   render() {
-    const { creatures } = this.props;
-    console.log(creatures)
-    const tokenActions = {
-      selectCreature: this.props.selectCreature,
-      updateCounter: this.props.updateCounter,
-      deleteCounter: this.props.deleteCounter,
-    }
+    const {
+      creatures,
+      createCounter,
+      updateCounter,
+      deleteCounter,
+      createCreature,
+    } = this.props;
+    const creatureProps = {
+      createCounter,
+      updateCounter,
+      deleteCounter,
+    };
     return (
-      <div className="initiative widget" >
+      <ScrollContainer className="initiative">
         <SortableList
-          items={creatures}
           onSortEnd={this.handleSortEnd}
           useDragHandle
-          handleScroll={this.handleScroll}
-          shouldUpdateCounterPositions={this.state.shouldUpdateCounterPositions}
-          {...tokenActions}
-        />
-    </div>
+          >
+          {creatures.map((creature, creatureIndex) =>
+            <InitiativeToken key={creature.id} creature={creature} {...creatureProps} />
+          )}
+        </SortableList>
+        <CreateCreatureForm createCreature={createCreature} />
+      </ScrollContainer>
     );
   };
 };
@@ -62,13 +51,14 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  updateCreature: creatureActions.updateCreature,
-  deleteCreature: creatureActions.deleteCreature,
-  reorderCreatures: creatureActions.reorderCreatures,
-  selectCreature: creatureActions.selectCreature,
   createCounter: creatureActions.createCounter,
   updateCounter: creatureActions.updateCounter,
   deleteCounter: creatureActions.deleteCounter,
+  createCreature: creatureActions.createCreature,
+  // updateCreature: creatureActions.updateCreature,
+  // deleteCreature: creatureActions.deleteCreature,
+  reorderCreatures: creatureActions.reorderCreatures,
+  // selectCreature: creatureActions.selectCreature,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Initiative);
