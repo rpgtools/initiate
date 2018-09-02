@@ -4,7 +4,7 @@ import {
   campaignCreaturesByIdStateSelector,
   campaignCreaturesAllIdsStateSelector,
   selectedCreatureStateSelector,
-} from '../../services/creatures/selectors';
+} from '../../store/creatures/selectors';
 
 export const creaturesSelector = createSelector(
   campaignCreaturesByIdStateSelector,

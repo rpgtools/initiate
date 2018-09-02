@@ -5,11 +5,11 @@ import CreateCreatureForm from './CreateCreatureForm';
 import InitiativeToken from './InitiativeToken';
 import ScrollContainer from '../reusable/ScrollContainer';
 import SortableList from '../reusable/SortableList';
-import { actions as creatureActions } from '../../services/creatures';
+import { actions as creatureActions } from '../../store/creatures';
 import { creaturesSelector } from './selectors';
 import {
   campaignCreaturesAllIdsStateSelector
-} from '../../services/creatures/selectors';
+} from '../../store/creatures/selectors';
 
 class Initiative extends React.Component {
   handleSortEnd = ({ oldIndex, newIndex }) => {
