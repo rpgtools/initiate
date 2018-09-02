@@ -5,7 +5,7 @@ import {
   allIdsReducer,
   selectedCreatureReducer,
   isCreatingReducer,
-} from './duck';
+} from './reducers';
 import * as selectors from './selectors';
 
 export {
