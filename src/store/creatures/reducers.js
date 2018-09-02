@@ -1,25 +1,10 @@
 import filter from 'lodash/filter';
 import omit from 'lodash/omit';
 import { arrayMove } from 'react-sortable-hoc';
-import uuid from 'uuid/v4';
-
-// ActionTypes ----------------------------------'
-
-export const actionTypes = {
-  CREATURE_CREATE_INIT: 'creature/CREATE_INIT',
-  CREATURE_CREATE: 'creature/CREATE',
-  CREATURE_CREATE_CANCEL: 'creature/CREATE_CANCEL',
-  CREATURE_DELETE: 'creature/DELETE',
-  CREATURE_UPDATE: 'creature/UPDATE',
-  CREATURE_SELECT: 'creature/SELECT',
-  CREATURE_REORDER: 'creature/REORDER',
-  COUNTER_CREATE: 'counter/CREATE',
-  COUNTER_DELETE: 'counter/DELETE',
-  COUNTER_UPDATE: 'counter/UPDATE',
-};
+import actionTypes from "./types";
 
 // Reducers -------------------------------------
-export const byIdReducer = (state = {}, action) => {
+const byIdReducer = (state = {}, action) => {
   switch(action.type) {
     case actionTypes.CREATURE_CREATE: {
       const creature = action.payload.creature;
@@ -78,7 +63,7 @@ export const byIdReducer = (state = {}, action) => {
   }
 };
 
-export const allIdsReducer = (state = [], action) => {
+const allIdsReducer = (state = [], action) => {
   switch(action.type) {
     case actionTypes.CREATURE_CREATE:
       return state.concat(action.payload.creature.id);
@@ -98,7 +83,7 @@ export const allIdsReducer = (state = [], action) => {
   }
 };
 
-export const selectedCreatureReducer = (state = null, action) => {
+const selectedCreatureReducer = (state = null, action) => {
   if (action.type === actionTypes.CREATURE_SELECT) {
     return action.payload.creatureId;
   } else {
@@ -106,84 +91,8 @@ export const selectedCreatureReducer = (state = null, action) => {
   }
 };
 
-export const isCreatingReducer = (state = false, { type }) => {
-  if (type === actionTypes.CREATURE_CREATE_INIT) {
-    return true;
-  } else if (type === actionTypes.CREATURE_CREATE_SUBMIT || actionTypes.CREATURE_CREATE_CANCEL) {
-    return false;
-  } else {
-    return state;
-  }
-};
-
-// Actions --------------------------------------
-
-export const actions = {
-  initCreateCreature: () => ({
-    type: actionTypes.CREATURE_CREATE_INIT
-  }),
-  cancelCreateCreature: () => ({
-    type: actionTypes.CREATURE_CREATE_CANCEL
-  }),
-  createCreature: name => ({
-    type: actionTypes.CREATURE_CREATE,
-    payload: {
-      creature: {
-        name,
-        id: uuid(),
-        counters: [],
-      },
-    }
-  }),
-  updateCreature: creature => {
-    return {
-      payload: {creature}
-    };
-  },
-  deleteCreature: creatureId => {
-    return {
-      type: actionTypes.CREATURE_DELETE,
-      payload: { creatureId }
-    };
-  },
-  reorderCreatures: (previousIndex, nextIndex) => {
-    return {
-      type: actionTypes.CREATURE_REORDER,
-      payload: {
-        previousIndex,
-        nextIndex
-      }
-    };
-  },
-  createCounter: (creatureId, label) => ({
-    type: actionTypes.COUNTER_CREATE,
-    payload: {
-      creatureId,
-      counter: {
-        label,
-        value: 0,
-      }
-    }
-  }),
-  updateCounter: (creatureId, counterIndex, value) => ({
-    type: actionTypes.COUNTER_UPDATE,
-    payload: {
-      creatureId,
-      counterIndex,
-      value,
-    }
-  }),
-  deleteCounter: (creatureId, counterIndex) => ({
-    type: actionTypes.COUNTER_DELETE,
-    payload: {
-      creatureId,
-      counterIndex,
-    },
-  }),
-  selectCreature: creatureId => ({
-    type: actionTypes.CREATURE_SELECT,
-    payload: {
-      creatureId,
-    }
-  }),
+export default {
+  byIdReducer,
+  allIdsReducer,
+  selectedCreatureReducer,
 }

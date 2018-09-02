@@ -5,7 +5,7 @@ import CreateCreatureForm from './CreateCreatureForm';
 import InitiativeToken from './InitiativeToken';
 import ScrollContainer from '../reusable/ScrollContainer';
 import SortableList from '../reusable/SortableList';
-import { actions as creatureActions } from '../../store/creatures';
+import { default as creatureActions } from '../../store/creatures/actions';
 import { creaturesSelector } from './selectors';
 import {
   campaignCreaturesAllIdsStateSelector

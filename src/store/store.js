@@ -6,7 +6,7 @@ import reduxFetch from './redux-fetch';
 import Api from '../services/api';
 import * as auth from '../services/api/auth';
 import * as campaign from '../services/api/campaign';
-import * as creatures from './creatures';
+import creatures from './creatures/reducers';
 
 const sagaMiddleware = createSagaMiddleware();
 const composer = (process.env.NODE_ENV === 'development' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
