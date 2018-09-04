@@ -48,7 +48,7 @@ class CreateCounterButton extends React.Component {
       'create-counter-button--editing': isEditing,
     });
     const form = (
-      <div className="create-counter-form">
+      <div className="create-counter-button__form">
         <SingleInputForm placeholder="Enter a label..." onSave={this.handleCreateCounterSubmit}/>
       </div>
     );
