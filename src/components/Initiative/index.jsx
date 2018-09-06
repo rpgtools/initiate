@@ -5,11 +5,8 @@ import CreateCreatureForm from './CreateCreatureForm';
 import InitiativeToken from './InitiativeToken';
 import ScrollContainer from '../reusable/ScrollContainer';
 import SortableList from '../reusable/SortableList';
-import { default as creatureActions } from '../../store/creatures/actions';
+import * as creatureActions from '../../store/creatures/actions';
 import { creaturesSelector } from './selectors';
-import {
-  campaignCreaturesAllIdsStateSelector
-} from '../../store/creatures/selectors';
 
 class Initiative extends React.Component {
   handleSortEnd = ({ oldIndex, newIndex }) => {
@@ -47,7 +44,6 @@ class Initiative extends React.Component {
 
 const mapStateToProps = state => ({
   creatures: creaturesSelector(state),
-  creatureOrder: campaignCreaturesAllIdsStateSelector(state),
 });
 
 const mapDispatchToProps = {
@@ -57,7 +53,7 @@ const mapDispatchToProps = {
   createCreature: creatureActions.createCreature,
   // updateCreature: creatureActions.updateCreature,
   // deleteCreature: creatureActions.deleteCreature,
-  reorderCreatures: creatureActions.reorderCreatures,
+  // reorderCreatures: creatureActions.reorderCreatures,
   // selectCreature: creatureActions.selectCreature,
 };
 

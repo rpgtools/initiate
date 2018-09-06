@@ -1,10 +1,11 @@
 import filter from 'lodash/filter';
 import omit from 'lodash/omit';
 import { arrayMove } from 'react-sortable-hoc';
-import actionTypes from "./types";
+import * as actionTypes from "./types";
+import { combineReducers } from 'redux';
 
 // Reducers -------------------------------------
-const byIdReducer = (state = {}, action) => {
+const byId = (state = {}, action) => {
   switch(action.type) {
     case actionTypes.CREATURE_CREATE: {
       const creature = action.payload.creature;
@@ -63,21 +64,13 @@ const byIdReducer = (state = {}, action) => {
   }
 };
 
-const allIdsReducer = (state = [], action) => {
+const allIds = (state = [], action) => {
   switch(action.type) {
     case actionTypes.CREATURE_CREATE:
       return state.concat(action.payload.creature.id);
     case actionTypes.CREATURE_DELETE:
       return filter(state, creatureId =>
         creatureId !== action.payload.creatureId);
-    case actionTypes.CREATURE_REORDER: {
-      const { previousIndex, nextIndex } = action.payload;
-      if (state.length === 0) {
-        return state;
-      } else {
-        return arrayMove(state, previousIndex, nextIndex);
-      }
-    }
     default:
       return state;
   }
@@ -91,8 +84,7 @@ const selectedCreatureReducer = (state = null, action) => {
   }
 };
 
-export default {
-  byIdReducer,
-  allIdsReducer,
-  selectedCreatureReducer,
-}
+export const creatures = combineReducers({
+  allIds,
+  byId,
+});

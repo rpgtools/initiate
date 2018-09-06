@@ -1,19 +1,7 @@
-const CREATURE_CREATE = 'creature/CREATE';
-const CREATURE_DELETE = 'creature/DELETE';
-const CREATURE_UPDATE = 'creature/UPDATE';
-const CREATURE_SELECT = 'creature/SELECT';
-const CREATURE_REORDER = 'creature/REORDER';
-const COUNTER_CREATE = 'counter/CREATE';
-const COUNTER_DELETE = 'counter/DELETE';
-const COUNTER_UPDATE = 'counter/UPDATE';
-
-export default {
-  CREATURE_CREATE,
-  CREATURE_DELETE,
-  CREATURE_UPDATE,
-  CREATURE_SELECT,
-  CREATURE_REORDER,
-  COUNTER_CREATE,
-  COUNTER_DELETE,
-  COUNTER_UPDATE,
-};
+export const CREATURE_CREATE = 'creature/CREATE';
+export const CREATURE_DELETE = 'creature/DELETE';
+export const CREATURE_UPDATE = 'creature/UPDATE';
+export const CREATURE_SELECT = 'creature/SELECT';
+export const COUNTER_CREATE = 'counter/CREATE';
+export const COUNTER_DELETE = 'counter/DELETE';
+export const COUNTER_UPDATE = 'counter/UPDATE';

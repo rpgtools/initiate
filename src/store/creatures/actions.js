@@ -1,7 +1,7 @@
-import actionTypes from './types';
+import * as actionTypes from './types';
 import uuid from 'uuid/v4';
 
-const createCounter = (creatureId, label) => ({
+export const createCounter = (creatureId, label) => ({
   type: actionTypes.COUNTER_CREATE,
   payload: {
     creatureId,
@@ -12,7 +12,7 @@ const createCounter = (creatureId, label) => ({
   }
 });
 
-const createCreature = name => ({
+export const createCreature = name => ({
   type: actionTypes.CREATURE_CREATE,
   payload: {
     creature: {
@@ -25,7 +25,7 @@ const createCreature = name => ({
   }
 });
 
-const deleteCounter = (creatureId, counterIndex) => ({
+export const deleteCounter = (creatureId, counterIndex) => ({
   type: actionTypes.COUNTER_DELETE,
   payload: {
     creatureId,
@@ -33,37 +33,28 @@ const deleteCounter = (creatureId, counterIndex) => ({
   },
 });
 
-const deleteCreature = creatureId => {
+export const deleteCreature = creatureId => {
   return {
     type: actionTypes.CREATURE_DELETE,
     payload: { creatureId }
   };
 }
 
-const reorderCreatures = (previousIndex, nextIndex) => {
-  return {
-    type: actionTypes.CREATURE_REORDER,
-    payload: {
-      previousIndex,
-      nextIndex
-    }
-  };
-}
 
-const selectCreature = creatureId => ({
+export const selectCreature = creatureId => ({
   type: actionTypes.CREATURE_SELECT,
   payload: {
     creatureId,
   }
 });
 
-const updateCreature = creature => {
+export const updateCreature = creature => {
   return {
     payload: {creature}
   };
 }
 
-const updateCounter = (creatureId, counterIndex, value) => ({
+export const updateCounter = (creatureId, counterIndex, value) => ({
   type: actionTypes.COUNTER_UPDATE,
   payload: {
     creatureId,
@@ -71,14 +62,3 @@ const updateCounter = (creatureId, counterIndex, value) => ({
     value,
   }
 });
-
-export default {
-  createCounter,
-  createCreature,
-  deleteCounter,
-  deleteCreature,
-  reorderCreatures,
-  selectCreature,
-  updateCounter,
-  updateCreature,
-}
