@@ -1,8 +1,8 @@
-import filter from 'lodash/filter';
 import omit from 'lodash/omit';
-import { arrayMove } from 'react-sortable-hoc';
 import * as actionTypes from "./types";
 import { combineReducers } from 'redux';
+import { persistentDocumentReducer } from 'redux-pouchdb';
+import { db } from '../pouch';
 
 // Reducers -------------------------------------
 const byId = (state = {}, action) => {
@@ -64,27 +64,8 @@ const byId = (state = {}, action) => {
   }
 };
 
-const allIds = (state = [], action) => {
-  switch(action.type) {
-    case actionTypes.CREATURE_CREATE:
-      return state.concat(action.payload.creature.id);
-    case actionTypes.CREATURE_DELETE:
-      return filter(state, creatureId =>
-        creatureId !== action.payload.creatureId);
-    default:
-      return state;
-  }
-};
-
-const selectedCreatureReducer = (state = null, action) => {
-  if (action.type === actionTypes.CREATURE_SELECT) {
-    return action.payload.creatureId;
-  } else {
-    return state;
-  }
-};
+const persistentById = persistentDocumentReducer(db, "creatures/ById")(byId);
 
 export const creatures = combineReducers({
-  allIds,
-  byId,
+  byId: persistentById,
 });

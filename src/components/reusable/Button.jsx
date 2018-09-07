@@ -20,7 +20,7 @@ const Button = ({
 }
 
 Button.propTypes = {
-  color: PropTypes.oneOf(['blue', 'yellow'])
+  color: PropTypes.oneOf(['blue', 'yellow', 'red'])
 };
 Button.defaultProps = {
   color: 'blue'

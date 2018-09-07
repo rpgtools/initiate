@@ -1,12 +1,8 @@
 import { createSelector } from 'reselect';
-import find from 'lodash/find';
-import {
-  creaturesByIdStateSelector,
-  creaturesAllIdsStateSelector,
-} from '../../store/creatures/selectors';
+import { creaturesByIdStateSelector } from '../../store/creatures/selectors';
+import { initiativeOrderSelector } from '../../store/initiative/selectors';
 
 export const creaturesSelector = createSelector(
-  creaturesByIdStateSelector,
-  creaturesAllIdsStateSelector,
-  (byId, allIds) => allIds.map(creatureId => byId[creatureId], [])
+  [creaturesByIdStateSelector, initiativeOrderSelector],
+  (byId, orderedIds) => orderedIds.map(creatureId => byId[creatureId], [])
 );

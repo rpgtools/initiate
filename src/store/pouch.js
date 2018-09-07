@@ -1,5 +1,3 @@
 import PouchDB from 'pouchdb';
 
-const db = new PouchDB('initiate');
-
-export default db;
+export const db = new PouchDB('initiate');

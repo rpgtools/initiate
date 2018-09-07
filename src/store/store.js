@@ -2,11 +2,12 @@ import { applyMiddleware, compose, createStore, combineReducers } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import { all } from 'redux-saga/effects';
 import reduxFetch from './redux-fetch';
+import { persistStore } from 'redux-pouchdb';
 import Api from '../services/api';
 import * as auth from '../services/api/auth';
 import * as campaign from '../services/api/campaign';
 import { creatures } from './creatures/reducers';
-// import { persistStore } from 'redux-pouchdb';
+import { initiative } from './initiative/reducers';
 
 const sagaMiddleware = createSagaMiddleware();
 const composer = (process.env.NODE_ENV === 'development' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
@@ -19,7 +20,7 @@ const rootReducer = combineReducers({
   campaign: combineReducers({
     metadata: campaign.campaignMetadataReducer,
     creatures: creatures,
-    initative: [],
+    initiative: initiative,
   }),
   // selectedCreature: creatures.selectedCreatureReducer,
 });
@@ -28,6 +29,7 @@ const store = createStore(
   rootReducer,
   enhancements
 );
+
 
 const api = new Api({
   fetch: reduxFetch(store),
@@ -47,5 +49,5 @@ function* rootSaga() {
 };
 
 sagaMiddleware.run(rootSaga);
-
+persistStore(store);
 export default store;

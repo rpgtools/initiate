@@ -12,13 +12,7 @@ export const creaturesByIdStateSelector = createSelector(
   creatures => get(creatures, 'byId', {})
 );
 
-export const creaturesAllIdsStateSelector = createSelector(
-  creaturesStateSelector,
-  creatures => get(creatures, 'allIds', [])
-);
-
-export const creaturesSelector = state => createSelector(
+export const creaturesAllIdsSelector = createSelector(
   creaturesByIdStateSelector,
-  creaturesAllIdsStateSelector,
-  (byId, allIds) => allIds.map(creatureId => byId[creatureId], [])
+  creatures => Object.keys(creatures)
 );
