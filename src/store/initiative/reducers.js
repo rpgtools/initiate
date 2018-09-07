@@ -25,7 +25,6 @@ const initiativeReducer = (state = {}, action) => {
     case actionTypes.INITIATIVE_RESET:
       return {
         ...state,
-        initiativeOrder: [],
         turn: 0
       };
     case actionTypes.INITIATIVE_REORDER: {

@@ -25,6 +25,10 @@ class Counter extends React.Component {
     };
   }
 
+  componentWillUnmount = () => {
+    this.doneEditing();
+  }
+
   startEditing = () => {
     this.setState({isEditing: true});
     document.addEventListener('mouseup', this.handleClickOutsideCounter);
@@ -47,7 +51,11 @@ class Counter extends React.Component {
 
   handleClickOutsideCounter = event => {
     const elem = ReactDOM.findDOMNode(this);
-    if (!(elem.contains(event.target) || event.target.className.startsWith('counter__buttons'))) {
+    if (!(
+      elem.contains(event.target)
+      || event.target.className.startsWith('counter__buttons')
+      || event.target.className.startsWith('counter__delete')
+    )) {
       this.doneEditing();
     }
   }
@@ -67,7 +75,7 @@ class Counter extends React.Component {
   }
 
   render () {
-    const { counter } = this.props;
+    const { counter, showDeleteButton, onRequestDelete } = this.props;
     const { isEditing } = this.state;
     const classes = classNames({
       'counter': true,
@@ -94,6 +102,9 @@ class Counter extends React.Component {
         <div className="counter__label"><p>{counter.label}</p></div>
       </div>
     );
+    const deleteButton = (showDeleteButton)
+      ? (<a class="counter__delete" href="#" style={{position:"absolute", top:0, left: 0}} onClick={onRequestDelete}>Delete</a>)
+      : '';
     const display = (isEditing) ? counterForm : counterBody;
     return (
       <AnchoredModal
@@ -103,6 +114,7 @@ class Counter extends React.Component {
         modal={counterControls}
       >
         {display}
+        {deleteButton}
       </AnchoredModal>
     );
   };

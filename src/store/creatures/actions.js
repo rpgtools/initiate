@@ -48,11 +48,10 @@ export const selectCreature = creatureId => ({
   }
 });
 
-export const updateCreature = creature => {
-  return {
-    payload: {creature}
-  };
-}
+export const updateCreature = creature => ({
+  type: actionTypes.CREATURE_UPDATE,
+  payload: {creature}
+});
 
 export const updateCounter = (creatureId, counterIndex, value) => ({
   type: actionTypes.COUNTER_UPDATE,

@@ -17,16 +17,18 @@ class Initiative extends React.Component {
   }
   render() {
     const {
-      creatures,
       createCounter,
-      updateCounter,
-      deleteCounter,
       createCreature,
+      creatures,
+      deleteCounter,
+      updateCounter,
+      updateCreature,
     } = this.props;
     const creatureProps = {
       createCounter,
-      updateCounter,
       deleteCounter,
+      updateCounter,
+      updateCreature,
     };
     const controls = (<InitiativeControls />);
     return (
@@ -55,7 +57,7 @@ const mapDispatchToProps = {
   updateCounter: creatureActions.updateCounter,
   deleteCounter: creatureActions.deleteCounter,
   createCreature: creatureActions.createCreature,
-  // updateCreature: creatureActions.updateCreature,
+  updateCreature: creatureActions.updateCreature,
   // deleteCreature: creatureActions.deleteCreature,
   reorderCreatures: initiativeActions.reorder,
   // selectCreature: creatureActions.selectCreature,
