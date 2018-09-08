@@ -23,27 +23,31 @@ class Initiative extends React.Component {
       deleteCounter,
       updateCounter,
       updateCreature,
+      deleteCreature,
     } = this.props;
     const creatureProps = {
       createCounter,
       deleteCounter,
       updateCounter,
       updateCreature,
+      deleteCreature,
     };
     const controls = (<InitiativeControls />);
     return (
-      <ScrollContainer className="initiative">
-        <SortableList
-          onSortEnd={this.handleSortEnd}
-          useDragHandle
-          >
-          {creatures.map((creature, creatureIndex) =>
-            <InitiativeToken key={creature.id} creature={creature} {...creatureProps} />
-          )}
-        </SortableList>
-        <CreateCreatureForm createCreature={createCreature} />
+      <div className="initiative">
+        <ScrollContainer>
+          <SortableList
+            onSortEnd={this.handleSortEnd}
+            useDragHandle
+            >
+            {creatures.map((creature, creatureIndex) =>
+              <InitiativeToken key={creature.id} creature={creature} {...creatureProps} />
+            )}
+          </SortableList>
+          <CreateCreatureForm createCreature={createCreature} />
+        </ScrollContainer>
         {(creatures.length) ? controls : 'Add a creature to get started.'}
-      </ScrollContainer>
+      </div>
     );
   };
 };
@@ -58,7 +62,7 @@ const mapDispatchToProps = {
   deleteCounter: creatureActions.deleteCounter,
   createCreature: creatureActions.createCreature,
   updateCreature: creatureActions.updateCreature,
-  // deleteCreature: creatureActions.deleteCreature,
+  deleteCreature: initiativeActions.remove,
   reorderCreatures: initiativeActions.reorder,
   // selectCreature: creatureActions.selectCreature,
 };

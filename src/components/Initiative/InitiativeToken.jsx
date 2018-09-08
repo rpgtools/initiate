@@ -3,25 +3,28 @@ import Counter from './Counter';
 import CreateCounterButton from './CreateCounterButton';
 import { DragHandle } from '../reusable/SortableList';
 import classNames from 'classnames';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrashAlt, faEdit, faArrowsAltV } from '@fortawesome/free-solid-svg-icons'
 
 export default class InitiativeToken extends React.Component {
   state = {
     isEditing: false,
   }
-  handleDeleteCounter = counterIndex => () =>
+  handleDeleteCounter = counterIndex => (event) => {
     this.props.deleteCounter(this.props.creature.id, counterIndex);
-
+    event.preventDefault();
+  }
   handleUpdateCounter = counterIndex => value =>
     this.props.updateCounter(this.props.creature.id, counterIndex, value);
 
   handleCreateCounter = ({ label }) =>
     this.props.createCounter(this.props.creature.id, label);
 
-  handleClickEdit = event => {
-    this.setState({
-      isEditing: !this.state.isEditing,
-    })
-  }
+  handleClickDelete = event =>
+    this.props.deleteCreature(this.props.creature.id);
+
+  handleClickEdit = event =>
+    this.setState({ isEditing: !this.state.isEditing, });
 
   handleUpdateCreature = (event) =>
     this.props.updateCreature({...this.props.creature, name: event.target.value});
@@ -29,7 +32,6 @@ export default class InitiativeToken extends React.Component {
   render() {
     const {
       creature,
-      actions,
     } = this.props;
     const { isEditing } = this.state;
     const counters = creature.counters.map((counter, index) => {
@@ -66,8 +68,13 @@ export default class InitiativeToken extends React.Component {
           {counters}
         </div>
         <div className="initiative-token__actions">
-          <a onClick={this.handleClickEdit}>Edit</a>
-          <DragHandle />
+          <button className="initiative-token__edit" onClick={this.handleClickEdit}>
+            <FontAwesomeIcon className="icon" icon={faEdit} />
+          </button>
+          <button className="initiative-token__delete" onClick={this.handleClickDelete}>
+            <FontAwesomeIcon className="icon" icon={faTrashAlt} />
+          </button>
+          <DragHandle><FontAwesomeIcon icon={faArrowsAltV} /></DragHandle>
         </div>
       </div>
     );

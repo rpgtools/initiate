@@ -4,10 +4,11 @@ import {
   SortableElement,
   SortableHandle
 } from 'react-sortable-hoc';
-import DragHandleImage from '../../images/drag-handle.png';
 
-export const DragHandle = SortableHandle(() =>
-  <img className="drag-handle" src={DragHandleImage} width={18} alt="::" />
+export const DragHandle = SortableHandle(({children}) =>
+  <div className="sortable-list__drag-handle">
+    {children}
+  </div>
 );
 
 const SortableItem = SortableElement(({item, ...rest}) =>

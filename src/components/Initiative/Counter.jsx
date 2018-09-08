@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import classNames from 'classnames';
 import AnchoredModal from '../reusable/AnchoredModal';
 import AbbreviatedNumber from '../reusable/AbbreviatedNumber';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTimesCircle } from '@fortawesome/free-solid-svg-icons'
 
 const CounterControls = ({ onUpdate, ...rest }) => {
   return (
@@ -44,18 +46,14 @@ class Counter extends React.Component {
   }
 
   handleClick = event => {
-    if(!this.state.isEditing) {
+    if(!this.state.isEditing && !this.props.showDeleteButton) {
       this.startEditing();
     }
   }
 
   handleClickOutsideCounter = event => {
     const elem = ReactDOM.findDOMNode(this);
-    if (!(
-      elem.contains(event.target)
-      || event.target.className.startsWith('counter__buttons')
-      || event.target.className.startsWith('counter__delete')
-    )) {
+    if (!( elem.contains(event.target) || event.target.className.startsWith('counter__buttons'))) {
       this.doneEditing();
     }
   }
@@ -103,19 +101,20 @@ class Counter extends React.Component {
       </div>
     );
     const deleteButton = (showDeleteButton)
-      ? (<a class="counter__delete" href="#" style={{position:"absolute", top:0, left: 0}} onClick={onRequestDelete}>Delete</a>)
+      ? (<button className="counter__delete" onClick={onRequestDelete}><FontAwesomeIcon icon={faTimesCircle} /></button>)
       : '';
     const display = (isEditing) ? counterForm : counterBody;
     return (
-      <AnchoredModal
-        className={classes}
-        isOpen={isEditing}
-        onClick={this.handleClick}
-        modal={counterControls}
-      >
-        {display}
+      <div className={classes}>
+          <AnchoredModal
+            isOpen={isEditing}
+            onClick={this.handleClick}
+            modal={counterControls}
+          >
+            {display}
+        </AnchoredModal>
         {deleteButton}
-      </AnchoredModal>
+      </div>
     );
   };
 };

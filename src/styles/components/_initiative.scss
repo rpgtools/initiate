@@ -1,9 +1,8 @@
 .initiative {
   flex: 1 1 350px;
-  @media (min-width: 765px) {
-    max-width: 60%;
-  }
-  @media (max-width: 765px) { order: 2; }
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 60px;
 
   &-token {
     width: 100%;
@@ -22,15 +21,41 @@
 
     &__title {
       margin: 3px 0 0 7px;
-      font-size: 25px;
-      font-weight: bold;
+      &, & input {
+        font-size: 25px;
+        font-weight: bold;
+        border-bottom: none;
+      }
     }
 
-    .drag-handle {
-      cursor: pointer;
+    &__actions {
       position: absolute;
       right: 10px;
       top: 10px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      button, .sortable-list__drag-handle {
+        cursor: pointer;
+        padding: 5px;
+        border: none;
+        background: none;
+        color: $charcoal;
+        font-size:16px;
+        opacity: 0.7;
+
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
+
+    &--editing &__actions {
+      .initiative-token__edit {
+        color: $saffron-dark;
+        opacity: 1;
+      }
     }
 
     &__counters {
@@ -40,6 +65,11 @@
       flex-direction: row;
       flex-wrap: wrap;
       overflow: hidden;
+      transition: height 250ms ease-in-out;
+    }
+
+    &--editing &__counters {
+      height: auto;
     }
   }
 }

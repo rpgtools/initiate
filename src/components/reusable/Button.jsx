@@ -6,11 +6,12 @@ const Button = ({
   label,
   onClick,
   color,
+  className,
   ...rest
 }) => {
   return (
     <button
-      className={`button button--${color}`}
+      className={`button button--${color} ${className}`}
       onClick={onClick}
       {...rest}>
       {label}
