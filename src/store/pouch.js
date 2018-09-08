@@ -1,3 +1,4 @@
 import PouchDB from 'pouchdb';
-
-export const db = new PouchDB('initiate');
+const params = new URLSearchParams(window.location.search);
+const dbName = (params.has('campaign')) ? params.get('campaign') : 'new_campaign';
+export const db = new PouchDB(dbName);
