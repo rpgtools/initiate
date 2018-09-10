@@ -40,9 +40,9 @@ class Initiative extends React.Component {
             onSortEnd={this.handleSortEnd}
             useDragHandle
             >
-            {creatures.map((creature, creatureIndex) =>
-              <InitiativeToken key={creature.id} creature={creature} {...creatureProps} />
-            )}
+            {creatures.map((creature, creatureIndex) => {
+              return(<InitiativeToken key={creature.id} creature={creature} {...creatureProps} />);
+            })}
           </SortableList>
           <CreateCreatureForm createCreature={createCreature} />
         </ScrollContainer>

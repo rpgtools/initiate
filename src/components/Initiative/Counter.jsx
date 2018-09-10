@@ -107,6 +107,7 @@ class Counter extends React.Component {
     return (
       <div className={classes}>
           <AnchoredModal
+            className="counter__button"
             isOpen={isEditing}
             onClick={this.handleClick}
             modal={counterControls}

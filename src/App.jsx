@@ -12,7 +12,7 @@ class App extends Component {
 
   }
   render () {
-    const { user } = this.props;
+    // const { user } = this.props;
     if (document.cookie === '') { console.log('EMPTY')}
     return (
       <div>

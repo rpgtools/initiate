@@ -4,5 +4,5 @@ import { initiativeOrderSelector } from '../../store/initiative/selectors';
 
 export const creaturesSelector = createSelector(
   [creaturesByIdStateSelector, initiativeOrderSelector],
-  (byId, orderedIds) => orderedIds.map(creatureId => byId[creatureId], [])
+  (byId, orderedIds) => orderedIds.map(creatureId => byId[creatureId], []).filter(creature => creature !== undefined)
 );
