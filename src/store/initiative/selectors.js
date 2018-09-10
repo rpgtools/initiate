@@ -9,7 +9,7 @@ export const initiativeStateSelector = createSelector(
 
 export const initiativeOrderSelector = createSelector(
   initiativeStateSelector,
-  initiative => get(initiative, 'initiativeOrder', [])
+  initiative => get(initiative, 'order', [])
 );
 
 export const initiativeTurnSelector = createSelector(
@@ -23,10 +23,6 @@ export const initiativeSizeSelector = createSelector(
 );
 
 export const initiativeRoundSelector = createSelector(
-  initiativeTurnSelector,
-  initiativeSizeSelector,
-  (turn, size) => {
-    const length = (size > 0) ? size : 1; //prevent NaN
-    return Math.floor(turn/length);
-  }
+  initiativeStateSelector,
+  initiative => get(initiative, 'round', 0)
 );

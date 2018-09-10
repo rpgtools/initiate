@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as initiativeActions from '../../store/initiative/actions';
-import * as selectors from './selectors';
+import { initiativeTurnSelector, initiativeRoundSelector } from '../../store/initiative/selectors';
 import Button from '../reusable/Button';
 
 const InitiativeControls = ({ turn, round, reset, nextTurn }) => {
@@ -25,8 +25,8 @@ const InitiativeControls = ({ turn, round, reset, nextTurn }) => {
 };
 
 const mapStateToProps = state => ({
-  turn: selectors.turnSelector(state),
-  round: selectors.roundSelector(state)
+  turn: initiativeTurnSelector(state),
+  round: initiativeRoundSelector(state)
 });
 
 const mapDispatchToProps = {

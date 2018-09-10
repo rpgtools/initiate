@@ -7,25 +7,34 @@ import { db } from '../pouch';
 const initiativeReducer = (state = {}, action) => {
   switch(action.type) {
     case creatureActionTypes.CREATURE_CREATE:
-      const newInitiativeOrder =
-        (state.initiativeOrder)
-          ? state.initiativeOrder.concat(action.payload.creature.id)
-          : [action.payload.creature.id];
+    if (state.order) {
+      const lastCreatureIndex = state.order.length - state.turn + 1;
       return {
         ...state,
-        initiativeOrder: newInitiativeOrder,
-      };
+        order: [
+          ...state.order.slice(0, lastCreatureIndex),
+          action.payload.creature.id,
+          ...state.order.slice(lastCreatureIndex)
+        ]
+      }
+    } else {
+      return {
+        ...state,
+        order: [action.payload.creature.id]
+      }
+    }
     case actionTypes.INITIATIVE_REMOVE:
       return {
         ...state,
-        initiativeOrder: state.initiativeOrder.filter(
+        order: state.order.filter(
           (creatureId) => creatureId !== action.payload.creatureId
         )
       };
     case actionTypes.INITIATIVE_RESET:
       return {
         ...state,
-        turn: 0
+        turn: 1,
+        round: 1
       };
     case actionTypes.INITIATIVE_REORDER: {
       const { previousIndex, nextIndex } = action.payload;
@@ -34,19 +43,31 @@ const initiativeReducer = (state = {}, action) => {
       } else {
         return {
           ...state,
-          initiativeOrder: arrayMove(state.initiativeOrder, previousIndex, nextIndex)
+          order: arrayMove(state.order, previousIndex, nextIndex)
         }
       }
     }
     case actionTypes.INITIATIVE_NEXT_TURN: {
-      if (state.initiativeOrder.length === 0) {
+      if (state.order.length === 0) {
         return state;
       } else {
-        const turn = (state.turn) ? state.turn : 0;
-        return {
+        const nextState = {
           ...state,
-          turn: turn + 1,
-          initiativeOrder: arrayMove(state.initiativeOrder, 0, state.initiativeOrder.length-1)
+          order: arrayMove(state.order, 0, state.order.length - 1)
+        };
+        const turn = (state.turn) ? state.turn : 1,
+              round = (state.round) ? state.round : 1;
+        if (turn === state.order.length) {
+          return {
+            ...nextState,
+            turn: 1,
+            round: round + 1,
+          }
+        } else {
+          return {
+            ...nextState,
+            turn: turn + 1,
+          }
         }
       }
     }
