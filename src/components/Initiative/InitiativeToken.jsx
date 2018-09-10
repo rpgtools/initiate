@@ -1,10 +1,11 @@
 import React from 'react';
-import Counter from './Counter';
-import CreateCounterButton from './CreateCounterButton';
 import { DragHandle } from '../reusable/SortableList';
 import classNames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashAlt, faEdit, faArrowsAltV } from '@fortawesome/free-solid-svg-icons'
+import Counter from './Counter';
+import CreateCounterButton from './CreateCounterButton';
+import SingleInputForm from '../reusable/SingleInputForm';
 
 export default class InitiativeToken extends React.Component {
   state = {
@@ -26,8 +27,8 @@ export default class InitiativeToken extends React.Component {
   handleClickEdit = event =>
     this.setState({ isEditing: !this.state.isEditing, });
 
-  handleUpdateCreature = (event) =>
-    this.props.updateCreature({...this.props.creature, name: event.target.value});
+  handleUpdateCreature = name =>
+    this.props.updateCreature({ ...this.props.creature, name });
 
   render() {
     const {
@@ -62,7 +63,15 @@ export default class InitiativeToken extends React.Component {
     });
     return (
       <div className={tokenClass}>
-        <div className="initiative-token__title">{(isEditing) ? creatureNameForm : creature.name}</div>
+        <div className="initiative-token__title">
+          {isEditing ? (
+            <SingleInputForm
+              defaultValue={creature.name}
+              onSave={this.handleUpdateCreature}
+              showButton={false}
+            />
+          ) : creature.name}
+        </div>
         <div className="initiative-token__counters">
           <CreateCounterButton onSubmit={this.handleCreateCounter}/>
           {counters}

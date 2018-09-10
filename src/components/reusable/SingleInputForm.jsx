@@ -1,18 +1,33 @@
 import React from 'react';
 import Button from './Button';
+import PropTypes from 'prop-types';
 
 class SingleInputForm extends React.Component {
+  static propTypes = {
+    placeholder: PropTypes.string,
+    buttonText: PropTypes.string,
+    showButton: PropTypes.bool,
+    onSave: PropTypes.func.isRequired,
+    defaultValue: PropTypes.string,
+  }
+
+  static defaultProps = {
+    placeholder: 'Enter a name...',
+    buttonText: 'Ok',
+    showButton: true,
+    defaultValue: '',
+  }
+
   constructor(props) {
     super(props);
     this.state = {
-      name: "",
+      value: props.defaultValue,
     };
   }
 
   handleInputChange = (event) => {
-    const name = event.target.value;
     this.setState({
-      name: name
+      value: event.target.value
     });
   }
 
@@ -20,23 +35,27 @@ class SingleInputForm extends React.Component {
     event.preventDefault();
     this.props.onSave(this.state.name);
     this.setState({
-      name: ""
+      value: ''
     })
   }
 
   render() {
-    const { placeholder } = this.props;
+    const {
+      placeholder,
+      buttonText,
+      showButton,
+    } = this.props;
     return (
       <form onSubmit={this.handleSubmit}>
         <input
           name="name"
           type="text"
           placeholder={placeholder}
-          value={this.state.name}
+          value={this.state.value}
           onChange={this.handleInputChange}
           autoFocus
         />
-        <Button type="submit" color="blue" label="Ok" />
+      {showButton && <Button type="submit" color="blue" label={buttonText} />}
       </form>
     );
   }
