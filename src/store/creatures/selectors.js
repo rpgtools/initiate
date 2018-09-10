@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 import get from 'lodash/get';
-import { campaignStateSelector } from '../../services/api/campaign/selectors';
+import { campaignStateSelector } from '../campaign/selectors';
 
 export const creaturesStateSelector = createSelector(
   campaignStateSelector,
