@@ -55,6 +55,7 @@
     "react-dev-utils": "6.0.0-next.3e165448",
     "react-dom": "^16.4.2",
     "react-error-overlay": "^1.0.9",
+    "react-modal": "^3.5.1",
     "react-redux": "^5.0.5",
     "react-sortable-hoc": "^0.8.2",
     "react-transition-group": "^2.4.0",
