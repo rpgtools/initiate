@@ -2,10 +2,15 @@ import React from 'react';
 import { DragHandle } from '../reusable/SortableList';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashAlt, faEdit, faArrowsAltV } from '@fortawesome/free-solid-svg-icons'
+import ReactModal from 'react-modal';
 import Counter from './Counter';
 import CreateCounterButton from './CreateCounterButton';
+import CreatureForm from '../CreatureForm';
 
 export default class InitiativeToken extends React.Component {
+  state = {
+    showEditModal: false,
+  };
   // handleDeleteCounter = counterIndex => (event) => {
   //   this.props.deleteCounter(this.props.creature.id, counterIndex);
   //   event.preventDefault();
@@ -20,10 +25,13 @@ export default class InitiativeToken extends React.Component {
   handleClickDelete = event =>
     this.props.deleteCreature(this.props.creature.id);
 
-  handleUpdateCreature = name =>
-    this.props.updateCreature({ ...this.props.creature, name });
+  handleUpdateCreature = creature =>
+    this.props.updateCreature({ ...this.props.creature, ...creature });
 
-  handleClickEdit = () => window.alert('EDIT Creater')
+  toggleShowEditModal = () =>
+    this.setState({ showEditModal: !this.state.showEditModal });
+
+  getPortalRoot = () => document.getElementById("portal-root");
 
   render() {
     const { creature } = this.props;
@@ -46,7 +54,7 @@ export default class InitiativeToken extends React.Component {
           {counters}
         </div>
         <div className="initiative-token__actions">
-          <button className="initiative-token__edit" onClick={this.handleClickEdit}>
+          <button className="initiative-token__edit" onClick={this.toggleShowEditModal}>
             <FontAwesomeIcon className="icon" icon={faEdit} />
           </button>
           <button className="initiative-token__delete" onClick={this.handleClickDelete}>
@@ -54,6 +62,16 @@ export default class InitiativeToken extends React.Component {
           </button>
           <DragHandle><FontAwesomeIcon icon={faArrowsAltV} /></DragHandle>
         </div>
+        <ReactModal
+          isOpen={this.state.showEditModal}
+          parentSelector={this.getPortalRoot}
+          onRequestClose={this.toggleShowEditModal}
+        >
+          <CreatureForm
+            closeModal={this.toggleShowEditModal}
+            creatureId={creature.id}
+          />
+        </ReactModal>
       </div>
     );
   }

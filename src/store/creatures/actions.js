@@ -12,15 +12,13 @@ export const createCounter = (creatureId, label) => ({
   }
 });
 
-export const createCreature = name => ({
+export const createCreature = ({ name, counters = [] }) => ({
   type: actionTypes.CREATURE_CREATE,
   payload: {
     creature: {
       name,
       id: uuid(),
-      counters: [
-        {label: "HP", value:0}
-      ],
+      counters,
     },
   }
 });
@@ -50,7 +48,7 @@ export const selectCreature = creatureId => ({
 
 export const updateCreature = creature => ({
   type: actionTypes.CREATURE_UPDATE,
-  payload: {creature}
+  payload: { creature }
 });
 
 export const updateCounter = (creatureId, counterIndex, value) => ({

@@ -16,3 +16,8 @@ export const creaturesAllIdsSelector = createSelector(
   creaturesByIdStateSelector,
   creatures => Object.keys(creatures)
 );
+
+export const makeGetCreatureSelector = creatureId => createSelector(
+  creaturesByIdStateSelector,
+  creatures => get(creatures, creatureId, {})
+);
