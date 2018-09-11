@@ -1,20 +1,16 @@
 import React from 'react';
 import { DragHandle } from '../reusable/SortableList';
-import classNames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashAlt, faEdit, faArrowsAltV } from '@fortawesome/free-solid-svg-icons'
 import Counter from './Counter';
 import CreateCounterButton from './CreateCounterButton';
-import SingleInputForm from '../reusable/SingleInputForm';
 
 export default class InitiativeToken extends React.Component {
-  state = {
-    isEditing: false,
-  }
-  handleDeleteCounter = counterIndex => (event) => {
-    this.props.deleteCounter(this.props.creature.id, counterIndex);
-    event.preventDefault();
-  }
+  // handleDeleteCounter = counterIndex => (event) => {
+  //   this.props.deleteCounter(this.props.creature.id, counterIndex);
+  //   event.preventDefault();
+  // }
+
   handleUpdateCounter = counterIndex => value =>
     this.props.updateCounter(this.props.creature.id, counterIndex, value);
 
@@ -24,53 +20,26 @@ export default class InitiativeToken extends React.Component {
   handleClickDelete = event =>
     this.props.deleteCreature(this.props.creature.id);
 
-  handleClickEdit = event =>
-    this.setState({ isEditing: !this.state.isEditing, });
-
   handleUpdateCreature = name =>
     this.props.updateCreature({ ...this.props.creature, name });
 
+  handleClickEdit = () => window.alert('EDIT Creater')
+
   render() {
-    const {
-      creature,
-    } = this.props;
-    const { isEditing } = this.state;
+    const { creature } = this.props;
     const counters = creature.counters.map((counter, index) => {
       return(
         <Counter
           onUpdateCounter={this.handleUpdateCounter(index)}
-          onRequestDelete={this.handleDeleteCounter(index)}
           counter={counter}
           key={index}
-          showDeleteButton={isEditing}
         />
       );
     });
-    const creatureNameForm = (
-      <form onSubmit={this.handleCreatureNameSubmit}>
-        <input
-          autoFocus
-          type="text"
-          value={creature.name}
-          onChange={this.handleUpdateCreature}
-          required
-          />
-      </form>
-    );
-    const tokenClass = classNames({
-      'initiative-token': true,
-      'initiative-token--editing': isEditing,
-    });
     return (
-      <div className={tokenClass}>
+      <div className="initiative-token">
         <div className="initiative-token__title">
-          {isEditing ? (
-            <SingleInputForm
-              defaultValue={creature.name}
-              onSave={this.handleUpdateCreature}
-              showButton={false}
-            />
-          ) : creature.name}
+          {creature.name}
         </div>
         <div className="initiative-token__counters">
           <CreateCounterButton onSubmit={this.handleCreateCounter}/>

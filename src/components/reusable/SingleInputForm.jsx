@@ -33,7 +33,7 @@ class SingleInputForm extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    this.props.onSave(this.state.name);
+    this.props.onSave(this.state.value);
     this.setState({
       value: ''
     })

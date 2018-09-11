@@ -3,8 +3,6 @@ import ReactDOM from 'react-dom';
 import classNames from 'classnames';
 import AnchoredModal from '../reusable/AnchoredModal';
 import AbbreviatedNumber from '../reusable/AbbreviatedNumber';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTimesCircle } from '@fortawesome/free-solid-svg-icons'
 
 const CounterControls = ({ onUpdate, ...rest }) => {
   return (
@@ -73,7 +71,7 @@ class Counter extends React.Component {
   }
 
   render () {
-    const { counter, showDeleteButton, onRequestDelete } = this.props;
+    const { counter } = this.props;
     const { isEditing } = this.state;
     const classes = classNames({
       'counter': true,
@@ -100,21 +98,16 @@ class Counter extends React.Component {
         <div className="counter__label"><p>{counter.label}</p></div>
       </div>
     );
-    const deleteButton = (showDeleteButton)
-      ? (<button className="counter__delete" onClick={onRequestDelete}><FontAwesomeIcon icon={faTimesCircle} /></button>)
-      : '';
     const display = (isEditing) ? counterForm : counterBody;
     return (
-      <div className={classes}>
-          <AnchoredModal
-            isOpen={isEditing}
-            onClick={this.handleClick}
-            modal={counterControls}
-          >
-            {display}
-        </AnchoredModal>
-        {deleteButton}
-      </div>
+      <AnchoredModal
+        className={classes}
+        isOpen={isEditing}
+        onClick={this.handleClick}
+        modal={counterControls}
+      >
+        {display}
+    </AnchoredModal>
     );
   };
 };
