@@ -12,7 +12,7 @@ export const reorder = (previousIndex, nextIndex) => {
   };
 }
 
-export const remove = (creatureId) => {
+export const removeCreature = creatureId => {
   return {
     type: actionTypes.INITIATIVE_REMOVE,
     payload: {

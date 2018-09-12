@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowsAltV } from '@fortawesome/free-solid-svg-icons'
 import { makeGetCreatureSelector } from '../store/creatures/selectors';
 import { actions as creatureActions } from  '../store/creatures';
+import { actions as initiativeActions } from  '../store/initiative';
 import SortableList from './reusable/SortableList';
 import { DragHandle } from './reusable/SortableList';
 
@@ -81,6 +82,8 @@ class CreatureForm extends React.Component {
     }
   }
 
+  handleRemoveCreature = () => this.props.removeCreature(this.props.creatureId);
+
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
@@ -132,6 +135,7 @@ class CreatureForm extends React.Component {
           </SortableList>
           <button type="button" onClick={this.addCounter}>Add Counter</button>
         </fieldset>
+        <button type="button" onClick={this.handleRemoveCreature}>Delete Creature</button>
         <button type="submit">SUBMIT</button>
       </form>
     );
@@ -146,7 +150,7 @@ const mapState = (state, ownProps) =>
 const mapDispatch = {
   createCreature: creatureActions.createCreature,
   updateCreature: creatureActions.updateCreature,
-  deleteCreature: creatureActions.deleteCreature,
+  removeCreature: initiativeActions.removeCreature,
 };
 
 export default connect(mapState, mapDispatch)(CreatureForm);

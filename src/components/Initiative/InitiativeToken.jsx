@@ -22,9 +22,6 @@ export default class InitiativeToken extends React.Component {
   handleCreateCounter = ({ label }) =>
     this.props.createCounter(this.props.creature.id, label);
 
-  handleClickDelete = event =>
-    this.props.deleteCreature(this.props.creature.id);
-
   handleUpdateCreature = creature =>
     this.props.updateCreature({ ...this.props.creature, ...creature });
 
@@ -56,9 +53,6 @@ export default class InitiativeToken extends React.Component {
         <div className="initiative-token__actions">
           <button className="initiative-token__edit" onClick={this.toggleShowEditModal}>
             <FontAwesomeIcon className="icon" icon={faEdit} />
-          </button>
-          <button className="initiative-token__delete" onClick={this.handleClickDelete}>
-            <FontAwesomeIcon className="icon" icon={faTrashAlt} />
           </button>
           <DragHandle><FontAwesomeIcon icon={faArrowsAltV} /></DragHandle>
         </div>
