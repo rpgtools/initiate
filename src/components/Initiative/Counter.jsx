@@ -51,7 +51,12 @@ class Counter extends React.Component {
 
   handleClickOutsideCounter = event => {
     const elem = ReactDOM.findDOMNode(this);
-    if (!( elem.contains(event.target) || event.target.className.startsWith('counter__buttons'))) {
+    if (
+      !elem.contains(event.target) || (
+        !event.target.className &&
+        !event.target.className.startsWith('counter__buttons')
+      )
+    ) {
       this.doneEditing();
     }
   }
