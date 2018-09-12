@@ -24,11 +24,28 @@ class CreatureForm extends React.Component {
     }
   }
 
+  componentDidMount = () => {
+    document.addEventListener('keydown', this.handleTabPress);
+  }
+
+  handleTabPress = (event) => {
+    const code = event.keyCode ? event.keyCode : event.which; // b/c browsers
+    if (9 !== code) return; // We only care about tab presses
+    const elem = document.activeElement;
+    const lastIndex = this.state.counters.length - 1;
+    if (
+      "value" === elem.dataset.id &&
+      parseInt(elem.dataset.indexNumber) === lastIndex
+    ) {
+      this.addCounter();
+    }
+  }
+
   addCounter = () => this.setState({
     counters: [ ...this.state.counters, { label: '', value: 0 } ]
   });
 
-  removeCounter = index => () => this.setState({
+  removeCounter = (index) => () => this.setState({
     counters: this.state.counters.filter((_, i) => i !== index)
   });
 
@@ -99,7 +116,6 @@ class CreatureForm extends React.Component {
               <button
                 type="button"
                 onClick={this.removeCounter(index)}
-                tabIndex="-1"
                 >
                 Remove Counter
               </button>
