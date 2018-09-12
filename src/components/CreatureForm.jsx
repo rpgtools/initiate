@@ -60,9 +60,9 @@ class CreatureForm extends React.Component {
             name="name"
             value={this.state.name}
             onChange={this.handleUpdateCreatureForm}
+            autoFocus
           />
         </fieldset>
-        <button type="button" onClick={this.addCounter}>Add Counter</button>
         <fieldset>
           {this.state.counters.map((counter, index) =>
             <div key={index}>
@@ -82,9 +82,16 @@ class CreatureForm extends React.Component {
                 value={counter.value}
                 onChange={this.handleUpdateCreatureForm}
               />
-            <button type="button" onClick={this.removeCounter(index)}>Remove Counter</button>
+            <button
+              type="button"
+              onClick={this.removeCounter(index)}
+              tabIndex="-1"
+            >
+              Remove Counter
+            </button>
             </div>
           )}
+          <button type="button" onClick={this.addCounter}>Add Counter</button>
         </fieldset>
         <button type="submit">SUBMIT</button>
       </form>
