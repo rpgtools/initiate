@@ -19,9 +19,11 @@ class CreatureForm extends React.Component {
     const inputValue = event.target.value;
     if (inputDataType === 'name') {
       this.setState({ creature: { ...this.state.creature, name: inputValue }});
-    } else if (inputDataType === 'counters') {
+    } else if (inputDataType === 'counter') {
       const counterIndex = event.target.dataset.indexNumber;
-      return;
+      const creature = this.state.creature;
+      creature.counters[counterIndex].label = inputValue;
+      this.setState({ creature });
     }
   }
 
@@ -47,8 +49,24 @@ class CreatureForm extends React.Component {
             value={creature.name}
             onChange={this.handleUpdateCreatureForm}
           />
-        <button type="submit">SUBMIT</button>
         </fieldset>
+        <fieldset>
+          {creature.counters.map((counter, index) =>
+            <div key={index}>
+              <label htmlFor={`counter-${index}`}></label>
+              <input
+                type="text"
+                id={`counter-${index}`}
+                name="counter"
+                data-index-number={index}
+                value={counter.label}
+                onChange={this.handleUpdateCreatureForm}
+              />
+            <span>{counter.value}</span>
+            </div>
+          )}
+        </fieldset>
+        <button type="submit">SUBMIT</button>
       </form>
     );
   }
