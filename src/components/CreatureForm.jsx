@@ -1,7 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { arrayMove } from 'react-sortable-hoc';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowsAltV } from '@fortawesome/free-solid-svg-icons'
 import { makeGetCreatureSelector } from '../store/creatures/selectors';
 import { actions as creatureActions } from  '../store/creatures';
+import SortableList from './reusable/SortableList';
+import { DragHandle } from './reusable/SortableList';
+
 
 class CreatureForm extends React.Component {
   constructor(props) {
@@ -49,6 +55,10 @@ class CreatureForm extends React.Component {
     this.props.closeModal();
   }
 
+  handleSortEnd = ({ oldIndex, newIndex }) => this.setState({
+    counters: arrayMove(this.state.counters, oldIndex, newIndex)
+  });
+
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
@@ -64,6 +74,10 @@ class CreatureForm extends React.Component {
           />
         </fieldset>
         <fieldset>
+          <SortableList
+            onSortEnd={this.handleSortEnd}
+            useDragHandle
+          >
           {this.state.counters.map((counter, index) =>
             <div key={index}>
               <input
@@ -73,7 +87,7 @@ class CreatureForm extends React.Component {
                 data-index-number={index}
                 value={counter.label}
                 onChange={this.handleUpdateCreatureForm}
-              />
+                />
               <input
                 type="text"
                 name="counter"
@@ -81,16 +95,18 @@ class CreatureForm extends React.Component {
                 data-index-number={index}
                 value={counter.value}
                 onChange={this.handleUpdateCreatureForm}
-              />
-            <button
-              type="button"
-              onClick={this.removeCounter(index)}
-              tabIndex="-1"
-            >
-              Remove Counter
-            </button>
+                />
+              <button
+                type="button"
+                onClick={this.removeCounter(index)}
+                tabIndex="-1"
+                >
+                Remove Counter
+              </button>
+              <DragHandle><FontAwesomeIcon icon={faArrowsAltV} /></DragHandle>
             </div>
           )}
+          </SortableList>
           <button type="button" onClick={this.addCounter}>Add Counter</button>
         </fieldset>
         <button type="submit">SUBMIT</button>
@@ -106,11 +122,8 @@ const mapState = (state, ownProps) =>
 
 const mapDispatch = {
   createCreature: creatureActions.createCreature,
-  createCounter: creatureActions.createCounter,
   updateCreature: creatureActions.updateCreature,
-  updateCounter: creatureActions.updateCounter,
   deleteCreature: creatureActions.deleteCreature,
-  deleteCounter: creatureActions.deleteCounter,
 };
 
 export default connect(mapState, mapDispatch)(CreatureForm);
