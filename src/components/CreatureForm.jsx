@@ -28,18 +28,10 @@ class CreatureForm extends React.Component {
     document.addEventListener('keydown', this.handleTabPress);
   }
 
-  handleTabPress = (event) => {
-    const code = event.keyCode ? event.keyCode : event.which; // b/c browsers
-    if (9 !== code) return; // We only care about tab presses
-    const elem = document.activeElement;
-    const lastIndex = this.state.counters.length - 1;
-    if (
-      "value" === elem.dataset.id &&
-      parseInt(elem.dataset.indexNumber) === lastIndex
-    ) {
-      this.addCounter();
-    }
+  componentWillUnmount = () => {
+    document.removeEventListener('keydown', this.handleTabPress);
   }
+
 
   addCounter = () => this.setState({
     counters: [ ...this.state.counters, { label: '', value: 0 } ]
@@ -75,6 +67,19 @@ class CreatureForm extends React.Component {
   handleSortEnd = ({ oldIndex, newIndex }) => this.setState({
     counters: arrayMove(this.state.counters, oldIndex, newIndex)
   });
+
+  handleTabPress = (event) => {
+    const code = event.keyCode ? event.keyCode : event.which; // b/c browsers
+    if (9 !== code) return; // We only care about tab presses
+    const elem = document.activeElement;
+    const lastIndex = this.state.counters.length - 1;
+    if (
+      "remove" === elem.dataset.id &&
+      parseInt(elem.dataset.indexNumber) === lastIndex
+    ) {
+      this.addCounter();
+    }
+  }
 
   render() {
     return (
@@ -115,6 +120,8 @@ class CreatureForm extends React.Component {
                 />
               <button
                 type="button"
+                data-id="remove"
+                data-index-number={index}
                 onClick={this.removeCounter(index)}
                 >
                 Remove Counter
