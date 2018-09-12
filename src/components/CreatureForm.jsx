@@ -4,26 +4,39 @@ import { makeGetCreatureSelector } from '../store/creatures/selectors';
 import { actions as creatureActions } from  '../store/creatures';
 
 class CreatureForm extends React.Component {
-  // static
-  state = {
-    creature: this.props.creature || {
-      name: '',
-      counters: [
-        { label: 'HP', value: 0 }
-      ],
+  constructor(props) {
+    super(props);
+    if (props.creature) {
+      this.state = { ...props.creature }
+    } else {
+      this.state =  {
+        name: '',
+        counters: [
+          { label: 'HP', value: 0 }
+        ],
+      }
     }
-  };
+  }
+
+  addCounter = () => this.setState({
+    counters: [ ...this.state.counters, { label: '', value: 0 } ]
+  });
+
+  removeCounter = index => () => this.setState({
+    counters: this.state.counters.filter((_, i) => i !== index)
+  });
 
   handleUpdateCreatureForm = event => {
-    const inputDataType = event.target.name;
+    const inputType = event.target.name;
     const inputValue = event.target.value;
-    if (inputDataType === 'name') {
-      this.setState({ creature: { ...this.state.creature, name: inputValue }});
-    } else if (inputDataType === 'counter') {
+    if (inputType === 'counter') {
       const counterIndex = event.target.dataset.indexNumber;
-      const creature = this.state.creature;
-      creature.counters[counterIndex].label = inputValue;
-      this.setState({ creature });
+      const counterKey = event.target.dataset.id;
+      let counters = [ ...this.state.counters ];
+      counters[counterIndex][counterKey] = inputValue;
+      this.setState({ counters });
+    } else {
+      this.setState({ name: inputValue });
     }
   }
 
@@ -31,13 +44,12 @@ class CreatureForm extends React.Component {
     event.preventDefault();
     const isExistingCreature = !!this.props.creature;
     isExistingCreature
-      ? this.props.updateCreature(this.state.creature)
-      : this.props.createCreature(this.state.creature);
+      ? this.props.updateCreature(this.state)
+      : this.props.createCreature(this.state);
     this.props.closeModal();
   }
 
   render() {
-    const { creature } = this.state;
     return (
       <form onSubmit={this.handleSubmit}>
         <fieldset>
@@ -46,23 +58,31 @@ class CreatureForm extends React.Component {
             type="text"
             id="name"
             name="name"
-            value={creature.name}
+            value={this.state.name}
             onChange={this.handleUpdateCreatureForm}
           />
         </fieldset>
+        <button type="button" onClick={this.addCounter}>Add Counter</button>
         <fieldset>
-          {creature.counters.map((counter, index) =>
+          {this.state.counters.map((counter, index) =>
             <div key={index}>
-              <label htmlFor={`counter-${index}`}></label>
               <input
                 type="text"
-                id={`counter-${index}`}
                 name="counter"
+                data-id="label"
                 data-index-number={index}
                 value={counter.label}
                 onChange={this.handleUpdateCreatureForm}
               />
-            <span>{counter.value}</span>
+              <input
+                type="text"
+                name="counter"
+                data-id="value"
+                data-index-number={index}
+                value={counter.value}
+                onChange={this.handleUpdateCreatureForm}
+              />
+            <button type="button" onClick={this.removeCounter(index)}>Remove Counter</button>
             </div>
           )}
         </fieldset>
