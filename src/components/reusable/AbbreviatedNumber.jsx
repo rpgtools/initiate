@@ -1,5 +1,5 @@
 import React from 'react';
-import { abbrNum } from '../../utils';
+import { abbrNum } from '../../utils/abbrNumber';
 import classNames from 'classnames';
 
 const AbbreviatedNumber = ({
