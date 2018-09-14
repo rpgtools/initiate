@@ -21,4 +21,5 @@ export const removeCreature = creatureId => {
   }
 }
 
-export const reset = () => ({type: actionTypes.INITIATIVE_RESET});
+export const resetTurn = () => ({type: actionTypes.INITIATIVE_RESET_TURN});
+export const resetAll = () => ({type: actionTypes.INITIATIVE_RESET_ALL});

@@ -5,6 +5,7 @@ import { persistStore } from 'redux-pouchdb';
 import * as campaign from './campaign';
 import { creatures } from './creatures/reducers';
 import { initiative } from './initiative/reducers';
+import { modalReducer } from './modals';
 
 const rootReducer = combineReducers({
   campaign: combineReducers({
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
     creatures: creatures,
     initiative: initiative,
   }),
+  modals: modalReducer,
 });
 
 const store = createStore(

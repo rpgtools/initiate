@@ -30,11 +30,18 @@ const initiativeReducer = (state = {}, action) => {
           (creatureId) => creatureId !== action.payload.creatureId
         )
       };
-    case actionTypes.INITIATIVE_RESET:
+    case actionTypes.INITIATIVE_RESET_TURN:
       return {
         ...state,
         turn: 1,
         round: 1
+      };
+    case actionTypes.INITIATIVE_RESET_ALL:
+      return {
+        ...state,
+        turn: 1,
+        round: 1,
+        initiative: [],
       };
     case actionTypes.INITIATIVE_REORDER: {
       const { previousIndex, nextIndex } = action.payload;
