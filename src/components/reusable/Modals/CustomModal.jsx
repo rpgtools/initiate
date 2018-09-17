@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 // import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -20,7 +19,6 @@ class CustomModal extends React.Component {
   }
 
   handleClickOutside = (event) => {
-    const elem = ReactDOM.findDOMNode(this);
     if(!event.target.className.startsWith("modal__content")) this.props.closeModal();
   }
 
