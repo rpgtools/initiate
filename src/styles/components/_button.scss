@@ -51,7 +51,7 @@
     text-shadow: 0 1.5px $blue-darkest;
     background-color: $blue;
     border-color: $blue-lightest $blue-light $blue-darkest;
-    &:hover {
+    &:hover, &:focus {
       background-color: $blue-light;
       border-bottom: 4px solid $blue-dark;
     }
@@ -64,7 +64,7 @@
     text-shadow: 0 1.5px $saffron-darkest;
     background-color: $saffron;
     border-color: $saffron-lightest $saffron-light $saffron-darkest;
-    &:hover {
+    &:hover, &:focus {
       background-color: $saffron-light;
       border-bottom: 4px solid $saffron-dark;
     }
@@ -77,7 +77,7 @@
     text-shadow: 0 1.5px $red-darkest;
     background-color: $red;
     border-color: $red-lightest $red-light $red-darkest;
-    &:hover {
+    &:hover, &:focus {
       background-color: $red-light;
       border-bottom: 4px solid $red-dark;
     }
@@ -90,7 +90,7 @@
     text-shadow: 0 1.5px $grey-darkest;
     background-color: $grey;
     border-color: $grey-lightest $grey-light $grey-darkest;
-    &:hover {
+    &:hover, &:focus {
       background-color: $grey-light;
       border-bottom: 4px solid $grey-dark;
     }
@@ -103,7 +103,7 @@
     text-shadow: 0 1.5px $grey;
     background-color: $grey-lighter;
     border-color: $white $grey-lightest $grey;
-    &:hover {
+    &:hover, &:focus {
       background-color: $grey-lightest;
       border-bottom: 4px solid $grey-lighter;
     }
