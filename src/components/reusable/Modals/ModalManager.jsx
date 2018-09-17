@@ -17,7 +17,7 @@ export class ModalManager extends React.Component {
       return <ModalComponent {...modalProps}  key={ modalType + index }/>;
     });
 
-    return <span>{renderedModals}</span>
+    return <div>{renderedModals}</div>
   }
 }
 
