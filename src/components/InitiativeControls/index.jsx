@@ -21,11 +21,11 @@ class InitiativeControls extends React.Component {
     this.props.openModal('CustomModal', {
       content: (
         <div>
-          <p>"Turns will be reset. Also clear all creatures?"</p>
+          Turns will be reset. Also clear all creatures?
           <div className="row">
+            <Button color="blue" onClick={this.props.closeModal}>Cancel</Button>
             <Button color="yellow" onClick={this.handleNo}>No</Button>
             <Button color="red" onClick={this.handleYes}>Yes</Button>
-            <Button color="blue" onClick={this.props.closeModal}>Cancel</Button>
           </div>
         </div>
       )

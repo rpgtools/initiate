@@ -7,10 +7,12 @@ import ModalManager from './components/reusable/Modals/ModalManager';
 class App extends Component {
   render() {
     return (
-      <main className="main">
-        <Initiative />
-        <ModalManager/>
-      </main>
+      <div className="app-container">
+        <ModalManager />
+        <main className="main">
+          <Initiative />
+        </main>
+      </div>
     );
   }
 }
