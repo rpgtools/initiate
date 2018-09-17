@@ -10,6 +10,8 @@ import SortableList from './reusable/SortableList';
 import { DragHandle } from './reusable/SortableList';
 
 
+const tabKey = 9;
+
 class CreatureForm extends React.Component {
   constructor(props) {
     super(props);
@@ -71,7 +73,7 @@ class CreatureForm extends React.Component {
 
   handleTabPress = (event) => {
     const code = event.keyCode ? event.keyCode : event.which; // b/c browsers
-    if (9 !== code) return; // We only care about tab presses
+    if (tabKey !== code) return; // We only care about tab presses
     const elem = document.activeElement;
     const lastIndex = this.state.counters.length - 1;
     if (
