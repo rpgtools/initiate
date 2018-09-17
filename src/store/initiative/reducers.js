@@ -41,7 +41,7 @@ const initiativeReducer = (state = {}, action) => {
         ...state,
         turn: 1,
         round: 1,
-        initiative: [],
+        order: [],
       };
     case actionTypes.INITIATIVE_REORDER: {
       const { previousIndex, nextIndex } = action.payload;
