@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { arrayMove } from 'react-sortable-hoc';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowsAltV } from '@fortawesome/free-solid-svg-icons'
+import { faSort, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import { makeGetCreatureSelector } from '../store/creatures/selectors';
 import { actions as creatureActions } from  '../store/creatures';
 import { actions as initiativeActions } from  '../store/initiative';
@@ -86,9 +86,8 @@ class CreatureForm extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form className="creature-form" onSubmit={this.handleSubmit}>
         <fieldset>
-          <label htmlFor="name">Name</label>
           <input
             type="text"
             id="name"
@@ -96,6 +95,7 @@ class CreatureForm extends React.Component {
             value={this.state.name}
             onChange={this.handleUpdateCreatureForm}
             autoFocus
+            className="creature-form__name"
           />
         </fieldset>
         <fieldset>
@@ -104,7 +104,8 @@ class CreatureForm extends React.Component {
             useDragHandle
           >
           {this.state.counters.map((counter, index) =>
-            <div key={index}>
+            <div key={index} className="creature-form__counter">
+              <DragHandle><FontAwesomeIcon icon={faSort} /></DragHandle>
               <input
                 type="text"
                 name="counter"
@@ -112,6 +113,7 @@ class CreatureForm extends React.Component {
                 data-index-number={index}
                 value={counter.label}
                 onChange={this.handleUpdateCreatureForm}
+                className="creature-form__counter-label"
                 />
               <input
                 type="text"
@@ -127,9 +129,8 @@ class CreatureForm extends React.Component {
                 data-index-number={index}
                 onClick={this.removeCounter(index)}
                 >
-                Remove Counter
+                <FontAwesomeIcon icon={faTrashAlt} />
               </button>
-              <DragHandle><FontAwesomeIcon icon={faArrowsAltV} /></DragHandle>
             </div>
           )}
           </SortableList>

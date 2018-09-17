@@ -1,0 +1,11 @@
+.creature-form {
+  &__name {
+    font-size: $creature-name-size;
+
+  }
+  &__counter {
+    a, input, div, button {
+      display: inline-block;
+    }
+  }
+}

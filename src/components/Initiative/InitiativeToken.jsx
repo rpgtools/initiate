@@ -1,7 +1,7 @@
 import React from 'react';
 import { DragHandle } from '../reusable/SortableList';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrashAlt, faEdit, faArrowsAltV } from '@fortawesome/free-solid-svg-icons'
+import { faTrashAlt, faEdit, faSort } from '@fortawesome/free-solid-svg-icons'
 import ReactModal from 'react-modal';
 import Counter from './Counter';
 import CreateCounterButton from './CreateCounterButton';
@@ -11,10 +11,6 @@ export default class InitiativeToken extends React.Component {
   state = {
     showEditModal: false,
   };
-  // handleDeleteCounter = counterIndex => (event) => {
-  //   this.props.deleteCounter(this.props.creature.id, counterIndex);
-  //   event.preventDefault();
-  // }
 
   handleUpdateCounter = counterIndex => value =>
     this.props.updateCounter(this.props.creature.id, counterIndex, value);
@@ -54,7 +50,7 @@ export default class InitiativeToken extends React.Component {
           <button className="initiative-token__edit" onClick={this.toggleShowEditModal}>
             <FontAwesomeIcon className="icon" icon={faEdit} />
           </button>
-          <DragHandle><FontAwesomeIcon icon={faArrowsAltV} /></DragHandle>
+          <DragHandle><FontAwesomeIcon icon={faSort} /></DragHandle>
         </div>
         <ReactModal
           isOpen={this.state.showEditModal}
