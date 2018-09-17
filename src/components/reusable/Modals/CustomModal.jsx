@@ -1,6 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import ReactModal from 'react-modal';
+// import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons'

@@ -33,7 +33,7 @@ class InitiativeControls extends React.Component {
   }
 
   render() {
-    const { turn, round, nextTurn, openModal } = this.props;
+    const { turn, round, nextTurn } = this.props;
     return (
       <div className='initiative-controls'>
         <Button

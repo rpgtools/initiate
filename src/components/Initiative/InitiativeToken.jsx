@@ -1,7 +1,7 @@
 import React from 'react';
 import { DragHandle } from '../reusable/SortableList';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrashAlt, faEdit, faSort } from '@fortawesome/free-solid-svg-icons'
+import { faEdit, faSort } from '@fortawesome/free-solid-svg-icons'
 import ReactModal from 'react-modal';
 import Counter from './Counter';
 import CreateCounterButton from './CreateCounterButton';
