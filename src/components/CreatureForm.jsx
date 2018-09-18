@@ -8,7 +8,7 @@ import { actions as creatureActions } from  '../store/creatures';
 import { actions as initiativeActions } from  '../store/initiative';
 import SortableList from './reusable/SortableList';
 import { DragHandle } from './reusable/SortableList';
-
+import Button from './reusable/Button';
 
 const tabKey = 9;
 
@@ -77,10 +77,12 @@ class CreatureForm extends React.Component {
     const elem = document.activeElement;
     const lastIndex = this.state.counters.length - 1;
     if (
-      "remove" === elem.dataset.id &&
-      parseInt(elem.dataset.indexNumber) === lastIndex
+      "value" === elem.dataset.id
+      && parseInt(elem.dataset.indexNumber) === lastIndex
+      && !event.getModifierState("Shift")
     ) {
       this.addCounter();
+      event.preventDefault();
     }
   }
 
@@ -99,6 +101,11 @@ class CreatureForm extends React.Component {
             autoFocus
             className="creature-form__name"
           />
+          <div className="creature-form__actions">
+            <button onClick={this.handleRemoveCreature} className="icon-button" tabIndex="-1">
+              <FontAwesomeIcon icon={faTrashAlt} />
+            </button>
+          </div>
         </fieldset>
         <fieldset>
           <SortableList
@@ -116,6 +123,7 @@ class CreatureForm extends React.Component {
                 value={counter.label}
                 onChange={this.handleUpdateCreatureForm}
                 className="creature-form__counter-label"
+                autoFocus={!counter.label.length}
                 />
               <input
                 type="text"
@@ -124,22 +132,25 @@ class CreatureForm extends React.Component {
                 data-index-number={index}
                 value={counter.value}
                 onChange={this.handleUpdateCreatureForm}
+                className="creature-form__counter-value"
                 />
               <button
                 type="button"
                 data-id="remove"
                 data-index-number={index}
                 onClick={this.removeCounter(index)}
+                tabIndex="-1"
                 >
                 <FontAwesomeIcon icon={faTrashAlt} />
               </button>
             </div>
           )}
           </SortableList>
-          <button type="button" onClick={this.addCounter}>Add Counter</button>
+          <Button type="button" color="blue" onClick={this.addCounter}>Add Counter [tab]</Button>
         </fieldset>
-        <button type="button" onClick={this.handleRemoveCreature}>Delete Creature</button>
-        <button type="submit">SUBMIT</button>
+        <div className="creature-form__footer">
+          <Button type="submit">Save</Button>
+        </div>
       </form>
     );
   }
