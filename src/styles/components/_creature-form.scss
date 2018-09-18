@@ -1,11 +1,49 @@
 .creature-form {
+  fieldset {
+    border: none;
+  }
+
   &__name {
     font-size: $creature-name-size;
-
   }
+
+  &__actions {
+    float: right;
+  }
+
+  &__footer {
+    margin-top: 100px;
+    button {
+      float: right;
+    }
+  }
+
   &__counter {
+    margin: 2px;
+    background-color: #eee;
+    border-radius: 3px;
+
     a, input, div, button {
       display: inline-block;
+      margin: 5px;
+    }
+
+    input {
+      font-size: 16px;
+      text-align: center;
+    }
+
+    button {
+      background: none;
+      border: none;
+    }
+
+    &-label {
+      width: 50px;
+    }
+
+    &-value {
+      width: 100px;
     }
   }
 }
