@@ -102,7 +102,7 @@ class CreatureForm extends React.Component {
             className="creature-form__name"
           />
           <div className="creature-form__actions">
-            <button onClick={this.handleRemoveCreature} className="icon-button" tabIndex="-1">
+            <button type="button" onClick={this.handleRemoveCreature} className="icon-button" tabIndex="-1">
               <FontAwesomeIcon icon={faTrashAlt} />
             </button>
           </div>
@@ -126,7 +126,7 @@ class CreatureForm extends React.Component {
                 autoFocus={!counter.label.length}
                 />
               <input
-                type="text"
+                type="number"
                 name="counter"
                 data-id="value"
                 data-index-number={index}
