@@ -1,53 +1,79 @@
+.token {
+  width: 100%;
+  box-sizing: border-box;
+  position: relative;
+  padding: 5px 5px 8px 8px;
+  border: 1px solid $charcoal;
+  border-radius: 8px;
+  box-shadow: 1px 1px 5px #333,
+              inset -2px -2px 5px $grey-lighter;
+  background-color: $white-opaque;
+}
+
 .initiative {
   flex: 1 1 350px;
-  @media (min-width: 765px) {
-    max-width: 60%;
-  }
-  @media (max-width: 765px) { order: 2; }
-
-  &__sortable-list-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100%;
-    justify-items: flex-start;
-    box-sizing: border-box;
-    overflow-y: auto;
-    overflow-x: hidden;
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 60px;
+  padding-top: 3px;
+  .sortable-list__element {
+    padding: 0 3px;
   }
 
-  &__token {
-    width: 100%;
-    flex: 0 0 100px;
-    padding: 5px;
-    margin-bottom: 3px;
-    background-color: $white-opaque;
-    border-radius: 8px;
-    position: relative;
-    box-shadow: inset 0 0 15px black;
-    box-sizing: border-box;
-    &:last-child {
-      margin-bottom: 0;
+  &-token {
+    @extend .token;
+    margin-bottom: 4px;
+    &__title {
+      margin: 0;
+      &, & input {
+        font-size: $creature-name-size;
+        font-weight: bold;
+        border-bottom: none;
+      }
     }
 
-    &--title {
-      margin: 3px 0 0 7px;
-    }
-
-    .drag-handle {
-      cursor: pointer;
+    &__actions {
       position: absolute;
       right: 10px;
       top: 10px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      button, .sortable-list__drag-handle {
+        cursor: pointer;
+        padding: 5px;
+        border: none;
+        background: none;
+        color: $charcoal;
+        font-size:16px;
+        opacity: 0.7;
+
+        &:hover {
+          opacity: 1;
+        }
+      }
     }
 
-    &--counters {
+    &--editing &__actions {
+      .initiative-token__edit {
+        color: $saffron-dark;
+        opacity: 1;
+      }
+    }
+
+    &__counters {
       width: 100%;
       height: 60px;
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;
       overflow: hidden;
+      transition: height 250ms ease-in-out;
+    }
+
+    &--editing &__counters {
+      height: auto;
     }
   }
 }

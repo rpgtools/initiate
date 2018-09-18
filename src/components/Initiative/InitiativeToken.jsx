@@ -1,47 +1,68 @@
 import React from 'react';
-import Counter from '../Counter';
 import { DragHandle } from '../reusable/SortableList';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEdit, faSort } from '@fortawesome/free-solid-svg-icons'
+import ReactModal from 'react-modal';
+import Counter from './Counter';
+import CreateCounterButton from './CreateCounterButton';
+import CreatureForm from '../CreatureForm';
 
 export default class InitiativeToken extends React.Component {
-  handleDeleteCounter = counterIndex => () =>
-    this.props.onDeleteCounter(this.props.creature.id, counterIndex);
-
-  handleUpdateCounter = counterIndex => value =>
-    this.props.onUpdateCounter(this.props.creature.id, counterIndex, value);
-
-  handleSelectCreature = e => {
-    if (!e.target.className.startsWith('counter')) {
-      this.props.onSelect(this.props.creature.id);
-    }
+  state = {
+    showEditModal: false,
   };
 
-  render () {
-    const { creature } = this.props;
-    const {
-      handleSelectCreature,
-      handleUpdateCounter,
-      handleDeleteCounter
-    } = this;
+  handleUpdateCounter = counterIndex => value =>
+    this.props.updateCounter(this.props.creature.id, counterIndex, value);
 
-    return (
-      <div
-        className="initiative__token"
-        onClick={handleSelectCreature}
-        >
-        <h2 className="initiative__token--title">{creature.name}</h2>
-        <div className="initiative__token--counters">
-          {creature.counters.map((counter, index) =>
-            <Counter
-              key={index}
-              label={counter.label}
-              value={counter.value}
-              handleUpdateValue={handleUpdateCounter(index)}
-              onClickDelete={handleDeleteCounter(index)}
-              />
-          )}
-        </div>
-          <DragHandle />
-        </div>
+  handleCreateCounter = ({ label }) =>
+    this.props.createCounter(this.props.creature.id, label);
+
+  handleUpdateCreature = creature =>
+    this.props.updateCreature({ ...this.props.creature, ...creature });
+
+  toggleShowEditModal = () =>
+    this.setState({ showEditModal: !this.state.showEditModal });
+
+  getPortalRoot = () => document.getElementById("portal-root");
+
+  render() {
+    const { creature } = this.props;
+    const counters = creature.counters.map((counter, index) => {
+      return(
+        <Counter
+          onUpdateCounter={this.handleUpdateCounter(index)}
+          counter={counter}
+          key={index}
+        />
       );
+    });
+    return (
+      <div className="initiative-token">
+        <div className="initiative-token__title">
+          {creature.name}
+        </div>
+        <div className="initiative-token__counters">
+          <CreateCounterButton onSubmit={this.handleCreateCounter}/>
+          {counters}
+        </div>
+        <div className="initiative-token__actions">
+          <button className="initiative-token__edit" onClick={this.toggleShowEditModal}>
+            <FontAwesomeIcon className="icon" icon={faEdit} />
+          </button>
+          <DragHandle><FontAwesomeIcon icon={faSort} /></DragHandle>
+        </div>
+        <ReactModal
+          isOpen={this.state.showEditModal}
+          parentSelector={this.getPortalRoot}
+          onRequestClose={this.toggleShowEditModal}
+        >
+          <CreatureForm
+            closeModal={this.toggleShowEditModal}
+            creatureId={creature.id}
+          />
+        </ReactModal>
+      </div>
+    );
   }
 };

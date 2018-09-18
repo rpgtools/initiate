@@ -1,26 +1,22 @@
-import React, {Component} from 'react';
-
-import Initiative from './components/Initiative';
-// import StateManagement from './components/StateManagement';
-import CreatureDetails from './components/CreatureDetails';
-import InitiativeButtonsWidget from './components/Initiative/InitiativeButtons';
-import './styles/index.scss';
+import React, { Component } from "react";
+import Initiative from "./components/Initiative";
+import "./styles/index.scss";
+import ReactModal from 'react-modal';
+import ModalManager from './components/reusable/Modals/ModalManager';
 
 class App extends Component {
-  render () {
+  render() {
     return (
-      <div>
+      <div className="app-container">
+        <ModalManager />
         <main className="main">
-          {/*<StateManagement />*/}
           <Initiative />
-          <div className="temporary-right-side">
-            <InitiativeButtonsWidget />
-            <CreatureDetails />
-          </div>
         </main>
       </div>
     );
   }
 }
+
+ReactModal.setAppElement('#root');
 
 export default App;

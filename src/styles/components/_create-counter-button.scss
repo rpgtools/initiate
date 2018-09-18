@@ -1,0 +1,26 @@
+.create-counter-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  min-width: 50px;
+  width: auto;
+  margin-left: 0;
+}
+
+.create-counter-button--editing {
+}
+
+.create-counter-form {
+  width: 0;
+  overflow: hidden;
+  input {
+    text-align: left !important;
+    font-size: 20px;
+  }
+  transition: width 250ms;
+
+  .create-counter-button--editing & {
+    width:400px;
+  }
+}

@@ -5,13 +5,15 @@ const Button = ({
   children,
   label,
   onClick,
-  color
+  color,
+  className,
+  ...rest
 }) => {
   return (
     <button
-      className={`button button--${color}`}
+      className={`button button--${color} ${className}`}
       onClick={onClick}
-      >
+      {...rest}>
       {label}
       {children}
     </button>
@@ -19,7 +21,7 @@ const Button = ({
 }
 
 Button.propTypes = {
-  color: PropTypes.oneOf(['blue', 'yellow'])
+  color: PropTypes.oneOf(['blue', 'yellow', 'red'])
 };
 Button.defaultProps = {
   color: 'blue'

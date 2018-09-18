@@ -1,0 +1,14 @@
+.create-creature-form {
+  @extend .token;
+
+  padding: 15px;
+  margin: 3px;
+  width: auto;
+
+  input {
+    font-size: $creature-name-size;
+    padding-top: 5px;
+    margin-right: 5px;
+    font-weight: bold;
+  }
+}

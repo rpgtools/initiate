@@ -1,16 +1,25 @@
-import {applyMiddleware, compose, createStore} from 'redux';
-import thunk from 'redux-thunk';
-import persistState from 'redux-localstorage'
-import rootReducer from '../reducers';
+import { createStore, combineReducers } from 'redux';
+// import { all } from 'redux-saga/effects';
+// import reduxFetch from './redux-fetch';
+import { persistStore } from 'redux-pouchdb';
+import * as campaign from './campaign';
+import { creatures } from './creatures/reducers';
+import { initiative } from './initiative/reducers';
+import { modalReducer } from './modals';
 
-const composer = (process.env.NODE_ENV === 'development' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
-const enhancements = composer(
-  applyMiddleware(thunk),
-  persistState(),
-);
+const rootReducer = combineReducers({
+  campaign: combineReducers({
+    metadata: campaign.campaignMetadataReducer,
+    creatures: creatures,
+    initiative: initiative,
+  }),
+  modals: modalReducer,
+});
 
-export const store = createStore(
+const store = createStore(
   rootReducer,
-  {},
-  enhancements
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
+
+persistStore(store);
+export default store;
