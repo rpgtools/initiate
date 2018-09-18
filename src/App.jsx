@@ -1,3 +1,4 @@
+import 'babel-polyfill'; //https://github.com/babel/babel/issues/5085#issuecomment-343375381
 import React, { Component } from "react";
 import Initiative from "./components/Initiative";
 import "./styles/index.scss";
