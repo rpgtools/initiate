@@ -4,6 +4,7 @@
   justify-content: center;
   font-size: 24px;
   min-width: 50px;
+  max-width: 97%;
   width: auto;
   margin-left: 0;
 }
@@ -13,14 +14,26 @@
 
 .create-counter-form {
   width: 0;
-  overflow: hidden;
-  input {
-    text-align: left !important;
-    font-size: 20px;
-  }
   transition: width 250ms;
+  .single-input-form {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    input {
+      min-width: 20px;
+      flex: 1 1 30px;
+      font-weight: bold;
+      text-align: left !important;
+      font-size: 20px;
+      margin: 0 3px;
+    }
+    button {
+      flex: 0 1 20px;
+    }
+  }
 
   .create-counter-button--editing & {
-    width:400px;
+    width: auto;
+    max-width: 100%;
   }
 }

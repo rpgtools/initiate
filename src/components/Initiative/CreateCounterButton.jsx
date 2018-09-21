@@ -53,13 +53,11 @@ class CreateCounterButton extends React.Component {
       </div>
     );
     return (
-      <div>
-        <div
-          className={classes}
-          onClick={this.handleClick}
-        >
-          {(isEditing) ? form : '+'}
-        </div>
+      <div
+        className={classes}
+        onClick={this.handleClick}
+      >
+        {(isEditing) ? form : '+'}
       </div>
     );
   };
