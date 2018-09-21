@@ -62,7 +62,10 @@ class Counter extends React.Component {
   }
 
   handleFocus = event => event.target.select();
-  handleSubmit = event => this.doneEditing();
+  handleSubmit = event => {
+    this.doneEditing();
+    event.preventDefault();
+  }
 
   handleUpdateCounterValue = (adjustBy) => {
     this.props.onUpdateCounter(Number(this.props.counter.value) + Number(adjustBy));
