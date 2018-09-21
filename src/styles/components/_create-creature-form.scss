@@ -7,10 +7,13 @@
 
   .single-input-form {
     display: flex;
-    flex-wrap: wrap;
     justify-content: flex-start;
 
+  & {
+    flex: 0 1 30px;
+  }
     input {
+      min-width: 40px;
       font-size: $creature-name-size;
       margin: 5px 5px 5px 0;
       font-weight: bold;
