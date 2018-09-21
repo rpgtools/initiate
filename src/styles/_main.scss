@@ -31,6 +31,12 @@ main.main {
   left: 30px;
   right: 30px;
   bottom: 30px;
+  @media (max-width: 420px) {
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
+  }
   -webkit-filter: drop-shadow(10px 10px 11px $grey-darkest);
   box-shadow: 0px 5px 10px #1ee;
   padding: 10px;

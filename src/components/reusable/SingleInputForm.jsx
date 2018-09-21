@@ -46,7 +46,7 @@ class SingleInputForm extends React.Component {
       showButton,
     } = this.props;
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit} className="single-input-form" >
         <input
           name="name"
           type="text"

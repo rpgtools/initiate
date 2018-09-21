@@ -5,10 +5,16 @@
   margin: 3px;
   width: auto;
 
-  input {
-    font-size: $creature-name-size;
-    padding-top: 5px;
-    margin-right: 5px;
-    font-weight: bold;
+  .single-input-form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+
+    input {
+      font-size: $creature-name-size;
+      margin: 5px 5px 5px 0;
+      font-weight: bold;
+      max-width: 95%;
+    }
   }
 }
