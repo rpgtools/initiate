@@ -5,14 +5,18 @@ import AnchoredModal from '../reusable/AnchoredModal';
 import AbbreviatedNumber from '../reusable/AbbreviatedNumber';
 
 const CounterControls = ({ onUpdate, ...rest }) => {
+  const handleClick = value => event => {
+    onUpdate(value);
+    event.stopPropagation();
+  }
   return (
     <div className="counter__controls" {...rest}>
-      <button className="counter__buttons counter__buttons--top-1" onClick={() => onUpdate(1)}>+1</button>
-      <button className="counter__buttons counter__buttons--top-2" onClick={() => onUpdate(10)}>+10</button>
-      <button className="counter__buttons counter__buttons--top-3" onClick={() => onUpdate(100)}>+100</button>
-      <button className="counter__buttons counter__buttons--bottom-1" onClick={() => onUpdate(-1)}>-1</button>
-      <button className="counter__buttons counter__buttons--bottom-2" onClick={() => onUpdate(-10)}>-10</button>
-      <button className="counter__buttons counter__buttons--bottom-3" onClick={() => onUpdate(-100)}>-100</button>
+      <button type="button" className="counter__buttons counter__buttons--top-1" onClick={handleClick(1)}>+1</button>
+      <button type="button" className="counter__buttons counter__buttons--top-2" onClick={handleClick(10)}>+10</button>
+      <button type="button" className="counter__buttons counter__buttons--top-3" onClick={handleClick(100)}>+100</button>
+      <button type="button" className="counter__buttons counter__buttons--bottom-1" onClick={handleClick(-1)}>-1</button>
+      <button type="button" className="counter__buttons counter__buttons--bottom-2" onClick={handleClick(-10)}>-10</button>
+      <button type="button" className="counter__buttons counter__buttons--bottom-3" onClick={handleClick(-100)}>-100</button>
     </div>
   );
 };
@@ -44,7 +48,7 @@ class Counter extends React.Component {
   }
 
   handleClick = event => {
-    if(!this.state.isEditing && !this.props.showDeleteButton) {
+    if(!this.state.isEditing) {
       this.startEditing();
     }
   }
@@ -52,9 +56,9 @@ class Counter extends React.Component {
   handleClickOutsideCounter = event => {
     const elem = ReactDOM.findDOMNode(this);
     if (
-      !elem.contains(event.target) || (
-        !event.target.className &&
-        !event.target.className.startsWith('counter__buttons')
+      !elem.contains(event.target) && (
+        !event.target.className
+        || !event.target.className.startsWith('counter__buttons')
       )
     ) {
       this.doneEditing();
@@ -111,11 +115,11 @@ class Counter extends React.Component {
       <AnchoredModal
         className={classes}
         isOpen={isEditing}
-        onClick={this.handleClick}
         modal={counterControls}
+        onClick={this.handleClick}
       >
         {display}
-    </AnchoredModal>
+      </AnchoredModal>
     );
   };
 };
