@@ -43,22 +43,8 @@ main.main {
   justify-content: center;
   flex-wrap: wrap;
   overflow-y: auto;
-
-  .widget {
-    border: 6px solid $white-opaque;
-    border-radius: 12px;
-    margin: 5px;
-    box-shadow: inset 0 0 15px $grey-darkest, 0 0 5px $grey;
-    padding: 3px;
-    ::-webkit-scrollbar-track {
-      margin: 2px;
-    }
-  }
-
-  .temporary-right-side {
-    flex: 1 1 250px;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-  }
 }
+
+button { cursor: pointer; }
+
+.sortable-list__drag-handle { cursor: pointer; }

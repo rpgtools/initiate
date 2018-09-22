@@ -115,7 +115,7 @@ class CreatureForm extends React.Component {
           >
           {this.state.counters.map((counter, index) =>
             <div key={index} className="creature-form__counter">
-              <DragHandle><FontAwesomeIcon icon={faSort} cursor="pointer" /></DragHandle>
+              <DragHandle><FontAwesomeIcon icon={faSort} /></DragHandle>
               <input
                 type="text"
                 name="counter"
@@ -142,7 +142,7 @@ class CreatureForm extends React.Component {
                 onClick={this.removeCounter(index)}
                 tabIndex="-1"
                 >
-                <FontAwesomeIcon icon={faTrashAlt} cursor="pointer" />
+                <FontAwesomeIcon icon={faTrashAlt} />
               </button>
             </div>
           )}
