@@ -9,9 +9,10 @@
     display: flex;
     justify-content: flex-start;
 
-  & {
-    flex: 0 1 30px;
-  }
+    & {
+      flex: 0 1 30px;
+    }
+    
     input {
       min-width: 40px;
       font-size: $creature-name-size;
