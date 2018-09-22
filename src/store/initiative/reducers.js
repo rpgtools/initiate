@@ -4,6 +4,11 @@ import { arrayMove } from 'react-sortable-hoc';
 import { persistentDocumentReducer } from 'redux-pouchdb';
 import { db } from '../pouch';
 
+const initialTurnState = {
+  turn: 1,
+  round: 1
+}
+
 const initiativeReducer = (state = {}, action) => {
   switch(action.type) {
     case creatureActionTypes.CREATURE_CREATE:
@@ -20,7 +25,8 @@ const initiativeReducer = (state = {}, action) => {
     } else {
       return {
         ...state,
-        order: [action.payload.creature.id]
+        ...initialTurnState,
+        order: [action.payload.creature.id],
       }
     }
     case actionTypes.INITIATIVE_REMOVE:
@@ -33,14 +39,12 @@ const initiativeReducer = (state = {}, action) => {
     case actionTypes.INITIATIVE_RESET_TURN:
       return {
         ...state,
-        turn: 1,
-        round: 1
+        ...initialTurnState,
       };
     case actionTypes.INITIATIVE_RESET_ALL:
       return {
         ...state,
-        turn: 1,
-        round: 1,
+        ...initialTurnState,
         order: [],
       };
     case actionTypes.INITIATIVE_REORDER: {
@@ -61,7 +65,7 @@ const initiativeReducer = (state = {}, action) => {
         const nextState = {
           ...state,
           order: arrayMove(state.order, 0, state.order.length - 1)
-        };
+        }
         const turn = (state.turn) ? state.turn : 1,
               round = (state.round) ? state.round : 1;
         if (turn === state.order.length) {
