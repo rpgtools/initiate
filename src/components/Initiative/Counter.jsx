@@ -45,6 +45,7 @@ class Counter extends React.Component {
     this.setState({
       isEditing: false,
     });
+    this.props.onUpdateCounter(this.state.value);
     document.removeEventListener('mouseup', this.handleClickOutsideCounter);
     document.removeEventListener('scroll', this.doneEditing, true);
   }
@@ -69,19 +70,19 @@ class Counter extends React.Component {
 
   handleFocus = event => event.target.select();
 
-  handleChange = (event) =>
-    this.handleUpdateCounter(Number(event.target.value));
-
   handleSubmit = event => {
     this.doneEditing();
     event.preventDefault();
   }
 
-  handleUpdateCounter = (value) => {
+  updateCounter = value => {
     if(!isNaN(value)) {
-      this.setState({ value });
-      this.props.onUpdateCounter(value);
+      this.setState({value: Number(value)});
     }
+  }
+
+  handleChange = (event) => {
+    this.updateCounter(event.target.value);
   }
 
   render () {
@@ -93,7 +94,7 @@ class Counter extends React.Component {
     });
     const counterControls = (
       <CounterControls
-        onUpdate={this.handleUpdateCounter}
+        onUpdate={this.updateCounter}
         value={this.state.value}
       />
     );
