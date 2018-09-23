@@ -4,13 +4,14 @@ import classNames from 'classnames';
 import AnchoredModal from '../reusable/AnchoredModal';
 import AbbreviatedNumber from '../reusable/AbbreviatedNumber';
 
-const CounterControls = ({ onUpdate, ...rest }) => {
-  const handleClick = value => event => {
-    onUpdate(value);
+const CounterControls = ({ onUpdate, value }) => {
+  const handleClick = buttonValue => event => {
+    const nextValue = value + buttonValue;
+    onUpdate(nextValue);
     event.stopPropagation();
   }
   return (
-    <div className="counter__controls" {...rest}>
+    <div className="counter__controls">
       <button type="button" className="counter__buttons counter__buttons--top-1" onClick={handleClick(1)}>+1</button>
       <button type="button" className="counter__buttons counter__buttons--top-2" onClick={handleClick(10)}>+10</button>
       <button type="button" className="counter__buttons counter__buttons--top-3" onClick={handleClick(100)}>+100</button>
@@ -26,6 +27,7 @@ class Counter extends React.Component {
     super(props);
     this.state = {
       isEditing: false,
+      value: props.counter.value,
     };
   }
 
@@ -66,18 +68,18 @@ class Counter extends React.Component {
   }
 
   handleFocus = event => event.target.select();
+
+  handleChange = (event) =>
+    this.handleUpdateCounter(Number(event.target.value));
+
   handleSubmit = event => {
     this.doneEditing();
     event.preventDefault();
   }
 
-  handleUpdateCounterValue = (adjustBy) => {
-    this.props.onUpdateCounter(Number(this.props.counter.value) + Number(adjustBy));
-  }
-
-  handleUpdateCounterValueFromForm = (event) => {
-    const value = Number(event.target.value);
+  handleUpdateCounter = (value) => {
     if(!isNaN(value)) {
+      this.setState({ value });
       this.props.onUpdateCounter(value);
     }
   }
@@ -90,16 +92,19 @@ class Counter extends React.Component {
       'counter--editing': isEditing,
     });
     const counterControls = (
-      <CounterControls onUpdate={this.handleUpdateCounterValue} />
+      <CounterControls
+        onUpdate={this.handleUpdateCounter}
+        value={this.state.value}
+      />
     );
     const counterForm = (
       <form onSubmit={this.handleSubmit}>
         <input
           autoFocus
           type="text"
-          value={counter.value}
+          value={this.state.value}
           onFocus={this.handleFocus}
-          onChange={this.handleUpdateCounterValueFromForm}
+          onChange={this.handleChange}
           required
           />
       </form>
