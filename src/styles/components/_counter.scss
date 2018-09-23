@@ -93,4 +93,18 @@
       text-align: center;
     }
   }
+
+  &--editing {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    input {
+      max-width: 90%;
+      border: none;
+      text-align: center;
+      background-color: $grey-light;
+      box-sizing: border-box;
+      caret-color: #FFF;
+    }
+  }
 }
