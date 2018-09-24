@@ -41,6 +41,7 @@ class InitiativeControls extends React.Component {
           label="Reset"
           onClick={this.openResetModal}
           color="red"
+          tabIndex="-1"
         />
         <p className="initiative-controls__turns-rounds">
           Turn {turn} / Round {round}
@@ -50,6 +51,7 @@ class InitiativeControls extends React.Component {
           label="Next Turn"
           onClick={nextTurn}
           color="yellow"
+          tabIndex="-1"
         />
       </div>
     );

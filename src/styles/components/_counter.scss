@@ -42,6 +42,11 @@
     opacity: 1;
     // END HACK
   }
+  &:focus {
+    // background-image: linear-gradient(327deg, $grey-dark, $grey 95%);
+    text-shadow: -1px -1px $grey;
+    color:white;
+  }
 
   &__delete {
     border: none;

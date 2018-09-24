@@ -45,7 +45,7 @@ export default class InitiativeToken extends React.Component {
           }
         </div>
         <div className="initiative-token__actions">
-          <button className="initiative-token__edit" onClick={this.toggleShowEditModal}>
+          <button className="initiative-token__edit" tabIndex="-1" onClick={this.toggleShowEditModal}>
             <FontAwesomeIcon className="icon" icon={faEdit} />
           </button>
           <DragHandle><FontAwesomeIcon icon={faSort} /></DragHandle>

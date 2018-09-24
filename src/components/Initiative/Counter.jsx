@@ -31,12 +31,29 @@ class Counter extends React.Component {
     };
   }
 
-  componentWillUnmount = () => {
+  componentDidMount() {
+    document.addEventListener('keydown', this.handleArrowKeys)
+  }
+
+  componentWillUnmount() {
     this.doneEditing();
+    document.removeEventListener('keydown', this.handleArrowKeys)
+  }
+
+  handleArrowKeys = (event) => {
+    const elem = ReactDOM.findDOMNode(this);
+    if (event.target === elem) {
+      const modifier = (event.shiftKey) ? 5 : 1;
+      if('ArrowDown' === event.key) {
+        this.props.onUpdateCounter(this.props.counter.value - modifier);
+      } else if ('ArrowUp' === event.key) {
+        this.props.onUpdateCounter(this.props.counter.value + modifier);
+      }
+    }
   }
 
   startEditing = () => {
-    this.setState({isEditing: true});
+    this.setState({isEditing: true, value: this.props.counter.value});
     document.addEventListener('mouseup', this.handleClickOutsideCounter);
     document.addEventListener('scroll', this.doneEditing, true);
   }
@@ -123,6 +140,7 @@ class Counter extends React.Component {
         isOpen={isEditing}
         modal={counterControls}
         onClick={this.handleClick}
+        tabIndex="0"
       >
         {display}
       </AnchoredModal>
