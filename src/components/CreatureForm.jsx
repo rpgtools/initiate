@@ -100,6 +100,7 @@ class CreatureForm extends React.Component {
             onChange={this.handleUpdateCreatureForm}
             autoFocus
             className="creature-form__name"
+            placeholder="Enter a name..."
           />
           <div className="creature-form__actions">
             <button type="button" onClick={this.handleRemoveCreature} className="icon-button" tabIndex="-1">

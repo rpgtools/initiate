@@ -42,7 +42,9 @@ class InitiativeControls extends React.Component {
           onClick={this.openResetModal}
           color="red"
         />
-        <p>Turn {turn} / Round {round}</p>
+        <p className="initiative-controls__turns-rounds">
+          Turn {turn} / Round {round}
+        </p>
         <Button
           className="initiative-controls__next-turn"
           label="Next Turn"

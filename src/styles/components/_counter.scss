@@ -1,6 +1,6 @@
 .counter, .create-counter-button {
-  height: 50px;
-  width: 50px;
+  height: 56px;
+  width: 56px;
   border-radius: 10px;
   margin: 3px 3px 10px 7px;
   cursor: pointer;
@@ -12,6 +12,7 @@
   // transform: translate(0, 0);
   text-shadow: 1px 1px $grey-lightest;
   border: 3px solid;
+  box-sizing: border-box;
   border-color: $grey-lightest $grey-lighter $grey;
   box-shadow: 1px 1px 3px $grey-darkest, inset 1px 1px $white-very-opaque;
   background-image: linear-gradient(147deg, $grey-light, $grey 95%);
@@ -52,23 +53,6 @@
     font-size: 16px;
   }
 
-  form {
-    width: 97%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    input {
-      font-weight: bold;
-      font-size: 20px;
-      border-bottom: none;
-      text-align: center;
-      max-width: 100%;
-    }
-  }
-
-
   &__count {
     height: 100%;
   }
@@ -107,6 +91,20 @@
       margin: 0;
       text-overflow: clip;
       text-align: center;
+    }
+  }
+
+  &--editing {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    input {
+      max-width: 90%;
+      border: none;
+      text-align: center;
+      background-color: $grey-light;
+      box-sizing: border-box;
+      caret-color: #FFF;
     }
   }
 }

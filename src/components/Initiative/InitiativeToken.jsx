@@ -28,15 +28,6 @@ export default class InitiativeToken extends React.Component {
 
   render() {
     const { creature } = this.props;
-    const counters = creature.counters.map((counter, index) => {
-      return(
-        <Counter
-          onUpdateCounter={this.handleUpdateCounter(index)}
-          counter={counter}
-          key={index}
-        />
-      );
-    });
     return (
       <div className="initiative-token">
         <div className="initiative-token__title">
@@ -44,7 +35,14 @@ export default class InitiativeToken extends React.Component {
         </div>
         <div className="initiative-token__counters">
           <CreateCounterButton onSubmit={this.handleCreateCounter}/>
-          {counters}
+          {creature.counters.map((counter, index) =>
+            <Counter
+              onUpdateCounter={this.handleUpdateCounter(index)}
+              counter={counter}
+              key={index}
+            />
+            )
+          }
         </div>
         <div className="initiative-token__actions">
           <button className="initiative-token__edit" onClick={this.toggleShowEditModal}>
